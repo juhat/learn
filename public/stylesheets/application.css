@@ -1,0 +1,43 @@
+body, html{
+	background:#005D73;
+	height:100%;
+}
+#doc4{
+	margin-top:2em;
+	background:#fff;
+	border:1px solid grey;
+}
+#hd{
+	padding:2em;
+}
+#bd{
+	padding:2em;
+}
+#ft{
+	padding:1em 2em;
+}
+.app-header{
+	background:#005d73;
+	color:#fff;
+	padding:1em;
+}
+.app-top-menu{
+	float:right;
+	display:inline;
+}
+a, a:hover, a:visited{
+	color:grey;
+}
+h1{
+	font-size:2em;
+}
+h2{
+	font-size:1.5em;
+}
+h3{
+	font-size:1.3em;
+}
+p{
+	padding:0.6em 0;
+}
+

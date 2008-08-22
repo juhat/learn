@@ -1,0 +1,14 @@
+<% if logged_in? %>
+  <p><strong>You are logged in as <%=h current_user.login %></strong></p>
+	<p>Rails learning system: <%= link_to "Create lesson", :controller => "home", :action => "create_lesson" %> <%= link_to 'START lesson', :controller=>'home', :action=>'start_lesson' %></p>
+  <p><%= link_to 'Logout', logout_path %></p>
+<% else %>
+  <p><strong>You are currently not logged in.</strong></p>
+  <p>
+    <%= link_to 'Login', login_path %> or
+    <%= link_to 'Sign Up', signup_path %>
+  </p>
+<% end %>
+<hr>
+<h2>Aktiv kurzusaink:</h2>
+<%= render :partial=>'course', :collection=>@courses  %>
