@@ -41,7 +41,7 @@ Ext.onReady(function() {
 		    },{
 		        title: 'script/console'
 			 	,xtype: 'terminal'
-				,url:'../tree/railsconsole'
+				,url:'../tree/console'
 		    }]			
 		}]
 	});

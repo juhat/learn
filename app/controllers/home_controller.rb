@@ -14,6 +14,10 @@ class HomeController < ApplicationController
     `cp -R course/users/1/rails/* public/A/`
     # `chown -R #{Course.getOsUserAndGroup} /public/A/. `
     `touch public/A/tmp/restart.txt`
+    redirect_to :action=>'do_lesson'
+  end
+  
+  def do_lesson
     render :layout=>'learn'
   end
   

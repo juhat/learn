@@ -1,7 +1,31 @@
 class TreeController < ApplicationController
+  
+  before_filter do |controller| 
+    logger.info("Processing #{controller.action_name}")
+    user_token = 'retek'
+    unless (params[:user_token] === user_token)
+      render :text=>'Nem vagy jogosult a megtekintesre..'
+      false
+    end
+  end 
+  
+  
+  before_filter :only=> [:console, :terminal]
+
   protect_from_forgery :only => [:retek]
 
-  def railsconsole
+  def token
+    @token = 'retk'
+
+    # logger.info(@token)
+    # logger.info(params[:user_token])
+    unless (params[:user_token] === @token)
+      render :text=>'Nem vagy jogosult a megtekintesre..'
+      false
+    end
+  end
+  
+  def console
     result = nil
     begin
       result = eval(params[:command])
@@ -10,23 +34,18 @@ class TreeController < ApplicationController
     end
     render :text=> result
   end
+  
   def terminal
     t = Thread.new { `cd public/A && #{params[:command]}` }
-    render :text=>t.value
+    tval = t.value
+    t.exit! 
+    render :text=>tval
   end
   
-  def download
-    baseDir = 'public/'
-    
-    logger.info(params) 
-  end
-  
-  def form
+  def file
     baseDir = 'public/'
     case params[:cmd]
       when 'load'
-        # sleep 2
-        # TODO waitMSG
         render :file => baseDir + params[:path]
       when 'save'
         file = File.new(baseDir + params[:path], 'w')
@@ -36,56 +55,38 @@ class TreeController < ApplicationController
     end 
   end
   
-  def getls
+  def filepanel
     baseDir = 'public/'
-    
-    if request.get? 
-      logger.info('get') 
-    else 
-      logger.info('post') 
-    end
-    logger.info(params[:cmd]) 
-    
     
     case params[:cmd]
       when 'get'
         dr = Dirlist.new(baseDir + params[:path])
         render :json => dr.list
-        # respond_to do |format|
-        #   format.html # render static index.html.erb
-        #   format.json { render :json => dr.list }
-        # end
       when 'rename'
         begin
-          unless File.directory?(baseDir + params[:oldname])
-            File.rename(baseDir + params[:oldname], baseDir + params[:newname])
-          else
-            # handling dir rename
-          end
+          File.rename(Dirlist.clean(baseDir + params[:oldname]),
+                      Dirlist.clean(baseDir + params[:newname]))            
         rescue
           render :json => '{"success":false,"error":"Cannot rename file root/a.txt to root/abc.txt"}'
         else
           render :json => '{"success":true}'
         end
-        
       when 'newdir'
         begin
-          Dir.mkdir(baseDir + params[:dir])
+          Dir.mkdir(Dirlist.clean(baseDir + params[:dir]))
         rescue
           render :json => '{"success":false,"error":"Cannot create dir..."}'
         else
           render :json => '{"success":true}'
         end
-        
       when 'delete'
         begin
-          
+          FileUtils.rm_r(Dirlist.clean(baseDir + params[:file]))
         rescue
           render :json => '{"success":false,"error":"Cannot delete file..."}'
         else
           render :json => '{"success":true}'
         end
-        
       when 'upload'
     end
   end

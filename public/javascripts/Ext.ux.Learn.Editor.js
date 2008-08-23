@@ -2,7 +2,7 @@ Ext.ns('Learn');
 
 Learn.FilePanel = Ext.extend(Ext.ux.FileTreePanel, {
     border:false
-	,url:'../tree/getls'
+	,url:'../tree/filepanel'
 	,rootPath:'A'
 	,rootText:'Website'
 
@@ -12,6 +12,7 @@ Learn.FilePanel = Ext.extend(Ext.ux.FileTreePanel, {
 			,topMenu:false
 			,autoScroll:true
 			,enableProgress:false
+			,enableUpload:false
         });
         Learn.FilePanel.superclass.initComponent.apply(this, arguments);
     }
@@ -19,9 +20,9 @@ Learn.FilePanel = Ext.extend(Ext.ux.FileTreePanel, {
 Ext.reg('filepanel', Learn.FilePanel);
 
 Learn.EditorForm = Ext.extend(Ext.form.FormPanel, {
-	url:'../tree/form'
+	url:'../tree/file'
 	,file:''
-
+	
     ,initComponent:function() {
         Ext.apply(this, {
 		    border:false
@@ -122,7 +123,11 @@ Learn.Editor = Ext.extend(Ext.Panel, {
 			alert('This is an image! It cant opened here.')
 			return false;
 		}
-
+		
+		console.log(obj);
+		console.log(title);
+		console.log(path);
+		
 		var tab = this.opened_files.find(function(s) {
 			return s === path;
 	 	});

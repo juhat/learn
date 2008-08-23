@@ -1,16 +1,33 @@
 class Dirlist
   
+  # TODO
+  
+  def self.clean(path)
+    path.gsub!(/\.\./, '')
+    path.gsub!(/\/\//, '/')
+    return path
+  end
+  
   def initialize(actdir)
     @files = []
     @dirs = []
-    @actual_dir = actdir + '/*'
+    @actual_dir = Dirlist.clean(actdir + '/*')
   end
+  
   def list
     Dir.glob(@actual_dir).each do |f|
       if File.directory?(f)
-        @dirs.push({:text=>File.basename(f), :iconcls=>'folder', :leaf=> false})
+        if File.writable?(f)
+          @dirs.push({:text=>File.basename(f), :iconcls=>'folder', :leaf=> false})
+        else
+          @dirs.push({:text=>File.basename(f), :iconcls=>'folder', :disabled=>true, :leaf=> false})
+        end
       else
-        @files.push({:text=>File.basename(f), :iconcls=>'file-txt', :id=>(f), :leaf=> true, :qtip=>'tooltip'})
+        if File.writable?(f)
+          @files.push({:text=>File.basename(f), :iconcls=>'file-txt', :id=>(f), :leaf=> true, :qtip=>'tooltip'})
+        else
+          @files.push({:text=>File.basename(f), :iconcls=>'file-txt', :id=>(f), :leaf=> true, :disabled=>true,:qtip=>'tooltip'})
+        end
       end
     end
     return @dirs + @files

@@ -42,6 +42,7 @@ Learn.Terminal = Ext.extend(Ext.FormPanel, {
 			,scope: this
 			,params:{
 				command: this.items.itemAt(1).getValue()
+				,user_token: 'retek'
 			}
 			,success: function(a,b){
 				var text = this.items.itemAt(0).getValue();
