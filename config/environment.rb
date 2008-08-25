@@ -64,5 +64,5 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
-  
+  config.user_token = YAML.load(File.open("#{RAILS_ROOT}/config/LEARN_user_token.yml"))['user_token']
 end

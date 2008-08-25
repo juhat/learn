@@ -1,25 +1,14 @@
 class TreeController < ApplicationController
   
-  before_filter do |controller| 
-    logger.info("Processing #{controller.action_name}")
-    user_token = 'retek'
-    unless (params[:user_token] === user_token)
-      render :text=>'Nem vagy jogosult a megtekintesre..'
-      false
-    end
-  end 
-  
-  
-  before_filter :only=> [:console, :terminal]
+  before_filter :token, :only=> [:console, :terminal]
 
   protect_from_forgery :only => [:retek]
 
   def token
-    @token = 'retk'
-
-    # logger.info(@token)
-    # logger.info(params[:user_token])
-    unless (params[:user_token] === @token)
+    conf = YAML.load(File.open("#{RAILS_ROOT}/config/LEARN_user_token.yml"))
+    logger.info config.user_token
+    # logger.info('baj van')
+    unless (params[:user_token] == conf['user_token'])
       render :text=>'Nem vagy jogosult a megtekintesre..'
       false
     end
