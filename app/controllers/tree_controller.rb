@@ -1,6 +1,6 @@
 class TreeController < ApplicationController
   
-  before_filter :token, :only=> [:console, :terminal]
+  # before_filter :token, :only=> [:console, :terminal]
 
   protect_from_forgery :only => [:retek]
 
