@@ -141,6 +141,8 @@ NameVirtualHost *
     put vhost_config, "src/vhost_config"
     sudo "mv src/vhost_config /etc/apache2/sites-available/#{application}"
     sudo "a2ensite #{application}"
+    sudo "a2dissite default"
+    # sudo "rm /etc/apache2/sites-available/default"
   end
   
   desc "Reload Apache"
@@ -157,6 +159,8 @@ NameVirtualHost *
     sudo "useradd -m test"
     sudo "sh -c \"find /home/test/. -type d -exec chmod 770 {} \\; \""
     sudo "sh -c \"find /home/test/. -type f -exec chmod 660 {} \\; \""
+    sudo "mkdir -p /home/test/public_html/public"
+    sudo "chmod 775 /home/test/public_html/public"
     sudo "chmod 775 /home/test/public_html"
     sudo "chmod 775 /home/test"
     sudo "adduser juhat test"
@@ -173,20 +177,23 @@ NameVirtualHost *
   
   desc "Generate vhosts"
   task :generate_vhosts do
-    run "#{sudo :as => "test"} echo 'subsite' > /home/test/public_html/index.html"
+    run "#{sudo :as => "test"} echo 'subsite' > /home/test/public_html/public/index.html"
 
     vhost_config =<<-EOF
 <VirtualHost *>
   ServerName rails.test1.krc.hu
-  DocumentRoot /home/test/public_html
+  DocumentRoot /home/test/public_html/public
 </VirtualHost>
     EOF
     put vhost_config, "src/vhost_config"
     
-    (1..100).each do |number|
-      sudo "cp src/vhost_config /etc/apache2/sites-available/rails_#{number}"
-      sudo "sh -c \"sed -e 's/rails.test1.krc.hu/rails#{number}.test1.krc.hu/' /etc/apache2/sites-available/rails_#{number} > vhost.bak \" "
-      sudo "mv vhost.bak /etc/apache2/sites-available/rails_#{number}"
+    (1..3).each do |number|
+      run "ln -s /home/test/public_html /home/test/rails_#{number}"
+      sudo "sh -c \"sed -e 's/rails.test1.krc.hu/rails#{number}.test1.krc.hu/' src/vhost_config > src/vhost_config.bak \" "
+      sudo "sh -c \"sed -e 's/\\/home\\/test\\/public_html\\/public/\\/home\\/test\\/rails_#{number}\\/public/' src/vhost_config.bak > src/vhost_config.bak2 \" "
+      sudo "mv src/vhost_config.bak2 /etc/apache2/sites-available/rails_#{number}"
+      sudo "rm src/vhost_config.bak"
+      
       sudo "a2ensite rails_#{number}"
     end
   end

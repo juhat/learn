@@ -10,10 +10,14 @@ class HomeController < ApplicationController
   end
   
   def start_lesson
-    `rm -rf public/A/*`
-    `cp -R course/users/1/rails/* public/A/`
-    # `chown -R #{Course.getOsUserAndGroup} /public/A/. `
-    `touch public/A/tmp/restart.txt`
+    `rm -rf /home/user1/test/*`
+    `cp -R course/users/1/rails/* /home/user1/test`
+    `chown -R /home/user1/test/*`
+    
+    `rm /home/test/rails_1`
+    `ln -s /home/user1/test /home/test/rails_1`
+    
+    `touch /home/user1/test/tmp/restart.txt`
     redirect_to :action=>'do_lesson'
   end
   
@@ -23,9 +27,13 @@ class HomeController < ApplicationController
   
   def stop_lesson
     `rm -rf course/users/1/rails/*`
-    `cp -R public/A/* course/users/1/rails/`
-    `rm -rf public/A/*`
-    `touch public/A/tmp/restart.txt`
+    `cp -R /home/user1/test/* course/users/1/rails/`
+    `rm -rf /home/user1/test/*`
+    
+    `rm /home/test/rails_1`
+    `ln -s /home/test/public_html /home/test/rails_1`
+    
+    `touch /home/user1/test/tmp/restart.txt`
     redirect_to :action => "index"
   end
 end
