@@ -183,6 +183,7 @@ NameVirtualHost *
 <VirtualHost *>
   ServerName rails.test1.krc.hu
   DocumentRoot /home/test/public_html/public
+  RailsEnv development
 </VirtualHost>
     EOF
     put vhost_config, "src/vhost_config"
