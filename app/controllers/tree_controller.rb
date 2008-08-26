@@ -32,7 +32,7 @@ class TreeController < ApplicationController
   end
   
   def file
-    baseDir = '/home/user1/test/'
+    baseDir = '../user1/test/'
     case params[:cmd]
       when 'load'
         render :file => baseDir + params[:path]
@@ -45,7 +45,7 @@ class TreeController < ApplicationController
   end
   
   def filepanel
-    baseDir = '/home/user1/test/'
+    baseDir = '../user1/test/'
     
     case params[:cmd]
       when 'get'
