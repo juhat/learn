@@ -133,7 +133,8 @@ namespace :learn do
 NameVirtualHost *
 <VirtualHost *>
   ServerName auto.atti.la
-  DocumentRoot #{deploy_to}/public
+  DocumentRoot #{deploy_to}/current/public
+  RailsEnv development
 </VirtualHost>
     EOF
     run "mkdir -p /home/juhat/Learn/public"
