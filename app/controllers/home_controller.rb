@@ -12,6 +12,8 @@ class HomeController < ApplicationController
   def start_lesson
     `rm -rf /home/user1/test/*`
     `cp -R course/users/1/rails/* /home/user1/test`
+    `find /home/user1/test/. -type d -exec chmod 770 {} \\;`
+    `find /home/user1/test/. -type f -exec chmod 660 {} \\;`
     `chown -R /home/user1/test/*`
     
     `rm /home/test/rails_1`
