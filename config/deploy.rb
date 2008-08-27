@@ -28,7 +28,7 @@ namespace :deploy do
   
   desc "Link shared files"
   #task :before_symlink do
-  after "deploy:symlink" do
+  before "deploy:migrate" do
     run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
   end
   
