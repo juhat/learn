@@ -7,6 +7,7 @@ set :deploy_via, :copy
 
 set :deploy_to, "/home/juhat/#{application}"
 set :user, "juhat"
+set :password, "juhat"
 set :admin_runner, "juhat" 
 
 role :app, "192.168.235.132"
@@ -14,14 +15,26 @@ role :web, "192.168.235.132"
 role :db,  "192.168.235.132", :primary => true
 
 namespace :deploy do
+
   desc "Restarting mod_rails with restart.txt"
-  task :restart, :roles => [:app, :web], :except => { :no_release => true } do
+  task :restart, :roles => :app, :except => { :no_release => true } do
     run "touch #{current_path}/tmp/restart.txt"
   end
 
   [:start, :stop].each do |t|
     desc "#{t} task is a no-op with mod_rails"
     task t, :roles => :app do ; end
+  end
+  
+  desc "Link shared files"
+  #task :before_symlink do
+  after "deploy:symlink" do
+    run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
+  end
+  
+  desc "shared dirs"
+  after "deploy:setup" do
+    run "mkdir -p #{shared_path}/db #{shared_path}/uploads"
   end
 end
 
@@ -54,7 +67,7 @@ namespace :learn do
   
   desc "Sudo setup"
   task :update_sudo do
-    sudo "sh -c \"echo 'juhat ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers\""
+    sudo "sh -c \"echo '#{user} ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers\""
   end
 
   desc "Update apt sources"
@@ -134,11 +147,11 @@ NameVirtualHost *
 <VirtualHost *>
   ServerName auto.atti.la
   DocumentRoot #{deploy_to}/current/public
-  RailsEnv development
+  # RailsEnv development
 </VirtualHost>
     EOF
-    run "mkdir -p /home/juhat/Learn/public"
-    run "echo 'hello LEARNER' >  /home/juhat/Learn/public/index.html "
+    run "mkdir -p /home/#{user}/Learn/public"
+    run "echo 'hello LEARNER' >  /home/#{user}/Learn/public/index.html "
     put vhost_config, "src/vhost_config"
     sudo "mv src/vhost_config /etc/apache2/sites-available/#{application}"
     sudo "a2ensite #{application}"
@@ -158,18 +171,17 @@ NameVirtualHost *
     sudo "mv profile /etc/profile"
     
     sudo "useradd -m test"
-    sudo "sh -c \"find /home/test/. -type d -exec chmod 770 {} \\; \""
-    sudo "sh -c \"find /home/test/. -type f -exec chmod 660 {} \\; \""
-    sudo "mkdir -p /home/test/public_html/public"
-    sudo "chmod 775 /home/test/public_html/public"
+    sudo "sh -c \"find /home/test/. -type d -exec chmod 775 {} \\; \""
+    sudo "sh -c \"find /home/test/. -type f -exec chmod 664 {} \\; \""
+    run "#{sudo :as => "test"} mkdir -p -m 775 /home/test/public_html/public"
     sudo "chmod 775 /home/test/public_html"
     sudo "chmod 775 /home/test"
     sudo "adduser juhat test"
     
-    (1..10).each do |number| 
+    (1..3).each do |number| 
       sudo "useradd -m user#{number}"
-      sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 770 {} \\; \""
-      sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 660 {} \\; \""
+      sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 775 {} \\; \""
+      sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 664 {} \\; \""
       sudo "chmod 775 /home/user#{number}/public_html"      
       sudo "chmod 775 /home/user#{number}"
       sudo "adduser juhat user#{number}"
