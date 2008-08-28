@@ -42,10 +42,10 @@ end
 namespace :learn do
   desc "Setup Environment"
   task :setup_env do
-    # update_sudo
+    update_sudo
     update_apt_sources
     update_apt_get
-    upgrade_apt_get
+    #upgrade_apt_get
     install_dev_tools
     install_git
     install_subversion
@@ -147,13 +147,14 @@ namespace :learn do
     sudo "apt-get install vsftpd -y"
     sudo "mv /etc/vsftpd.conf /etc/vsftpd.conf.bak"
 
-    etc_config =<<-EOF
+    ftp_config =<<-EOF
 listen=YES
 local_enable=YES
 write_enable=YES
 local_umask=022
 xferlog_enable=YES
 connect_from_port_20=YES
+chroot_local_user=YES
 secure_chroot_dir=/var/run/vsftpd
 pam_service_name=vsftpd
 rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
@@ -161,6 +162,7 @@ rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
     EOF
     put ftp_config, "src/ftp_config"
     sudo "mv src/ftp_config /etc/vsftpd.conf"
+    sudo "/etc/init.d/vsftpd restart"
   end
   
   desc "Configure main VHost"
