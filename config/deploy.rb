@@ -30,18 +30,19 @@ namespace :deploy do
   #task :before_symlink do
   before "deploy:migrate" do
     run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
+    run "ln -s #{shared_path}/courses #{release_path}/courses"
   end
   
   desc "shared dirs"
   after "deploy:setup" do
-    run "mkdir -p #{shared_path}/db #{shared_path}/uploads"
+    run "mkdir -p #{shared_path}/db #{shared_path}/uploads #{shared_path}/courses"
   end
 end
 
 namespace :learn do
   desc "Setup Environment"
   task :setup_env do
-    update_sudo
+    # update_sudo
     update_apt_sources
     update_apt_get
     upgrade_apt_get
@@ -53,6 +54,7 @@ namespace :learn do
     install_apache
     install_passenger
     config_passenger
+    install_ftp
     generate_users
     apache_reload
   end
@@ -138,6 +140,27 @@ namespace :learn do
   task :config_passenger do
     sudo "sh -c \"echo 'LoadModule passenger_module /mod_passenger.so' > 
           /etc/apache2/mods-available/passenger.load \""
+  end
+  
+  desc "Install ftp"
+  task :install_ftp do
+    sudo "apt-get install vsftpd -y"
+    sudo "mv /etc/vsftpd.conf /etc/vsftpd.conf.bak"
+
+    etc_config =<<-EOF
+listen=YES
+local_enable=YES
+write_enable=YES
+local_umask=022
+xferlog_enable=YES
+connect_from_port_20=YES
+secure_chroot_dir=/var/run/vsftpd
+pam_service_name=vsftpd
+rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+    EOF
+    put ftp_config, "src/ftp_config"
+    sudo "mv src/ftp_config /etc/vsftpd.conf"
   end
   
   desc "Configure main VHost"
