@@ -9,6 +9,8 @@ set :deploy_to, "/home/juhat/#{application}"
 set :user, "juhat"
 set :password, "juhat"
 set :admin_runner, "juhat" 
+set :shared_children, %w(system log pids courses db courses_saved)
+set :rails_env, 'development'
 
 role :app, "192.168.235.132"
 role :web, "192.168.235.132"
@@ -27,15 +29,19 @@ namespace :deploy do
   end
   
   desc "Link shared files"
-  #task :before_symlink do
-  before "deploy:migrate" do
+  before "deploy:symlink" do
+    run "rm -f #{release_path}/db/production.sqlite3"
+    run "rm -f #{release_path}/db/development.sqlite3"
     run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
+    run "ln -s #{shared_path}/db/development.sqlite3 #{release_path}/db/development.sqlite3"
     run "ln -s #{shared_path}/courses #{release_path}/courses"
+    run "ln -s #{shared_path}/courses_saved #{release_path}/courses_saved"
   end
   
-  desc "shared dirs"
-  after "deploy:setup" do
-    run "mkdir -p #{shared_path}/db #{shared_path}/uploads #{shared_path}/courses"
+  desc "Upload courses."
+  after "deploy:cold" do
+    top.learn.upload_courses
+    run "touch #{shared_path}/courses_saved/readme.txt"
   end
 end
 
@@ -45,7 +51,7 @@ namespace :learn do
     update_sudo
     update_apt_sources
     update_apt_get
-    #upgrade_apt_get
+    upgrade_apt_get
     install_dev_tools
     install_git
     install_subversion
@@ -92,7 +98,8 @@ namespace :learn do
   task :install_dev_tools do
     sudo "apt-get install build-essential -y"
     sudo "apt-get install mc -y"
-    run  "mkdir src"
+    run  "mkdir -p src .mc"
+    top.upload '../courses/mc.ini', '.mc/ini'
   end
   
   desc "Install Git"
@@ -172,11 +179,9 @@ NameVirtualHost *
 <VirtualHost *>
   ServerName auto.atti.la
   DocumentRoot #{deploy_to}/current/public
-  # RailsEnv development
+  RailsEnv #{rails_env}
 </VirtualHost>
     EOF
-    run "mkdir -p /home/#{user}/Learn/public"
-    run "echo 'hello LEARNER' >  /home/#{user}/Learn/public/index.html "
     put vhost_config, "src/vhost_config"
     sudo "mv src/vhost_config /etc/apache2/sites-available/#{application}"
     sudo "a2ensite #{application}"
@@ -203,7 +208,7 @@ NameVirtualHost *
     sudo "chmod 775 /home/test"
     sudo "adduser juhat test"
     
-    (1..3).each do |number| 
+    (1..5).each do |number| 
       sudo "useradd -m user#{number}"
       sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 775 {} \\; \""
       sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 664 {} \\; \""
@@ -226,14 +231,49 @@ NameVirtualHost *
     EOF
     put vhost_config, "src/vhost_config"
     
-    (1..3).each do |number|
+    (1..10).each do |number|
       run "ln -s /home/test/public_html /home/test/rails_#{number}"
       sudo "sh -c \"sed -e 's/rails.test1.krc.hu/rails#{number}.test1.krc.hu/' src/vhost_config > src/vhost_config.bak \" "
       sudo "sh -c \"sed -e 's/\\/home\\/test\\/public_html\\/public/\\/home\\/test\\/rails_#{number}\\/public/' src/vhost_config.bak > src/vhost_config.bak2 \" "
       sudo "mv src/vhost_config.bak2 /etc/apache2/sites-available/rails_#{number}"
-      sudo "rm src/vhost_config.bak"
+      sudo "rm -f src/vhost_config.bak"
       
       sudo "a2ensite rails_#{number}"
     end
+      sudo "rm -f src/vhost_config"
+  end
+  
+  desc "Upload courses"
+  task :upload_courses do
+    `cd ../courses && tar -czvf ../courses.tar.gz *`
+    top.upload '../courses.tar.gz', 'src/courses.tar.gz'
+    run "cd #{shared_path}/courses/ && tar -zxvf /home/#{user}/src/courses.tar.gz"
+    run "sh -c \"find #{shared_path}/courses/. -type d -exec chmod 770 {} \\; \""
+    run "sh -c \"find #{shared_path}/courses/. -type f -exec chmod 660 {} \\; \""
+    run "rm -f src/courses.tar.gz"
+  end
+  
+  desc "Backup Learn system."
+  task :backup, :roles => :app do
+    ts = Time.now.utc.strftime("%Y%m%d%H%M%S")
+    `mkdir -p ../archives/Learn/#{ts}`
+    `rm -f ../archives/Learn/current`
+    `cd ../archives/Learn && ln -s #{ts} current`
+    
+    run <<-CMD
+      cd #{shared_path}   &&
+      tar -czvf /home/#{user}/src/courses_saved.tar.gz courses_saved/*  &&
+      cd log  &&
+      tar -czvf /home/#{user}/src/log.tar.gz ./*  &&
+      cd ../db  &&
+      tar -czvf /home/#{user}/src/db.tar.gz ./*
+    CMD
+    get "/home/#{user}/src/log.tar.gz", "../archives/Learn/#{ts}/log.tar.gz"
+    `cd ../archives/Learn/#{ts}/  && tar -zxvf log.tar.gz  && rm -f log.tar.gz` 
+    get "/home/#{user}/src/db.tar.gz", "../archives/Learn/#{ts}/db.tar.gz"
+    `cd ../archives/Learn/#{ts}/  && tar -zxvf db.tar.gz  && rm -f db.tar.gz` 
+    get "/home/#{user}/src/courses_saved.tar.gz", "../archives/Learn/#{ts}/courses_saved.tar.gz"
+    
+    run "rm -f /home/#{user}/src/*"
   end
 end
