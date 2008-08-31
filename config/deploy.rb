@@ -32,7 +32,7 @@ namespace :deploy do
   end
   
   desc "Link shared files."
-  before "deploy:symlink" do
+  before "deploy:finalize_update" do
     run "rm -f #{release_path}/db/production.sqlite3"
     run "rm -f #{release_path}/db/development.sqlite3"
     run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
@@ -182,6 +182,7 @@ NameVirtualHost *
   ServerName auto.atti.la
   DocumentRoot #{deploy_to}/current/public
   RailsEnv #{rails_env}
+  PassengerMaxInstancesPerApp 2
 </VirtualHost>
     EOF
     put vhost_config, "src/vhost_config"
@@ -209,7 +210,7 @@ NameVirtualHost *
     sudo "chmod 775 /home/test"
     sudo "adduser juhat test"
     
-    (1..5).each do |number| 
+    (1..100).each do |number| 
       sudo "useradd -m user#{number}"
       sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 775 {} \\; \""
       sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 664 {} \\; \""
@@ -221,7 +222,7 @@ NameVirtualHost *
   
   desc "Generate vhosts"
   task :generate_vhosts do
-    run "#{sudo :as => "test"} rails /home/test/rails_basic"
+    run "#{sudo :as => "test"} rails /home/test/basic_rails"
     # run "#{sudo :as => "test"} echo 'subsite' > /home/test/public_html/public/index.html"
 
     vhost_config =<<-EOF
@@ -229,12 +230,14 @@ NameVirtualHost *
   ServerName rails.test1.krc.hu
   DocumentRoot /home/test/public_html/public
   RailsEnv development
+  PassengerMaxInstancesPerApp 1
+  PassengerPoolIdleTime 120
 </VirtualHost>
     EOF
     put vhost_config, "src/vhost_config"
     
-    (1..10).each do |number|
-      run "ln -s /home/test/rails_basic /home/test/rails_#{number}"
+    (1..1000).each do |number|
+      run "ln -s /home/test/basic_rails /home/test/rails_#{number}"
       sudo "sh -c \"sed -e 's/rails.test1.krc.hu/rails#{number}.test1.krc.hu/' src/vhost_config > src/vhost_config.bak \" "
       sudo "sh -c \"sed -e 's/\\/home\\/test\\/public_html\\/public/\\/home\\/test\\/rails_#{number}\\/public/' src/vhost_config.bak > src/vhost_config.bak2 \" "
       sudo "mv src/vhost_config.bak2 /etc/apache2/sites-available/rails_#{number}"
