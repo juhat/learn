@@ -1,4 +1,5 @@
 # LEARN system installer
+require 'digest/md5'
 
 set :application, "Learn"
 set :user, "juhat"
@@ -45,6 +46,9 @@ namespace :deploy do
   after "deploy:cold" do
     top.learn.upload_courses
     run "touch #{shared_path}/courses_saved/readme.txt"
+    run "cat src/users.sql | sqlite3 #{release_path}/db/#{rails_env}.sqlite3"
+    run "cat src/url.sql | sqlite3 #{release_path}/db/#{rails_env}.sqlite3"
+    run "rm -f src/*"
   end
 end
 
@@ -65,7 +69,6 @@ namespace :learn do
     config_passenger
     install_ftp
     generate_users
-    # apache_reload
   end
   
   desc "Config environment"
@@ -210,13 +213,14 @@ NameVirtualHost *
     sudo "chmod 775 /home/test"
     sudo "adduser juhat test"
     
-    (1..100).each do |number| 
+    (1..10).each do |number|
       sudo "useradd -m user#{number}"
       sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 775 {} \\; \""
       sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 664 {} \\; \""
       sudo "chmod 775 /home/user#{number}/public_html"      
       sudo "chmod 775 /home/user#{number}"
       sudo "adduser juhat user#{number}"
+      run "echo \"INSERT INTO 'server_resources' ('type', 'key', 'status') VALUES('user', 'user#{number}', 'free');\" >> src/users.sql"
     end
   end
   
@@ -236,14 +240,15 @@ NameVirtualHost *
     EOF
     put vhost_config, "src/vhost_config"
     
-    (1..1000).each do |number|
-      run "ln -s /home/test/basic_rails /home/test/rails_#{number}"
-      sudo "sh -c \"sed -e 's/rails.test1.krc.hu/rails#{number}.test1.krc.hu/' src/vhost_config > src/vhost_config.bak \" "
-      sudo "sh -c \"sed -e 's/\\/home\\/test\\/public_html\\/public/\\/home\\/test\\/rails_#{number}\\/public/' src/vhost_config.bak > src/vhost_config.bak2 \" "
-      sudo "mv src/vhost_config.bak2 /etc/apache2/sites-available/rails_#{number}"
+    (1..100).each do |number|
+      key = Digest::MD5.hexdigest("rails_#{number}")
+      run "ln -s /home/test/basic_rails /home/test/rails_#{key}"
+      sudo "sh -c \"sed -e 's/rails.test1.krc.hu/rails_#{key}.test1.krc.hu/' src/vhost_config > src/vhost_config.bak \" "
+      sudo "sh -c \"sed -e 's/\\/home\\/test\\/public_html\\/public/\\/home\\/test\\/rails_#{key}\\/public/' src/vhost_config.bak > src/vhost_config.bak2 \" "
+      sudo "mv src/vhost_config.bak2 /etc/apache2/sites-available/rails_#{key}"
       sudo "rm -f src/vhost_config.bak"
-      
-      sudo "a2ensite rails_#{number}"
+      run "echo \"INSERT INTO 'server_resources' ('type', 'key', 'status') VALUES('url', 'rails_#{key}', 'free');\" >> src/url.sql"
+      sudo "a2ensite rails_#{key}"
     end
       sudo "rm -f src/vhost_config"
   end

@@ -4,17 +4,19 @@ class HomeController < ApplicationController
   end
   
   def create_lesson
-    `rm -rf courses/users/1/rails/*`
-    `cp -R courses/rails/1/* courses/users/1/rails/`
+    `mkdir -p courses_saved/user1/rails/`
+    `rm -rf courses_saved/user1/rails/*`
+    `cp -R courses/rails/1/* courses_saved/user1/rails/`
     redirect_to :action => "start_lesson"
   end
   
   def start_lesson
-    `rm -rf /home/user1/test/*`
-    `cp -R courses/users/1/rails/* /home/user1/test`
-    `find /home/user1/test/. -type d -exec chmod 770 {} \\;`
-    `find /home/user1/test/. -type f -exec chmod 660 {} \\;`
-    `chown -R /home/user1/test/*`
+    `mkdir -p /home/user1/rails/`
+    `rm -rf /home/user1/rails/*`
+    `cp -R courses_saved/user1/rails/* /home/user1/rails`
+    `find /home/user1/rails/. -type d -exec chmod 770 {} \\;`
+    `find /home/user1/rails/. -type f -exec chmod 660 {} \\;`
+    `chown -R /home/user1/rails/* user1:user1`
     
     `rm /home/test/rails_1`
     `ln -s /home/user1/test /home/test/rails_1`
