@@ -1,16 +1,19 @@
-default_run_options[:pty] = true
+# LEARN system installer
 
 set :application, "Learn"
+set :user, "juhat"
+set :password, "juhat"
+set :admin_runner, "juhat"
+
 set :scm, :git
 set :repository,  "file:///users/juhat/Sites/l/.git/"
 set :deploy_via, :copy
 
 set :deploy_to, "/home/juhat/#{application}"
-set :user, "juhat"
-set :password, "juhat"
-set :admin_runner, "juhat" 
 set :shared_children, %w(system log pids courses db courses_saved)
 set :rails_env, 'development'
+
+default_run_options[:pty] = true
 
 role :app, "192.168.235.132"
 role :web, "192.168.235.132"
@@ -28,7 +31,7 @@ namespace :deploy do
     task t, :roles => :app do ; end
   end
   
-  desc "Link shared files"
+  desc "Link shared files."
   before "deploy:symlink" do
     run "rm -f #{release_path}/db/production.sqlite3"
     run "rm -f #{release_path}/db/development.sqlite3"
@@ -38,7 +41,7 @@ namespace :deploy do
     run "ln -s #{shared_path}/courses_saved #{release_path}/courses_saved"
   end
   
-  desc "Upload courses."
+  desc "Upload courses after cold deploy."
   after "deploy:cold" do
     top.learn.upload_courses
     run "touch #{shared_path}/courses_saved/readme.txt"
@@ -62,7 +65,7 @@ namespace :learn do
     config_passenger
     install_ftp
     generate_users
-    apache_reload
+    # apache_reload
   end
   
   desc "Config environment"
@@ -94,7 +97,7 @@ namespace :learn do
     sudo "apt-get upgrade -y"
   end
   
-  desc "Install Development Tools"
+  desc "Install Development Tools and customize #{user}"
   task :install_dev_tools do
     sudo "apt-get install build-essential -y"
     sudo "apt-get install mc -y"
@@ -153,7 +156,6 @@ namespace :learn do
   task :install_ftp do
     sudo "apt-get install vsftpd -y"
     sudo "mv /etc/vsftpd.conf /etc/vsftpd.conf.bak"
-
     ftp_config =<<-EOF
 listen=YES
 local_enable=YES
@@ -203,7 +205,7 @@ NameVirtualHost *
     sudo "useradd -m test"
     sudo "sh -c \"find /home/test/. -type d -exec chmod 775 {} \\; \""
     sudo "sh -c \"find /home/test/. -type f -exec chmod 664 {} \\; \""
-    run "#{sudo :as => "test"} mkdir -p -m 775 /home/test/public_html/public"
+    run "#{sudo :as => "test"} cd /home/test && rails rails_basic"
     sudo "chmod 775 /home/test/public_html"
     sudo "chmod 775 /home/test"
     sudo "adduser juhat test"
@@ -220,7 +222,7 @@ NameVirtualHost *
   
   desc "Generate vhosts"
   task :generate_vhosts do
-    run "#{sudo :as => "test"} echo 'subsite' > /home/test/public_html/public/index.html"
+    # run "#{sudo :as => "test"} echo 'subsite' > /home/test/public_html/public/index.html"
 
     vhost_config =<<-EOF
 <VirtualHost *>
@@ -232,7 +234,7 @@ NameVirtualHost *
     put vhost_config, "src/vhost_config"
     
     (1..10).each do |number|
-      run "ln -s /home/test/public_html /home/test/rails_#{number}"
+      run "ln -s /home/test/rails_basic /home/test/rails_#{number}"
       sudo "sh -c \"sed -e 's/rails.test1.krc.hu/rails#{number}.test1.krc.hu/' src/vhost_config > src/vhost_config.bak \" "
       sudo "sh -c \"sed -e 's/\\/home\\/test\\/public_html\\/public/\\/home\\/test\\/rails_#{number}\\/public/' src/vhost_config.bak > src/vhost_config.bak2 \" "
       sudo "mv src/vhost_config.bak2 /etc/apache2/sites-available/rails_#{number}"
