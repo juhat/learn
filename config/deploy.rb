@@ -54,7 +54,7 @@ namespace :learn do
     update_sudo
     update_apt_sources
     update_apt_get
-    upgrade_apt_get
+    # upgrade_apt_get
     install_dev_tools
     install_git
     install_subversion
@@ -205,7 +205,6 @@ NameVirtualHost *
     sudo "useradd -m test"
     sudo "sh -c \"find /home/test/. -type d -exec chmod 775 {} \\; \""
     sudo "sh -c \"find /home/test/. -type f -exec chmod 664 {} \\; \""
-    run "#{sudo :as => "test"} cd /home/test && rails rails_basic"
     sudo "chmod 775 /home/test/public_html"
     sudo "chmod 775 /home/test"
     sudo "adduser juhat test"
@@ -222,6 +221,7 @@ NameVirtualHost *
   
   desc "Generate vhosts"
   task :generate_vhosts do
+    run "#{sudo :as => "test"} rails /home/test/rails_basic"
     # run "#{sudo :as => "test"} echo 'subsite' > /home/test/public_html/public/index.html"
 
     vhost_config =<<-EOF
