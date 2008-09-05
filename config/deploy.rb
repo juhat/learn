@@ -55,10 +55,11 @@ end
 namespace :learn do
   desc "Setup Environment"
   task :setup_env do
+    set_umask
     update_sudo
     update_apt_sources
     update_apt_get
-    # upgrade_apt_get
+    upgrade_apt_get
     install_dev_tools
     install_git
     install_subversion
@@ -78,6 +79,20 @@ namespace :learn do
     generate_vhosts
     apache_reload
   end
+  
+  desc "Umask"
+  task :try_umask do
+    set_umask
+    run "mkdir -p src"
+    generate_users
+    generate_vhosts
+  end
+
+  desc "Umask"
+  task :set_umask do
+    run "umask 006"
+  end
+
   
   desc "Sudo setup"
   task :update_sudo do
@@ -132,7 +147,8 @@ namespace :learn do
   task :install_rails_stack do
     run <<-CMD
       sudo apt-get install ruby ruby1.8-dev irb ri rdoc libopenssl-ruby1.8 rubygems rubygems1.8 -y  &&
-      sudo gem install rails --no-ri --no-rdoc
+      sudo gem install rails --no-ri --no-rdoc  &&
+      sudo gem install rails --no-ri --no-rdoc --version 2.1.0
     CMD
   end
   
@@ -202,23 +218,23 @@ NameVirtualHost *
   
   desc "Generate users"
   task :generate_users do
-    sudo "mkdir -p /etc/skel/public_html"
-    sudo "sh -c \"sed -e 's/umask 022/umask 002/' /etc/profile > profile \" "
+    # sudo "mkdir -p /etc/skel/public_html"
+    sudo "sh -c \"sed -e 's/umask 022/umask 006/' /etc/profile > profile \" "
     sudo "mv profile /etc/profile"
     
     sudo "useradd -m test"
-    sudo "sh -c \"find /home/test/. -type d -exec chmod 775 {} \\; \""
+    sudo "sh -c \"find /home/test/. -type d -exec chmod 771 {} \\; \""
     sudo "sh -c \"find /home/test/. -type f -exec chmod 664 {} \\; \""
-    sudo "chmod 775 /home/test/public_html"
-    sudo "chmod 775 /home/test"
+    # sudo "chmod 771 /home/test/public_html"
+    sudo "chmod 771 /home/test"
     sudo "adduser juhat test"
     
     (1..10).each do |number|
       sudo "useradd -m user#{number}"
-      sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 775 {} \\; \""
+      sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 771 {} \\; \""
       sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 664 {} \\; \""
-      sudo "chmod 775 /home/user#{number}/public_html"      
-      sudo "chmod 775 /home/user#{number}"
+      # sudo "chmod 771 /home/user#{number}/public_html"
+      sudo "chmod 771 /home/user#{number}"
       sudo "adduser juhat user#{number}"
       run "echo \"INSERT INTO 'server_resources' ('type', 'key', 'status') VALUES('user', 'user#{number}', 'free');\" >> src/users.sql"
     end
