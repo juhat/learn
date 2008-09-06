@@ -14,7 +14,7 @@ set :deploy_to, "/home/juhat/#{application}"
 set :shared_children, %w(system log pids courses db courses_saved)
 set :rails_env, 'development'
 
-default_run_options[:pty] = true
+# default_run_options[:pty] = true
 
 role :app, "192.168.235.132"
 role :web, "192.168.235.132"
@@ -34,6 +34,8 @@ namespace :deploy do
   
   desc "Link shared files."
   before "deploy:finalize_update" do
+    sudo "sh -c \"find /home/#{user}/. -type d -exec chmod 771 {} \\; \""
+    
     run "rm -f #{release_path}/db/production.sqlite3"
     run "rm -f #{release_path}/db/development.sqlite3"
     run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
@@ -53,13 +55,21 @@ namespace :deploy do
 end
 
 namespace :learn do
+  
+  task :bootstrap do
+    mkdirs
+    update_sudo
+    update_umask    
+  end
+  
   desc "Setup Environment"
   task :setup_env do
-    set_umask
-    update_sudo
+    #upgrade
     update_apt_sources
     update_apt_get
     upgrade_apt_get
+    
+    #installs
     install_dev_tools
     install_git
     install_subversion
@@ -69,6 +79,8 @@ namespace :learn do
     install_passenger
     config_passenger
     install_ftp
+    
+    #populate
     generate_users
   end
   
@@ -80,23 +92,31 @@ namespace :learn do
     apache_reload
   end
   
-  desc "Umask"
-  task :try_umask do
-    set_umask
-    run "mkdir -p src"
-    generate_users
-    generate_vhosts
-  end
-
-  desc "Umask"
-  task :set_umask do
-    run "umask 006"
-  end
-
-  
-  desc "Sudo setup"
+  desc "Sudo, umask setup"
   task :update_sudo do
     sudo "sh -c \"echo '#{user} ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers\""
+  end
+  
+  desc "Update umask"
+  task :update_umask do
+    sudo "sh -c \"sed -e 's/umask 022/umask 002/' /etc/profile > profile \" "
+    sudo "mv profile /etc/profile"
+    
+    sudo "sh -c \"echo 'umask 002' >> src/bash.bashrc\""
+    sudo "sh -c \"cat /etc/bash.bashrc >> src/bash.bashrc\""
+    sudo "mv src/bash.bashrc /etc/bash.bashrc"
+    
+    sudo "sh -c \"echo 'umask 002' >> src/.bashrc\""
+    sudo "sh -c \"cat /etc/skel/.bashrc >> src/.bashrc\""
+    run "cp src/.bashrc ~/.bashrc"
+    # sudo "mv src/.bashrc /etc/skel/.bashrc"
+    
+    sudo "sh -c \"echo 'Defaults umask=0002' >> /etc/sudoers\""
+  end
+  
+  desc "Basic dirs"
+  task :mkdirs do
+    run  "mkdir -p src .mc"
   end
 
   desc "Update apt sources"
@@ -119,7 +139,6 @@ namespace :learn do
   task :install_dev_tools do
     sudo "apt-get install build-essential -y"
     sudo "apt-get install mc -y"
-    run  "mkdir -p src .mc"
     top.upload '../courses/mc.ini', '.mc/ini'
   end
   
@@ -218,22 +237,20 @@ NameVirtualHost *
   
   desc "Generate users"
   task :generate_users do
-    # sudo "mkdir -p /etc/skel/public_html"
-    sudo "sh -c \"sed -e 's/umask 022/umask 006/' /etc/profile > profile \" "
-    sudo "mv profile /etc/profile"
+    sudo "sh -c \"find /home/#{user}/. -type d -exec chmod 771 {} \\; \""
+    # sudo "sh -c \"find /home/#{user}/. -type f -exec chmod 664 {} \\; \"" 
+    sudo "chmod 771 /home/#{user}"
     
     sudo "useradd -m test"
     sudo "sh -c \"find /home/test/. -type d -exec chmod 771 {} \\; \""
-    sudo "sh -c \"find /home/test/. -type f -exec chmod 664 {} \\; \""
-    # sudo "chmod 771 /home/test/public_html"
+    # sudo "sh -c \"find /home/test/. -type f -exec chmod 664 {} \\; \"" 
     sudo "chmod 771 /home/test"
     sudo "adduser juhat test"
     
     (1..10).each do |number|
       sudo "useradd -m user#{number}"
       sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 771 {} \\; \""
-      sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 664 {} \\; \""
-      # sudo "chmod 771 /home/user#{number}/public_html"
+      # sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 664 {} \\; \""
       sudo "chmod 771 /home/user#{number}"
       sudo "adduser juhat user#{number}"
       run "echo \"INSERT INTO 'server_resources' ('type', 'key', 'status') VALUES('user', 'user#{number}', 'free');\" >> src/users.sql"
@@ -243,8 +260,8 @@ NameVirtualHost *
   desc "Generate vhosts"
   task :generate_vhosts do
     run "#{sudo :as => "test"} rails /home/test/basic_rails"
-    # run "#{sudo :as => "test"} echo 'subsite' > /home/test/public_html/public/index.html"
-
+    sudo "sh -c \"find /home/test/. -type d -exec chmod 771 {} \\; \""
+    
     vhost_config =<<-EOF
 <VirtualHost *>
   ServerName rails.test1.krc.hu
@@ -256,7 +273,7 @@ NameVirtualHost *
     EOF
     put vhost_config, "src/vhost_config"
     
-    (1..100).each do |number|
+    (1..10).each do |number|
       key = Digest::MD5.hexdigest("rails_#{number}")
       run "ln -s /home/test/basic_rails /home/test/rails_#{key}"
       sudo "sh -c \"sed -e 's/rails.test1.krc.hu/rails_#{key}.test1.krc.hu/' src/vhost_config > src/vhost_config.bak \" "
