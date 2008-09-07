@@ -12,7 +12,15 @@
 	<div id="hd"><h1>Learn to code the web</h1></div>
 	<div id="bd">
 		<div class="yui-g">
-			<h2>Menu: <%= link_to 'course admin', :controller=>'courses' %> </h2><br>
+			<h2>Menu: </h2>
+			<div id="navcontainer">
+        <ul id="navlist">
+          <li> <%= link_to "Home", :controller=>'home' %> </li>
+          <li> <%= link_to "Users", :controller=>'users' %> </li>
+          <li> <%= link_to "Users Home", :controller=>'home', :action=>'user' %> </li>
+          <li> <%= link_to "Courses", :controller=>'courses' %> </li>
+        </ul>
+      </div>
 			<%= yield %>
 	
 		</div>

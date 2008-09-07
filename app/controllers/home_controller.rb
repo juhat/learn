@@ -1,15 +1,17 @@
 class HomeController < ApplicationController
+  before_filter :login_required, :only => [ :user ]
+    
   def index
     @courses = Course.find(:all)
   end
   
   def create_lesson
-    `mkdir -p courses_saved/user1/rails/`
-    `rm -rf courses_saved/user1/rails/*`
-    `cp -R courses/rails/1/* courses_saved/user1/rails/`
+    `mkdir -p courses_saved/user1/rails1/`
+    `rm -rf courses_saved/user1/rails1/*`
+    `cp -R courses/rails1/* courses_saved/user1/rails1/`
     redirect_to :action => "start_lesson"
   end
-  
+  # not changed below
   def start_lesson
     `mkdir -p /home/user1/rails/`
     `rm -rf /home/user1/rails/*`

@@ -8,7 +8,7 @@ body, html{
 	border:1px solid grey;
 }
 #hd{
-	padding:2em;
+	padding:2em 2em 0em 2em;
 }
 #bd{
 	padding:2em;
@@ -41,3 +41,52 @@ p{
 	padding:0.6em 0;
 }
 
+
+
+/*Navbar*/
+#navcontainer ul
+{
+text-align: left;
+padding-bottom: 5px;
+padding-top: 5px;
+padding-left: 0;
+margin-top: 0;
+/* cancels gap caused by top padding in Opera 7.54 */
+margin-left: 0;
+margin-bottom:2em;
+background-color: #036;
+color: white;
+width: 100%;
+font-family: Arial,Helvetica,sans-serif;
+line-height: 18px;
+/* fixes Firefox 0.9.3 */
+}
+
+#navcontainer ul li
+{
+display: inline;
+padding-left: 0;
+padding-right: 0;
+padding-bottom: 5px;
+/* matches link padding except for left and right */
+padding-top: 5px;
+}
+
+#navcontainer ul li a
+{
+padding-left: 10px;
+padding-right: 10px;
+padding-bottom: 5px;
+padding-top: 5px;
+color: white;
+text-decoration: none;
+border-right: 1px solid #fff;
+}
+
+#navcontainer ul li a:hover
+{
+background-color: #369;
+color: white;
+}
+
+/*#navcontainer #active { border-left: 1px solid #fff; }*/

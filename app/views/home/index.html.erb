@@ -1,6 +1,6 @@
 	<p>Rails learning system: <%= link_to "Create lesson", :controller => "home", :action => "create_lesson" %> <%= link_to 'START lesson', :controller=>'home', :action=>'start_lesson' %></p>
 <% if logged_in? %>
-  <p><strong>You are logged in as <%=h current_user.login %></strong></p>
+  <p><strong>You are logged in as <%=h current_user.email %></strong></p>
 	<p>Rails learning system: <%= link_to "Create lesson", :controller => "home", :action => "create_lesson" %> <%= link_to 'START lesson', :controller=>'home', :action=>'start_lesson' %></p>
   <p><%= link_to 'Logout', logout_path %></p>
 <% else %>
