@@ -3,7 +3,7 @@ Ext.ns('Learn');
 Learn.FilePanel = Ext.extend(Ext.ux.FileTreePanel, {
     border:false
 	,url:'../tree/filepanel'
-	,rootPath:'A'
+	,rootPath:'rails1'
 	,rootText:'Website'
 
     ,initComponent:function() {

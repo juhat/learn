@@ -25,14 +25,14 @@ class TreeController < ApplicationController
   end
   
   def terminal
-    t = Thread.new { `cd /home/user1/test && #{params[:command]}` }
+    t = Thread.new { `cd courses_saved/user#{current_user.id}/rails1/ && #{params[:command]}` }
     tval = t.value
     t.exit! 
     render :text=>tval
   end
   
   def file
-    baseDir = '../user1/test/'
+    baseDir = "courses_saved/user#{current_user.id}/"
     case params[:cmd]
       when 'load'
         render :file => baseDir + params[:path]
@@ -45,7 +45,7 @@ class TreeController < ApplicationController
   end
   
   def filepanel
-    baseDir = '../user1/test/'
+    baseDir = "courses_saved/user#{current_user.id}/"
     
     case params[:cmd]
       when 'get'

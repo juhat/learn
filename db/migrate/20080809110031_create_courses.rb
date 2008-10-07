@@ -9,6 +9,7 @@ class CreateCourses < ActiveRecord::Migration
 
       t.timestamps
     end
+    Course.create :name=>'Rails', :author=>'Juhasz Attila'
   end
 
   def self.down
