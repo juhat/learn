@@ -1,1 +1,0 @@
-INSERT INTO server_resources (type, key, status) VALUES('user', '234', 'available') db/development.sqlite3

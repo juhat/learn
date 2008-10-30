@@ -2,8 +2,8 @@ Ext.ns('Learn');
 
 Learn.FilePanel = Ext.extend(Ext.ux.FileTreePanel, {
     border:false
-	,url:'../tree/filepanel'
-	,rootPath:'rails1'
+	,url:'learn/filepanel'
+	,rootPath:'testproject'
 	,rootText:'Website'
 
     ,initComponent:function() {
@@ -20,7 +20,7 @@ Learn.FilePanel = Ext.extend(Ext.ux.FileTreePanel, {
 Ext.reg('filepanel', Learn.FilePanel);
 
 Learn.EditorForm = Ext.extend(Ext.form.FormPanel, {
-	url:'../tree/file'
+	url:'learn/file'
 	,file:''
 	
     ,initComponent:function() {
@@ -61,13 +61,13 @@ Learn.EditorForm = Ext.extend(Ext.form.FormPanel, {
     }
     ,onRender:function() {
 	    Learn.EditorForm.superclass.onRender.apply(this, arguments);
-		// this.getForm().waitMsgTarget = this.getEl(); 
+		// this.getForm().waitMsgTarget = this.getEl();
     }
 	,onSubmit:function() {
 		this.getForm().submit({
 			 url:this.url
 			,scope:this
-			// ,success:this.onSuccess
+			,success:this.findParentByType('viewport').items.itemAt(1).getUpdater().refresh()
 			,failure:function(){alert('File cant saved!');}
 			,params:{
 				cmd:'save'
@@ -99,7 +99,7 @@ Learn.Editor = Ext.extend(Ext.Panel, {
 					,items:[{
 						title:'Read me'
 						,closable:false
-						,autoLoad:'../page/readme'
+						,autoLoad:'learn/readme'
 					}]
 				}]	
 		});
@@ -124,10 +124,10 @@ Learn.Editor = Ext.extend(Ext.Panel, {
 			return false;
 		}
 		
-		console.log(obj);
-		console.log(title);
-		console.log(path);
-		
+		// console.log(obj);
+		// console.log(title);
+		// console.log(path);
+	
 		var tab = this.opened_files.find(function(s) {
 			return s === path;
 	 	});

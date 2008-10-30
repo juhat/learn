@@ -16,32 +16,31 @@ Ext.onReady(function() {
 			,el: 'lesson_info'
 			,cls: 'app-header'
 			,height:60
-		}),{
-			region:'center'
-			,xtype:'tabpanel'
+			})
+			,{
+			region:'east'
+			,xtype:'panel'
+			,width:250
 			,frame:true
-			// ,defaults:{autoHeight: true}
-		    ,activeTab: 0
-			// ,border:10
-		    ,items: [{
-		        title: 'File Editor'
-			    // ,layout: 'fit'
-			 	,xtype: 'editor'
-		    },{
-		        title: 'Terminal'
-				,tabTip:'Unix command shell.'
-			 	,xtype: 'terminal'
-				// ,layout:'fit'
-		    },{
-		        title: 'SQL console'
-		        ,html: 'Another one'
-		    },{
-		        title: 'IRB ruby'
-		        ,html: 'Another one'
-		    },{
-		        title: 'script/console'
-			 	,xtype: 'terminal'
-				,url:'../tree/console'
+		 	,autoLoad:{url:'learn/autotest'}
+			}
+			,{
+				region:'center'
+				,xtype:'tabpanel'
+				,frame:true
+			    ,activeTab: 0
+			    ,items: [{
+			        title: 'File Editor'
+				 	,xtype: 'editor'
+			    },{
+			        title: 'Terminal'
+					,tabTip:'Unix command shell.'
+				 	,xtype: 'terminal'
+			    }
+				,{
+			        title: 'script/console'
+				 	,xtype: 'terminal'
+					,url:'learn/console'
 		    }]			
 		}]
 	});
