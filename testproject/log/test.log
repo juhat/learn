@@ -1,0 +1,294 @@
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 17:46:13) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 17:46:43) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00218 (457 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 17:46:59) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00220 (454 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 17:47:02) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00217 (460 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 17:51:06) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 17:51:06) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00027 (3705 reqs/sec) | Rendering: 0.00009 (32%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 17:51:29) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00229 (437 reqs/sec) | Rendering: 0.00016 (6%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 17:51:29) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00026 (3788 reqs/sec) | Rendering: 0.00009 (32%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:09:55) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00220 (453 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:09:55) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00031 (3216 reqs/sec) | Rendering: 0.00014 (45%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:12:07) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00219 (457 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:12:07) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00031 (3214 reqs/sec) | Rendering: 0.00014 (44%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:23:41) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00218 (459 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:23:41) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00031 (3206 reqs/sec) | Rendering: 0.00014 (44%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:29:39) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00216 (464 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:29:39) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00032 (3153 reqs/sec) | Rendering: 0.00014 (44%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:29:44) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00219 (457 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:29:44) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00031 (3246 reqs/sec) | Rendering: 0.00014 (45%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:30:13) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00220 (454 reqs/sec) | Rendering: 0.00011 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:30:13) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00033 (3075 reqs/sec) | Rendering: 0.00014 (44%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:30:35) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00219 (457 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:30:35) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00031 (3175 reqs/sec) | Rendering: 0.00014 (44%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:30:50) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00214 (466 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:30:50) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00032 (3163 reqs/sec) | Rendering: 0.00014 (44%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:31:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00219 (457 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:31:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00031 (3206 reqs/sec) | Rendering: 0.00014 (44%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:31:33) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00224 (446 reqs/sec) | Rendering: 0.00017 (7%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:31:33) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00026 (3876 reqs/sec) | Rendering: 0.00009 (33%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:31:52) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00214 (467 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:31:52) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00032 (3104 reqs/sec) | Rendering: 0.00015 (45%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:31:59) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00224 (446 reqs/sec) | Rendering: 0.00017 (7%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:31:59) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00026 (3802 reqs/sec) | Rendering: 0.00009 (33%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:32:07) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00218 (458 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:32:07) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00031 (3194 reqs/sec) | Rendering: 0.00014 (45%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:32:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00216 (462 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:32:23) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00033 (3068 reqs/sec) | Rendering: 0.00014 (43%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:33:00) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00215 (465 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:33:00) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00031 (3226 reqs/sec) | Rendering: 0.00014 (45%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:33:42) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00217 (459 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:33:42) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00032 (3172 reqs/sec) | Rendering: 0.00014 (44%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:49:08) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00216 (463 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:49:08) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00032 (3172 reqs/sec) | Rendering: 0.00014 (45%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:51:04) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00219 (456 reqs/sec) | Rendering: 0.00010 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:51:04) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00032 (3106 reqs/sec) | Rendering: 0.00015 (45%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
+
+
+Processing PageController#index (for 0.0.0.0 at 2008-10-22 18:52:55) [GET]
+  Session ID: 
+  Parameters: {"action"=>"index", "controller"=>"page"}
+Completed in 0.00229 (437 reqs/sec) | Rendering: 0.00011 (4%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page]
+
+
+Processing PageController#hello_template (for 0.0.0.0 at 2008-10-22 18:52:55) [GET]
+  Session ID: 
+  Parameters: {"action"=>"hello_template", "controller"=>"page"}
+Rendering page/hello_template
+Completed in 0.00031 (3246 reqs/sec) | Rendering: 0.00014 (45%) | DB: 0.00000 (0%) | 200 OK [http://test.host/page/hello_template]
