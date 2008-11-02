@@ -168,7 +168,8 @@ namespace :learn do
     run <<-CMD
       sudo apt-get install ruby ruby1.8-dev irb ri rdoc libopenssl-ruby1.8 rubygems rubygems1.8 -y  &&
       sudo gem install rails --no-ri --no-rdoc  &&
-      sudo gem install rails --no-ri --no-rdoc --version 2.1.0
+      sudo gem install rails --no-ri --no-rdoc --version 2.1.0  &&
+      sudo gem install hpricot
     CMD
   end
   
