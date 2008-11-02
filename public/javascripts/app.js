@@ -20,7 +20,7 @@ Ext.onReady(function() {
 			,{
 			region:'east'
 			,xtype:'panel'
-			,width:250
+			,width:300
 			,frame:true
 		 	,autoLoad:{url:'learn/autotest'}
 			}

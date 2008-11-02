@@ -11,6 +11,8 @@ class LearnController < ApplicationController
   
   def autotest
     doc =  Hpricot( `script/spec -o spec/spec.opts spec/learn_test_spec.rb` )
+    (doc/".not_implemented_spec_name").each{|e| e.inner_html = e.inner_html[0,e.inner_html.index('(')] }
+    # header = File.readlines('app/views/learn/header.html').map {|l| l.rstrip}
     render :text => (doc/".results").inner_html
   end
   

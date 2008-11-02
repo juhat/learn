@@ -67,9 +67,10 @@ namespace :learn do
     #upgrade
     update_apt_sources
     update_apt_get
-    upgrade_apt_get
+    # upgrade_apt_get
     
     #installs
+    mkdirs
     install_dev_tools
     install_git
     install_subversion
@@ -139,7 +140,7 @@ namespace :learn do
   task :install_dev_tools do
     sudo "apt-get install build-essential -y"
     sudo "apt-get install mc -y"
-    top.upload '../courses/mc.ini', '.mc/ini'
+    top.upload 'vendor/stack/mc.ini', '.mc/ini'
   end
   
   desc "Install Git"
@@ -217,7 +218,7 @@ rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
     vhost_config =<<-EOF
 NameVirtualHost *
 <VirtualHost *>
-  ServerName auto.atti.la
+  ServerName learn.atti.la
   DocumentRoot #{deploy_to}/current/public
   RailsEnv #{rails_env}
   PassengerMaxInstancesPerApp 2
