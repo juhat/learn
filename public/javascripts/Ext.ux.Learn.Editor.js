@@ -87,7 +87,7 @@ Learn.Editor = Ext.extend(Ext.Panel, {
 			,items:[{
 					xtype:'filepanel'
 					,region:'west'
-					,width:250
+					,width:200
 					// ,collapsible:true
 					// ,collapseMode:'mini'
 					,split:true
