@@ -20,7 +20,8 @@ Ext.onReady(function() {
 			,{
 			region:'east'
 			,xtype:'panel'
-			,width:200
+			,width:'30%'
+			,split:true
 			,frame:true
 		 	,autoLoad:{url:'learn/autotest'}
 			}
@@ -36,6 +37,7 @@ Ext.onReady(function() {
 			        title: 'Terminal'
 					,tabTip:'Unix command shell.'
 				 	,xtype: 'terminal'
+					,url:'learn/terminal'
 			    }
 				,{
 			        title: 'script/console'

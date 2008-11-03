@@ -1,21 +1,32 @@
-# require 'rubygems'
 require 'hpricot'
 
 class LearnController < ApplicationController  
-  before_filter :ajax_call, :except => [:filepanel, :autotest, :file]
+  before_filter :ajax_call, :except => [:filepanel, :autotest, :file, :terminal]
   protect_from_forgery :only => [:retek]  
   
   def index
     render :layout=>'learn'
   end
-  
-  def autotest
-    doc =  Hpricot( `script/spec -o spec/spec.opts spec/learn_test_spec.rb` )
-    (doc/".not_implemented_spec_name").each{|e| e.inner_html = e.inner_html[0,e.inner_html.index('(')] }
-    # header = File.readlines('app/views/learn/header.html').map {|l| l.rstrip}
-    render :text => (doc/".results").inner_html
+  def restart
+    `tar czvf testproject_bak/#{Time.now.strftime("%y%m%d%H%M%S")}.tar.gz testproject/`
+    `rm -rf testproject`
+    `rails testproject`
+    `cd testproject && script/generate rspec`
+    `cp spec/learn_gallery_spec.rb testproject/spec/learn_gallery_spec.rb`
+    `cp spec/spec.opts testproject/spec/spec.opts`
+    `cp spec/spec_helper.rb testproject/spec/spec_helper.rb`
+    `cp spec/learn_story.html testproject/spec/learn_story.html`
+    redirect_to :controller => :learn
   end
   
+  def autotest
+    doc =  Hpricot( `cd testproject && script/spec -o spec/spec.opts spec/learn_gallery_spec.rb` )
+    (doc/".not_implemented_spec_name").each{|e| e.inner_html = e.inner_html[0,e.inner_html.index('(')] }
+    header = File.readlines('testproject/spec/learn_story.html').map {|l| l.rstrip}
+    render :text => header + (doc/".results")
+  end
+  
+  # NEED WORK
   def console
     result = nil
     begin

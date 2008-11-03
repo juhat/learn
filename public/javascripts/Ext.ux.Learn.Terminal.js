@@ -47,6 +47,7 @@ Learn.Terminal = Ext.extend(Ext.FormPanel, {
 			,success: function(a,b){
 				var text = this.items.itemAt(0).getValue();
 				this.items.itemAt(0).setValue(a.responseText + "\n" + text);
+				this.findParentByType('viewport').items.itemAt(1).getUpdater().refresh()
 			}
 		    ,failure: function(){
 				alert('Problem with terminal functionaliti.')

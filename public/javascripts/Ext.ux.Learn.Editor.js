@@ -61,7 +61,6 @@ Learn.EditorForm = Ext.extend(Ext.form.FormPanel, {
     }
     ,onRender:function() {
 	    Learn.EditorForm.superclass.onRender.apply(this, arguments);
-		// this.getForm().waitMsgTarget = this.getEl();
     }
 	,onSubmit:function() {
 		this.getForm().submit({
@@ -87,14 +86,12 @@ Learn.Editor = Ext.extend(Ext.Panel, {
 			,items:[{
 					xtype:'filepanel'
 					,region:'west'
-					,width:200
-					// ,collapsible:true
-					// ,collapseMode:'mini'
+					,width:'30%'
 					,split:true
 				},{
 					xtype:'tabpanel'
 					,region:'center'
-					,border:false
+					,border:true
 					,activeTab:0
 					,items:[{
 						title:'Read me'

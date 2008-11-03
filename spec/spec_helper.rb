@@ -45,3 +45,13 @@ Spec::Runner.configure do |config|
   # 
   # For more information take a look at Spec::Example::Configuration and Spec::Runner
 end
+
+def controller_exist?(name = nil)
+  File.exist?("#{RAILS_ROOT}/app/controllers/#{name}_controller.rb")
+end
+def model_exist?(name = nil)
+  File.exist?("#{RAILS_ROOT}/app/models/#{name}.rb")
+end
+def scaffold_exist?(name = nil)
+  model_exist?(name) && controller_exist?(name.pluralize)
+end  
