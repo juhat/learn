@@ -13,10 +13,18 @@ class LearnCourseController < ApplicationController
     out, err = StringIO.new('',"w+"), StringIO.new('',"w+")
     ::Spec::Runner::CommandLine.run(::Spec::Runner::OptionParser.parse(["#{RAILS_ROOT}/spec/learn_gallery_spec.rb",'-f html','-t 10','-c'], err, out))
     render :text => out.string
+  end  
+  
+  def terminal
+    logger.info('Working on terminal command proxied by frontend.')
+    t = Thread.new { `#{params[:command]}` }
+    tval = t.value
+    t.exit!
+    render :text=>tval
   end
   
-  # NEED WORK
   def console
+    logger.info('Working on app console command proxied by frontend.')
     result = nil
     begin
       result = eval(params[:command])
@@ -26,12 +34,14 @@ class LearnCourseController < ApplicationController
     render :text=> result
   end
   
-  
-  def terminal
-    logger.info('Working on terminal command proxied by frontend.')
-    t = Thread.new { `#{params[:command]}` }
-    tval = t.value
-    t.exit!
-    render :text=>tval
+  def db
+    begin
+      some_objects = []
+      mysql_res = ActiveRecord::Base.connection.execute(params[:command])
+      mysql_res.each{ |res| some_objects << res }
+    rescue Exception => e
+      some_objects = e.message
+    end
+    render :text => some_objects.to_yaml
   end
 end

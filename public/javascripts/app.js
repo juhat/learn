@@ -49,8 +49,8 @@ Ext.onReady(function() {
 				,{
 			        title: 'Database script/dbconsole'
 					,tabTip:'DB SQL console'
-				 	,xtype: 'panel'
-					,url:'learn/terminal'
+				 	,xtype: 'terminal'
+					,url:'learn/db'
 			    }
 			]			
 		}]
