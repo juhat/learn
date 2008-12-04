@@ -1,7 +1,7 @@
 .example_group{
 }
 .example_group dt{
-  font-size: 2em;
+  font-size: 1.2em;
   font-weight:bold;
   margin: 0.2em 0 0.6em 0;
 }
@@ -50,6 +50,13 @@ body, html{
 	float:right;
 	display:inline;
 }
+.app-top-menu a{
+  margin: 0 1em 0 0; 
+}
+.app-top-menu a img{
+  padding: 0em 0 0.5em 0;
+  margin: 0 0.2em 0 0;
+}
 .app-top-menu a,
 .app-top-menu a:hover, 
 .app-top-menu a:visited{
@@ -72,8 +79,16 @@ p{
 .readme{
   margin:2em;
 }
-
-
+.readme p{
+  margin: 0.6em 0 0 0;
+}
+.readme p span{
+  text-decoration:underline;
+}
+.readme ul li{
+  margin: 0.5em 0 0 2em;
+  list-style-type: square;
+}
 
 /*Navbar*/
 #navcontainer ul

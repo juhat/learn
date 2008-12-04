@@ -1,2 +1,6 @@
-<div class="app-top-menu"><%= link_to "Alkalmazás megtekintése", "http://user.atti.la", :popup=>true %></div>
-<h1>Interaktív e-learning rendszer</h1>
+<div class="app-top-menu">
+<!--  <%= link_to '.', :controller=>:learn, :action=>:push %>-->
+  <%= link_to image_tag('cancel.png') + "Restart this lesson!", :controller => :learn, :action => :restart %>
+  <%= link_to image_tag('application_go.png') + "View the application!", "http://user.atti.la", :popup=>true %>
+</div>
+<h1>Interactive e-learning system <span style="font-size:0.5em">for programmers</span></h1>

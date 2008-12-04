@@ -33,17 +33,26 @@ Ext.onReady(function() {
 			    ,items: [{
 			        title: 'File Editor'
 				 	,xtype: 'editor'
-			    },{
-			        title: 'Terminal'
-					,tabTip:'Unix command shell.'
+			    }
+				,{
+			        title: 'Linux terminal'
+					,tabTip:'Linux command shell'
 				 	,xtype: 'terminal'
 					,url:'learn/terminal'
 			    }
 				,{
-			        title: 'script/console'
-				 	,xtype: 'terminal'
+			        title: 'Rails script/console'
+					,tabTip:'The Rails command shell'
+				 	,xtype: 'panel'
 					,url:'learn/console'
-		    }]			
+		    	}
+				,{
+			        title: 'Database script/dbconsole'
+					,tabTip:'DB SQL console'
+				 	,xtype: 'panel'
+					,url:'learn/terminal'
+			    }
+			]			
 		}]
 	});
 	vp.show();

@@ -64,12 +64,12 @@ namespace :learn do
   
   desc "Setup Environment"
   task :setup_env do
-    #upgrade
+    # upgrade the system
     update_apt_sources
     update_apt_get
-    # upgrade_apt_get
+    upgrade_apt_get
     
-    #installs
+    # install the software stack
     mkdirs
     install_dev_tools
     install_git
@@ -81,13 +81,16 @@ namespace :learn do
     config_passenger
     install_ftp
     
-    #populate
+    # Populate with student users
     generate_users
   end
   
   desc "Config environment"
   task :config_env do
+    # Setup admin application environment
     top.deploy.setup
+    
+    # Configure web addresses
     config_vhost
     generate_vhosts
     apache_reload

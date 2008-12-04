@@ -1,0 +1,38 @@
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 14:45:20) [GET]
+Working on autotest proxied by frontend.
+Completed in 555ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 14:45:38) [GET]
+Working on autotest proxied by frontend.
+Completed in 134ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 14:46:05) [GET]
+Working on autotest proxied by frontend.
+
+
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-04 14:46:05) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-04 14:46:05) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-04 14:46:05) [GET]
+Completed in 143ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 14:46:37) [GET]
+Working on autotest proxied by frontend.
+
+
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-04 14:46:37) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-04 14:46:37) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-04 14:46:37) [GET]
+Completed in 75ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]

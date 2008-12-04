@@ -1,3 +1,5 @@
+# require 'rubygems'
+require 'spec'
 require 'hpricot'
 
 class LearnController < ApplicationController  
@@ -6,6 +8,24 @@ class LearnController < ApplicationController
   
   def index
     render :layout=>'learn'
+  end
+  
+  # Proxied back to backend.
+  def autotest
+    logger.info('Proxied autotest to backend.')
+    doc = Hpricot(Net::HTTP.get('user.atti.la', '/learn_course/autotest'))
+        
+    (doc/".not_implemented_spec_name").each{|e| e.inner_html = e.inner_html[0,e.inner_html.index('(')] }
+    (doc/".backtrace").each{|e| e.inner_html = ''}
+    (doc/"pre code").each{|e| e.inner_html = ''}
+    (doc/".failure").each{|e| e.inner_html = ''}
+    
+    header = File.readlines("#{RAILS_ROOT}/testproject/spec/learn_story.html").map{|l| l.rstrip}.to_s
+    render :text => header + (doc/".results").to_s
+  end
+  def push
+    `cp spec/learn_gallery_spec.rb testproject/spec/learn_gallery_spec.rb`
+    redirect_to :action=>:index
   end
   def restart
     `tar czvf testproject_bak/#{Time.now.strftime("%y%m%d%H%M%S")}.tar.gz testproject/`
@@ -16,15 +36,17 @@ class LearnController < ApplicationController
     `cp spec/spec.opts testproject/spec/spec.opts`
     `cp spec/spec_helper.rb testproject/spec/spec_helper.rb`
     `cp spec/learn_story.html testproject/spec/learn_story.html`
+    `cp app/controllers/learn_course_controller.rb testproject/app/controllers/learn_course_controller.rb`
+    `touch testproject/tmp/restart.txt`
     redirect_to :controller => :learn
   end
   
-  def autotest
-    doc =  Hpricot( `cd testproject && script/spec -o spec/spec.opts spec/learn_gallery_spec.rb` )
-    (doc/".not_implemented_spec_name").each{|e| e.inner_html = e.inner_html[0,e.inner_html.index('(')] }
-    header = File.readlines('testproject/spec/learn_story.html').map {|l| l.rstrip}
-    render :text => header + (doc/".results")
-  end
+  # def autotest
+  #   doc =  Hpricot `cd testproject && script/spec -o spec/spec.opts spec/learn_gallery_spec.rb` #+' -X'
+  #   (doc/".not_implemented_spec_name").each{|e| e.inner_html = e.inner_html[0,e.inner_html.index('(')] }
+  #   header = File.readlines('testproject/spec/learn_story.html').map {|l| l.rstrip}
+  #   render :text => header + (doc/".results")
+  # end
   
   # NEED WORK
   def console
