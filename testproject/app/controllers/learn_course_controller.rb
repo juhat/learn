@@ -8,6 +8,7 @@ class LearnCourseController < ApplicationController
   session :off
   
   def autotest
+    # ::ActionController::Dispatcher.reload_application() 
     logger.info('Working on autotest proxied by frontend.')
     out, err = StringIO.new('',"w+"), StringIO.new('',"w+")
     ::Spec::Runner::CommandLine.run(::Spec::Runner::OptionParser.parse(["#{RAILS_ROOT}/spec/learn_gallery_spec.rb",'-f html','-t 10','-c'], err, out))
@@ -25,10 +26,12 @@ class LearnCourseController < ApplicationController
     render :text=> result
   end
   
+  
   def terminal
-    t = Thread.new { `cd testproject && #{params[:command]}` }
+    logger.info('Working on terminal command proxied by frontend.')
+    t = Thread.new { `#{params[:command]}` }
     tval = t.value
-    t.exit! 
+    t.exit!
     render :text=>tval
   end
 end

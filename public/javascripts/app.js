@@ -43,7 +43,7 @@ Ext.onReady(function() {
 				,{
 			        title: 'Rails script/console'
 					,tabTip:'The Rails command shell'
-				 	,xtype: 'panel'
+				 	,xtype:'terminal'
 					,url:'learn/console'
 		    	}
 				,{

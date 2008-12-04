@@ -12,9 +12,9 @@ require File.dirname(__FILE__) + '/spec_helper'
   describe 'The GalleryController class', :type => :controller do
     controller_name :gallery
     it "should have an index action" do
-      controller.respond_to?(:index).should be_true
-      # get :index
-      # response.should be_success
+      # controller.respond_to?(:index).should be_true
+      get :index
+      response.should be_success
     end
     it "should have an index action, and say 'Hello my dear visitor!'" do
       get :index
