@@ -47,23 +47,35 @@ class LearnController < ApplicationController
 
   # Proxied terminal back to backend.
   def terminal
-    logger.info('Proxied terminal to backend.')
-    res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/terminal'),{'command' => params[:command]})
-    render :text => res.body
+    logger.info('Proxied terminal command to backend.')
+    begin
+      res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/terminal'),{'command' => params[:command]}).body
+    rescue e
+      res = e.message
+    end
+    render :text => res
   end
 
   # Proxied app console back to backend
   def console
-    logger.info('Proxied app console to backend.')
-    res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/console'),{'command' => params[:command]})
-    render :text => res.body
+    logger.info('Proxied app console command to backend.')
+    begin
+      res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/console'),{'command' => params[:command]}).body
+    rescue e
+      res = e.message
+    end
+    render :text => res
   end
   
   # Proxied db console back to backend
   def db
-    logger.info('Proxied db console to backend.')
-    res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/db'),{'command' => params[:command]})
-    render :text => res.body
+    logger.info('Proxied db console command to backend.')
+    begin
+      res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/db'),{'command' => params[:command]}).body
+    rescue e
+      res = e.message
+    end
+    render :text => res
   end
   
   def file

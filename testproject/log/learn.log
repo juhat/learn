@@ -1,5 +1,4 @@
-# Logfile created on Fri Dec 05 10:45:54 +0100 2008 by /
-Terminal command: script/generate controller image | INFO:2008-12-05 10:46:07
-App console command: 'hi' | INFO:2008-12-05 10:46:17
-App console command: 'hi' | INFO:2008-12-05 10:46:21
-Db console command: sleect | INFO:2008-12-05 10:46:35
+# Logfile created on Fri Dec 05 11:04:55 +0100 2008 by /
+Terminal command: ps ax | INFO:2008-12-05 11:05:33
+App console command: 'hi'.reverse! | INFO:2008-12-05 11:05:45
+Db console command: select * from people; | INFO:2008-12-05 11:05:55
