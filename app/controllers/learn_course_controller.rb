@@ -8,9 +8,7 @@ class LearnCourseController < ApplicationController
   session :off
   
   def autotest
-    Dir.glob(File.join(RAILS_ROOT, '/app/controllers/*.rb')).each {|f| require f }
-    Dir.glob(File.join(RAILS_ROOT, '/app/models/*.rb')).each {|f| require f }
-    # Dir.glob(File.join(RAILS_ROOT, '/app/controllers/*.rb')).each {|f| require f }
+    # Dir.glob(File.join(RAILS_ROOT, '/app/controllers/*.rb')).each {|f| require f unless f.include?('learn_course') or f.include?('application')}
     
     logger.info('Working on autotest proxied by frontend.')
     out, err = StringIO.new('',"w+"), StringIO.new('',"w+")

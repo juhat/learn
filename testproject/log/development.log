@@ -74,31 +74,47 @@ Rendered /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/temp
 Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
 
 
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 09:35:34) [GET]
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 10:22:22) [GET]
 Working on autotest proxied by frontend.
 
 
-Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 09:35:34) [GET]
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 10:22:23) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 09:35:34) [GET]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 10:22:23) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 09:35:34) [GET]
-Completed in 685ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 10:22:23) [GET]
+Completed in 583ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
 
 
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 09:35:59) [GET]
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 10:22:32) [GET]
 Working on autotest proxied by frontend.
 
 
-Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 09:35:59) [GET]
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 10:22:33) [GET]
 Rendering gallery/index
 Completed in 2ms (View: 0, DB: 0) | 200 OK [http://test.host/gallery]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 09:35:59) [GET]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 10:22:33) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 09:35:59) [GET]
-Completed in 572ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 10:22:33) [GET]
+Completed in 548ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 10:22:46) [GET]
+Working on autotest proxied by frontend.
+
+
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 10:22:46) [GET]
+Rendering gallery/index
+Completed in 1ms (View: 0, DB: 0) | 200 OK [http://test.host/gallery]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 10:22:46) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 10:22:46) [GET]
+Completed in 125ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
