@@ -22,7 +22,7 @@ class LearnController < ApplicationController
     `cp spec/spec_helper.rb testproject/spec/spec_helper.rb`
     `cp spec/learn_story.html testproject/spec/learn_story.html`
     `cp app/controllers/learn_course_controller.rb testproject/app/controllers/learn_course_controller.rb`
-    # `cd testproject && script/generate controller gallery`
+    `cd testproject && script/generate controller gallery`
     `touch testproject/tmp/restart.txt`
     `touch tmp/restart.txt`
     redirect_to :controller => :learn

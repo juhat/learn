@@ -74,128 +74,31 @@ Rendered /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/temp
 Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
 
 
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 17:04:45) [GET]
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 09:35:34) [GET]
 Working on autotest proxied by frontend.
-Completed in 898ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
 
 
-Processing LearnCourseController#db (for 127.0.0.1 at 2008-12-04 17:04:57) [POST]
-  Parameters: {"command"=>"select 2;"}
-  [4;36;1mSQL (0.2ms)[0m   [0;1mselect 2;[0m
-Completed in 2ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/db]
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 09:35:34) [GET]
 
 
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 17:04:58) [GET]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 09:35:34) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 09:35:34) [GET]
+Completed in 685ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 09:35:59) [GET]
 Working on autotest proxied by frontend.
-Completed in 915ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
 
 
-Processing LearnCourseController#terminal (for 127.0.0.1 at 2008-12-04 17:05:38) [POST]
-  Parameters: {"command"=>"script/generate scaffold person name:string"}
-Working on terminal command proxied by frontend.
-Completed in 2217ms (View: 1, DB: 0) | 200 OK [http://user.atti.la/learn_course/terminal]
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 09:35:59) [GET]
+Rendering gallery/index
+Completed in 2ms (View: 0, DB: 0) | 200 OK [http://test.host/gallery]
 
 
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 17:05:41) [GET]
-Working on autotest proxied by frontend.
-Completed in 553ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 09:35:59) [GET]
 
 
-Processing LearnCourseController#terminal (for 127.0.0.1 at 2008-12-04 17:05:46) [POST]
-  Parameters: {"command"=>"rake db:migrate"}
-Working on terminal command proxied by frontend.
-Completed in 2383ms (View: 2, DB: 0) | 200 OK [http://user.atti.la/learn_course/terminal]
-
-
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 17:05:50) [GET]
-Working on autotest proxied by frontend.
-Completed in 570ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
-
-
-Processing PeopleController#index (for 127.0.0.1 at 2008-12-04 17:05:57) [GET]
-  [4;36;1mPerson Load (0.5ms)[0m   [0;1mSELECT * FROM "people" [0m
-Rendering template within layouts/people
-Rendering people/index
-Completed in 6ms (View: 2, DB: 0) | 200 OK [http://user.atti.la/people]
-
-
-Processing PeopleController#new (for 127.0.0.1 at 2008-12-04 17:05:58) [GET]
-Rendering template within layouts/people
-Rendering people/new
-Completed in 4ms (View: 3, DB: 0) | 200 OK [http://user.atti.la/people/new]
-
-
-Processing PeopleController#create (for 127.0.0.1 at 2008-12-04 17:06:02) [POST]
-  Parameters: {"commit"=>"Create", "person"=>{"name"=>"attila"}}
-  [4;35;1mPerson Create (0.8ms)[0m   [0mINSERT INTO "people" ("name", "updated_at", "created_at") VALUES('attila', '2008-12-04 16:06:02', '2008-12-04 16:06:02')[0m
-Redirected to #<Person:0x33f908c>
-Completed in 8ms (DB: 1) | 302 Found [http://user.atti.la/people]
-
-
-Processing PeopleController#show (for 127.0.0.1 at 2008-12-04 17:06:02) [GET]
-  Parameters: {"id"=>"1"}
-  [4;36;1mPerson Load (0.5ms)[0m   [0;1mSELECT * FROM "people" WHERE ("people"."id" = 1) [0m
-Rendering template within layouts/people
-Rendering people/show
-Completed in 2ms (View: 1, DB: 0) | 200 OK [http://user.atti.la/people/1]
-
-
-Processing PeopleController#index (for 127.0.0.1 at 2008-12-04 17:06:04) [GET]
-  [4;35;1mPerson Load (0.4ms)[0m   [0mSELECT * FROM "people" [0m
-Rendering template within layouts/people
-Rendering people/index
-Completed in 2ms (View: 1, DB: 0) | 200 OK [http://user.atti.la/people]
-
-
-Processing PeopleController#new (for 127.0.0.1 at 2008-12-04 17:06:05) [GET]
-Rendering template within layouts/people
-Rendering people/new
-Completed in 2ms (View: 1, DB: 0) | 200 OK [http://user.atti.la/people/new]
-
-
-Processing PeopleController#create (for 127.0.0.1 at 2008-12-04 17:06:09) [POST]
-  Parameters: {"commit"=>"Create", "person"=>{"name"=>"lilla"}}
-  [4;36;1mPerson Create (0.5ms)[0m   [0;1mINSERT INTO "people" ("name", "updated_at", "created_at") VALUES('lilla', '2008-12-04 16:06:09', '2008-12-04 16:06:09')[0m
-Redirected to #<Person:0x3337838>
-Completed in 6ms (DB: 1) | 302 Found [http://user.atti.la/people]
-
-
-Processing PeopleController#show (for 127.0.0.1 at 2008-12-04 17:06:09) [GET]
-  Parameters: {"id"=>"2"}
-  [4;35;1mPerson Load (0.4ms)[0m   [0mSELECT * FROM "people" WHERE ("people"."id" = 2) [0m
-Rendering template within layouts/people
-Rendering people/show
-Completed in 2ms (View: 1, DB: 0) | 200 OK [http://user.atti.la/people/2]
-
-
-Processing LearnCourseController#db (for 127.0.0.1 at 2008-12-04 17:06:20) [POST]
-  Parameters: {"command"=>"select * from people;"}
-  [4;36;1mSQL (0.5ms)[0m   [0;1mselect * from people;[0m
-Completed in 4ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/db]
-
-
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 17:06:21) [GET]
-Working on autotest proxied by frontend.
-Completed in 567ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
-
-
-Processing LearnCourseController#console (for 127.0.0.1 at 2008-12-04 17:07:37) [POST]
-  Parameters: {"command"=>"hi"}
-Working on app console command proxied by frontend.
-Completed in 4ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/console]
-
-
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 17:07:38) [GET]
-Working on autotest proxied by frontend.
-Completed in 562ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
-
-
-Processing LearnCourseController#console (for 127.0.0.1 at 2008-12-04 17:07:44) [POST]
-  Parameters: {"command"=>"'hi'"}
-Working on app console command proxied by frontend.
-Completed in 2ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/console]
-
-
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-04 17:07:45) [GET]
-Working on autotest proxied by frontend.
-Completed in 562ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 09:35:59) [GET]
+Completed in 572ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]

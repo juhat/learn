@@ -8,7 +8,8 @@ class LearnCourseController < ApplicationController
   session :off
   
   def autotest
-    # ::ActionController::Dispatcher.reload_application() 
+    Dir.glob(File.join(RAILS_ROOT, '/app/controllers/*.rb')).each {|f| require f }
+    
     logger.info('Working on autotest proxied by frontend.')
     out, err = StringIO.new('',"w+"), StringIO.new('',"w+")
     ::Spec::Runner::CommandLine.run(::Spec::Runner::OptionParser.parse(["#{RAILS_ROOT}/spec/learn_gallery_spec.rb",'-f html','-t 10','-c'], err, out))
