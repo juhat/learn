@@ -1,4 +1,1 @@
-# Logfile created on Fri Dec 05 11:04:55 +0100 2008 by /
-Terminal command: ps ax | INFO:2008-12-05 11:05:33
-App console command: 'hi'.reverse! | INFO:2008-12-05 11:05:45
-Db console command: select * from people; | INFO:2008-12-05 11:05:55
+# Logfile created on Sun Dec 14 22:05:36 +0100 2008 by /

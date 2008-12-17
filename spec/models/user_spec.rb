@@ -26,13 +26,24 @@ describe User do
       @user.reload
       @user.activation_code.should_not be_nil
     end
+
+    it 'starts in pending state' do
+      @creating_user.call
+      @user.reload
+      @user.should be_pending
+    end
   end
 
   #
   # Validations
   #
 
-  
+  it 'requires login' do
+    lambda do
+      u = create_user(:login => nil)
+      u.errors.on(:login).should_not be_nil
+    end.should_not change(User, :count)
+  end
 
   describe 'allows legitimate logins:' do
     ['123', '1234567890_234567890_234567890_234567890',
@@ -136,12 +147,12 @@ describe User do
 
   it 'resets password' do
     users(:quentin).update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    User.authenticate('quentin@example.com', 'new password').should == users(:quentin)
+    User.authenticate('quentin', 'new password').should == users(:quentin)
   end
 
   it 'does not rehash password' do
-    users(:quentin).update_attributes(:email => 'quentin2@example.com')
-    User.authenticate('quentin2@example.com', 'monkey').should == users(:quentin)
+    users(:quentin).update_attributes(:login => 'quentin2')
+    User.authenticate('quentin2', 'monkey').should == users(:quentin)
   end
 
   #
@@ -149,7 +160,7 @@ describe User do
   #
 
   it 'authenticates user' do
-    User.authenticate('quentin@example.com', 'monkey').should == users(:quentin)
+    User.authenticate('quentin', 'monkey').should == users(:quentin)
   end
 
   it "doesn't authenticate user with bad password" do
@@ -219,10 +230,61 @@ describe User do
     users(:quentin).remember_token_expires_at.between?(before, after).should be_true
   end
 
+  it 'registers passive user' do
+    user = create_user(:password => nil, :password_confirmation => nil)
+    user.should be_passive
+    user.update_attributes(:password => 'new password', :password_confirmation => 'new password')
+    user.register!
+    user.should be_pending
+  end
+
+  it 'suspends user' do
+    users(:quentin).suspend!
+    users(:quentin).should be_suspended
+  end
+
+  it 'does not authenticate suspended user' do
+    users(:quentin).suspend!
+    User.authenticate('quentin', 'monkey').should_not == users(:quentin)
+  end
+
+  it 'deletes user' do
+    users(:quentin).deleted_at.should be_nil
+    users(:quentin).delete!
+    users(:quentin).deleted_at.should_not be_nil
+    users(:quentin).should be_deleted
+  end
+
+  describe "being unsuspended" do
+    fixtures :users
+
+    before do
+      @user = users(:quentin)
+      @user.suspend!
+    end
+
+    it 'reverts to active state' do
+      @user.unsuspend!
+      @user.should be_active
+    end
+
+    it 'reverts to passive state if activation_code and activated_at are nil' do
+      User.update_all :activation_code => nil, :activated_at => nil
+      @user.reload.unsuspend!
+      @user.should be_passive
+    end
+
+    it 'reverts to pending state if activation_code is set and activated_at is nil' do
+      User.update_all :activation_code => 'foo-bar', :activated_at => nil
+      @user.reload.unsuspend!
+      @user.should be_pending
+    end
+  end
+
 protected
   def create_user(options = {})
-    record = User.new({ :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
-    record.save
+    record = User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire69', :password_confirmation => 'quire69' }.merge(options))
+    record.register! if record.valid?
     record
   end
 end

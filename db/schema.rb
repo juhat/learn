@@ -9,44 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080908100224) do
-
-  create_table "categories", :force => true do |t|
-    t.integer  "parent_id"
-    t.integer  "position"
-    t.integer  "children_count"
-    t.integer  "ancestors_count"
-    t.integer  "descendants_count"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "courses", :force => true do |t|
-    t.string   "name"
-    t.string   "author"
-    t.text     "description"
-    t.integer  "price"
-    t.text     "text"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "lessons", :force => true do |t|
-    t.integer  "course_id"
-    t.integer  "position"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "server_resources", :force => true do |t|
-    t.string "type"
-    t.string "key"
-    t.string "status"
-  end
+ActiveRecord::Schema.define(:version => 20081214172852) do
 
   create_table "users", :force => true do |t|
+    t.string   "login",                     :limit => 40
     t.string   "name",                      :limit => 100, :default => ""
     t.string   "email",                     :limit => 100
     t.string   "crypted_password",          :limit => 40
@@ -57,8 +23,10 @@ ActiveRecord::Schema.define(:version => 20080908100224) do
     t.datetime "remember_token_expires_at"
     t.string   "activation_code",           :limit => 40
     t.datetime "activated_at"
+    t.string   "state",                                    :default => "passive"
+    t.datetime "deleted_at"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
 end

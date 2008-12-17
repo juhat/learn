@@ -74,76 +74,85 @@ Rendered /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/temp
 Rendering /Library/Ruby/Gems/1.8/gems/actionpack-2.2.2/lib/action_controller/templates/rescues/layout.erb (internal_server_error)
 
 
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 11:04:55) [GET]
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-14 22:05:36) [GET]
 Working on autotest proxied by frontend.
 
 
-Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 11:04:55) [GET]
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-14 22:05:37) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 11:04:55) [GET]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:05:37) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 11:04:55) [GET]
-Completed in 563ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:05:37) [GET]
+Completed in 963ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
 
 
-Processing LearnCourseController#terminal (for 127.0.0.1 at 2008-12-05 11:05:33) [POST]
-  Parameters: {"command"=>"ps ax"}
-Working on terminal command proxied by frontend.
-Completed in 97ms (View: 1, DB: 0) | 200 OK [http://user.atti.la/learn_course/terminal]
-
-
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 11:05:34) [GET]
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-14 22:06:42) [GET]
 Working on autotest proxied by frontend.
 
 
-Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 11:05:35) [GET]
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-14 22:06:43) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 11:05:35) [GET]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:06:43) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 11:05:35) [GET]
-Completed in 594ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:06:43) [GET]
+Completed in 927ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
 
 
-Processing LearnCourseController#console (for 127.0.0.1 at 2008-12-05 11:05:45) [POST]
-  Parameters: {"command"=>"'hi'.reverse!"}
-Working on app console command proxied by frontend.
-Completed in 2ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/console]
-
-
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 11:05:46) [GET]
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-14 22:07:36) [GET]
 Working on autotest proxied by frontend.
 
 
-Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 11:05:47) [GET]
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-14 22:07:37) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 11:05:47) [GET]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:07:37) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 11:05:47) [GET]
-Completed in 564ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:07:37) [GET]
+Completed in 996ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
 
 
-Processing LearnCourseController#db (for 127.0.0.1 at 2008-12-05 11:05:55) [POST]
-  Parameters: {"command"=>"select * from people;"}
-Working on db console command proxied by frontend.
-  [4;36;1mSQL (0.0ms)[0m   [0;1mSQLite3::SQLException: no such table: people: select * from people;[0m
-Completed in 2ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/db]
-
-
-Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-05 11:05:57) [GET]
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-14 22:08:49) [GET]
 Working on autotest proxied by frontend.
 
 
-Processing GalleryController#index (for 0.0.0.0 at 2008-12-05 11:05:57) [GET]
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-14 22:08:50) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 11:05:57) [GET]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:08:50) [GET]
 
 
-Processing GalleryController#about (for 0.0.0.0 at 2008-12-05 11:05:57) [GET]
-Completed in 564ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:08:50) [GET]
+Completed in 943ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-14 22:08:54) [GET]
+Working on autotest proxied by frontend.
+
+
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-14 22:08:55) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:08:55) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:08:55) [GET]
+Completed in 946ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-14 22:09:34) [GET]
+Working on autotest proxied by frontend.
+
+
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-14 22:09:35) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:09:35) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:09:35) [GET]
+Completed in 924ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]

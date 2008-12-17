@@ -4,12 +4,11 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
 
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  # include AuthenticatedSystem
+  include AuthenticatedSystem
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
-  protect_from_forgery # :secret => '2714a3eab66d2bc3dc22d7dc0257fb1f'
+  # protect_from_forgery # :secret => '2714a3eab66d2bc3dc22d7dc0257fb1f'
   
   # See ActionController::Base for details 
   # Uncomment this to filter the contents of submitted sensitive data parameters

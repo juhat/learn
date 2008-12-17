@@ -1,8 +1,5 @@
-# require 'rubygems'
-require 'spec'
 require 'hpricot'
 require 'net/http'
-require 'uri'
 
 class LearnController < ApplicationController  
   before_filter :ajax_call, :except => [:filepanel, :autotest, :file, :terminal, :console, :db]
