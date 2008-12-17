@@ -156,3 +156,59 @@ Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:09:35) [GET]
 
 Processing GalleryController#about (for 0.0.0.0 at 2008-12-14 22:09:35) [GET]
 Completed in 924ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-17 21:18:35) [GET]
+Working on autotest proxied by frontend.
+
+
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-17 21:18:37) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-17 21:18:37) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-17 21:18:37) [GET]
+Completed in 1371ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-17 21:20:42) [GET]
+Working on autotest proxied by frontend.
+
+
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-17 21:20:43) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-17 21:20:43) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-17 21:20:43) [GET]
+Completed in 929ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-17 21:21:20) [GET]
+Working on autotest proxied by frontend.
+
+
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-17 21:21:21) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-17 21:21:21) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-17 21:21:21) [GET]
+Completed in 914ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]
+
+
+Processing LearnCourseController#autotest (for 127.0.0.1 at 2008-12-17 21:21:26) [GET]
+Working on autotest proxied by frontend.
+
+
+Processing GalleryController#index (for 0.0.0.0 at 2008-12-17 21:21:27) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-17 21:21:27) [GET]
+
+
+Processing GalleryController#about (for 0.0.0.0 at 2008-12-17 21:21:27) [GET]
+Completed in 906ms (View: 0, DB: 0) | 200 OK [http://user.atti.la/learn_course/autotest]

@@ -6,19 +6,14 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
   include Authorization::AasmRoles
 
-  validates_presence_of     :login, :message=>'Szükséges mező.'
-  validates_length_of       :login, :within => 3..40, :message => "A login hossza 3 és 40 karakter között lehet."
-  validates_uniqueness_of   :login, :message => 'A login név foglalt.'
-  validates_format_of       :login, :with => Authentication.login_regex, :message => Authentication.bad_login_message
-
   validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
   validates_length_of       :name,     :maximum => 100
 
   validates_presence_of     :email, :message => 'Szükséges mező.'
-  validates_length_of       :email,    :within => 6..100, :message => 'Az email cím hossza nem megfelelő.' #r@a.wk  
+  validates_length_of       :email, :within => 6..100, :message => 'Az email cím hossza nem megfelelő.'
   validates_uniqueness_of   :email, :message => 'Az email cím foglalt.'
-  validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
-
+  validates_format_of       :email, :with => Authentication.email_regex, :message => 'Érvényes email cím lehet.'
+  validates_format_of       :email, :with => /\A\w+@digitus\.itk\.ppke\.hu\Z/, :message => "Pillanatnyilag csak egyetemi cím lehet."
   
 
   # HACK HACK HACK -- how to do attr_accessible from here?
@@ -54,6 +49,5 @@ class User < ActiveRecord::Base
         self.deleted_at = nil
         self.activation_code = self.class.make_token
     end
-
 
 end

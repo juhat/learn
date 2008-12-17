@@ -1,13 +1,19 @@
 <h1>Üdvözöllek</h1>
-<p>
-  Ahhoz, hogy segíteni tudj, először <%= link_to 'regisztrálnod', 'signup' %> kell! Ha ezzel megvagy, <%= link_to 'jelentkezz be', 'login' %>!
-</p>
-<p>
-főoldal
-</p>  
-<p>
-főoldal
-</p>  
-<p>
-<%= 'Be vagy jelentkezve! '+ link_to('kijelentkezés','logout') if logged_in? %>
-</p>
+
+<% unless logged_in? %>  
+
+  <p>
+    Ahhoz, hogy segíteni tudj, először <%= link_to 'regisztrálnod', 'signup' %> kell! Ha ezzel megvagy, <%= link_to 'jelentkezz be', 'login' %>!
+  </p>
+
+<% else %> 
+
+  <p>
+    Be vagy jelentkezve!
+    <%= link_to('kijelentkezés','logout')  %>
+  </p>
+  <div class='highlight-box'>
+    <%= link_to('Tanfolyam indítása!', {:controller => 'learn'}, :popup => true )  %>
+  </div>
+
+<% end %>

@@ -9,6 +9,9 @@ html{
   color: #889B00;
   margin-bottom: -0.2em;
 }
+#hd img{
+  float:right;
+}
 #bd{
   background: #fff;
   padding-top:0.01px;
@@ -60,4 +63,10 @@ label{
   padding: 0.2em 0.4em;
   color: #222;
   font-size: 0.6em;
+}
+.highlight-box{
+  margin: 2em 0 1em 0;
+  padding: 2em;
+  background: #ffee00; 
+  text-align: center;
 }
