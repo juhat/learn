@@ -4,24 +4,17 @@ require 'net/http'
 class LearnController < ApplicationController  
   before_filter :ajax_call, :except => [:filepanel, :autotest, :file, :terminal, :console, :db]
   skip_before_filter :verify_authenticity_token
-  # protect_from_forgery :only => [:retek]  
+  # protect_from_forgery :only => [:retek]
+  before_filter :login_required
   
   def index
+    @user = current_user
+    current_user.start_course
     render :layout=>'learn'
   end
 
   def restart
-    # `tar czvf testproject_bak/#{Time.now.strftime("%y%m%d%H%M%S")}.tar.gz testproject/`
-    `rm -rf testproject`
-    `cp -R testproject_skel testproject`
-    `cp spec/learn_gallery_spec.rb testproject/spec/learn_gallery_spec.rb`
-    `cp spec/spec.opts testproject/spec/spec.opts`
-    `cp spec/spec_helper.rb testproject/spec/spec_helper.rb`
-    `cp spec/learn_story.html testproject/spec/learn_story.html`
-    `cp app/controllers/learn_course_controller.rb testproject/app/controllers/learn_course_controller.rb`
-    `cd testproject && script/generate controller gallery`
-    `touch testproject/tmp/restart.txt`
-    `touch tmp/restart.txt`
+    current_user.restart_course
     redirect_to :controller => :learn
   end
   
@@ -29,49 +22,58 @@ class LearnController < ApplicationController
   # TODO: Restarting of backend is not the best deal, it is a workaround.
   # It just needid because the backend code is cached even in development mode.
   def autotest
-    logger.info('Proxied autotest to backend.')
-    `touch testproject/tmp/restart.txt`
-    doc = Hpricot(Net::HTTP.get('user.atti.la', '/learn_course/autotest'))
+    current_user.restart_course
+    path = '/learn_course/autotest'
+    doc = Hpricot(Net::HTTP.get(current_user.course_host, path))
+
+    logger.info("Proxied autotest to backend to #{current_user.course_host + path}.")
+    logger.info((doc/".results").to_s)
 
     (doc/".not_implemented_spec_name").each{|e| e.inner_html = e.inner_html[0,e.inner_html.index('(')] }
     (doc/".backtrace").each{|e| e.inner_html = ''}
     (doc/"pre code").each{|e| e.inner_html = ''}
     (doc/".failure").each{|e| e.inner_html = ''}
     
-    header = File.readlines("#{RAILS_ROOT}/testproject/spec/learn_story.html").map{|l| l.rstrip}.to_s
+    header = File.readlines("#{current_user.path}/active/spec/learn_story.html").map{|l| l.rstrip}.to_s
     render :text => header + (doc/".results").to_s
   end
 
   # Proxied terminal back to backend.
   def terminal
-    logger.info('Proxied terminal command to backend.')
+    path = "#{current_user.course_host}/learn_course/terminal"
     begin
-      res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/terminal'),{'command' => params[:command]}).body
-    rescue e
+      res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
+    rescue StandardError => e
       res = e.message
     end
+    logger.info("Proxied terminal command to backend to #{path}.")
+    logger.info(res)
     render :text => res
   end
 
   # Proxied app console back to backend
   def console
-    logger.info('Proxied app console command to backend.')
+    path = "#{current_user.course_host}/learn_course/console"
     begin
-      res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/console'),{'command' => params[:command]}).body
-    rescue e
+      res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
+    rescue StandardError => e
       res = e.message
     end
+    logger.info("Proxied app console command to backend to #{path}.")
+    logger.info(res)
     render :text => res
   end
   
   # Proxied db console back to backend
   def db
-    logger.info('Proxied db console command to backend.')
+    path = "#{current_user.course_host}/learn_course/db"
     begin
-      res = Net::HTTP.post_form(URI.parse('http://user.atti.la/learn_course/db'),{'command' => params[:command]}).body
-    rescue e
+      res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
+    rescue StandardError => e
       res = e.message
     end
+    logger.info("Proxied db console command to backend to #{path}.")
+    logger.info(res)
     render :text => res
   end
   

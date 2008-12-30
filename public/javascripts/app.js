@@ -32,7 +32,7 @@ Ext.onReady(function() {
 			    ,activeTab: 0
 			    ,items: [{
 			        title: 'File Editor'
-				 	,xtype: 'editor'
+					 	,xtype: 'editor'
 			    }
 				,{
 			        title: 'Linux terminal'

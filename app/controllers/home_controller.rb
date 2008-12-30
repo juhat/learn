@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
   layout 'simple'
+  before_filter :login_required, :except=>['index']
   
-  def test
-    render :layout=>'course'
-  end
 end
