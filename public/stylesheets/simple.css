@@ -1,42 +1,65 @@
 html{
   background: #BFD73B;
-  margin-top: 3em;
   font-family: Verdana, Geneva, sans-serif;
 }
 #hd h1{
   text-align: right;
   font-size: 4em;
   color: #889B00;
-  margin-bottom: -0.2em;
+  margin: 2em 0 0 0;
 }
 #hd img{
   float:right;
 }
 #bd{
   background: #fff;
-  padding-top:0.01px;
 }
-#ft{
-  display: none;
-}
-#content{
+.content{
+  padding: 2em;
   font-size: 1.4em;
-  margin: 2em;
 }
-#help{}
-#help-content{
-  margin: 6em 1em 0 1em;
-  padding: 0.4em 1em;
+.help-content{
   font-size: 1.4em;
+  margin: 5em 1.4em 0 0;
+  padding: 0.5em 1em;
   background: #ffee00;
 }
-#notice{
+#navigation{
   padding: 0.6em 3em;
   background: #ffee00;
 }
+#navigation .path{
+  float:left;
+  font-size: 1.2em;
+  padding: 0.2em;
+}
+#navigation .path a{
+  background: #FFFAAF;
+  border-bottom: 2px solid #BFB300;
+  padding: 0.2em 0.4em;
+  text-decoration: none;
+}
+#menu{
+  margin-top: 0.3em;
+  float:right;
+}
+#menu a{
+  background: #FFF77F;
+  border-bottom: 1px solid #DFD100;
+  padding: 0.2em 0.4em;
+  text-decoration: none;
+}
+
+#ft{
+  display: none;
+}
+#notice{
+  padding: 0.5em;
+  background: #FF8F8F;
+}
 h1{
   font-size: 1.5em;
-  margin: 0.5em 0 1em 0;
+  margin-bottom: 1em;
 }
 p{
   margin: 0.5em 0 1em 0;
@@ -58,6 +81,9 @@ label{
   display: block;
   margin-top:1em;
 }
+.block{
+  margin-bottom: 1em;
+}
 .formError{
   margin-left: 2em;
   padding: 0.2em 0.4em;
@@ -65,8 +91,12 @@ label{
   font-size: 0.6em;
 }
 .highlight-box{
-  margin: 2em 0 1em 0;
+  margin: 2em 3em 1em 3em;
   padding: 2em;
-  background: #ffee00; 
   text-align: center;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+}
+.clear{
+  clear:both;
 }

@@ -1,3 +1,8 @@
+<% content_for :navigation do %>
+  <%= link_to('Főoldal', root_url)  %> >
+  <%= link_to('Bejelentkezés', login_url)  %>
+<% end %>
+
 <h1>Bejelentkezés</h1>
 
 <% form_tag session_path do -%>

@@ -1,0 +1,17 @@
+<div id="menu">
+  <% if logged_in? %>
+
+    <%= link_to('Főoldal', root_url)  %>
+    <%= link_to('Kijelentkezés', logout_url)  %>
+    
+  <% else %>
+  
+    <%= link_to('Regisztráció', signup_url)  %>
+    <%= link_to('Bejelentkezés', login_url)  %>
+  
+  <% end %>
+
+
+
+</div>
+<div class="clear"></div>

@@ -11,27 +11,32 @@
 </head>
 <body>
 
+<% if flash[:notice] %>
+  <div id="notice"><%= flash[:notice] %></div>
+<% end %>
+
 <div id="doc" class="yui-t7">
   <div id="hd">
     <%= image_tag 'web-logo.png' %>
     <h1>E-LEARN</h1>
   </div>
   <div id="bd">
-  <% if flash[:notice] %><div id="notice"><%= flash[:notice] %></div>
-    <script type="text/javascript">//<![CDATA[
-        //setTimeout(function() {$("notice").visualEffect("blind_up");}, 4000);
-    //]]></script>
-  <% end %>
-      
-    <div class="yui-g">
-      <div id="content">
-        <%= yield %>          
+  
+    <div id="navigation">
+      <div class="path"><%= yield :navigation %></div>
+      <%= render :partial => 'layouts/menu' %>
+    </div>
+
+    <div class="yui-g">    
+      <div class="content">
+            
+        <%= yield %>
+
       </div>
     </div>
-    
   </div>
+  
   <div id="ft">Juhász Attila - 2009. Minden jog fentartva!</div>
 </div>
-
 </body>
 </html>

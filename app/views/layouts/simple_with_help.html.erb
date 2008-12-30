@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>E-learning programozóknak</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
   <!--<link rel="stylesheet" href="http://yui.yahooapis.com/2.5.1/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">-->
   <%= stylesheet_link_tag 'reset-fonts-grids' %>
   <%= stylesheet_link_tag 'simple' %>
@@ -11,36 +11,40 @@
 </head>
 <body>
 
-<div id="doc" class="yui-t6"> 
+<% if flash[:notice] %>
+  <div id="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<div id="doc" class="yui-t6">
   <div id="hd">
+    <%= image_tag 'web-logo.png' %>
     <h1>E-LEARN</h1>
   </div>
-  
+
   <div id="bd">
-    <% if flash[:notice] %><div id="notice"><%= flash[:notice] %></div>
-      <script type="text/javascript">//<![CDATA[
-          setTimeout(function() {$("notice").visualEffect("blind_up");}, 4000);
-      //]]></script>
-    <% end %>
-    
-    <div id="yui-main">
-      <div class="yui-b">
-        <div class="yui-g">
-          <div id="content">
-            <%= yield %>          
-          </div>
-        </div>
-      </div>
+
+    <div id="navigation">
+      <div class="path"><%= yield :navigation %></div>
+      <%= render :partial => 'layouts/menu' %>
     </div>
-    <div class="yui-b" id="help">
-      <div id="help-content">
+
+    <div id="yui-main">
+      <div class="yui-b"><div class="yui-g">
+        <div class="content">      
+      
+          <%= yield %>
+          
+        </div>
+      </div></div>
+    </div>
+    <div class="yui-b">
+      <div class="help-content">
         <%= yield :help %>
       </div>
-    </div>    
-    
+    </div>
+
   </div>
   <div id="ft">Juhász Attila - 2009. Minden jog fentartva!</div>
 </div>
-
 </body>
 </html>

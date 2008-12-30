@@ -24,12 +24,9 @@ dd.failed div{
 }
 
 html{
-background:#BFD73B;
-margin:20px;
-padding:20px;
+  background:#BFD73B;
 }
 body{
-margin: 2em;
 }
 #doc4{
 	margin-top:2em;
@@ -47,7 +44,7 @@ margin: 2em;
 }
 .app-header{
 	background:#BFD73B;
-	color:#fff;
+	color:#f00e00;
 	padding:1em;
 }
 .app-top-menu{
