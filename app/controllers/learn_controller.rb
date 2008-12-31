@@ -24,18 +24,13 @@ class LearnController < ApplicationController
   def autotest
     current_user.restart_course
     path = '/learn_course/autotest'
-    doc = Hpricot(Net::HTTP.get(current_user.course_host, path))
+    res = Net::HTTP.get(current_user.course_host, path)
 
     logger.info("Proxied autotest to backend to #{current_user.course_host + path}.")
-    logger.info((doc/".results").to_s)
-
-    (doc/".not_implemented_spec_name").each{|e| e.inner_html = e.inner_html[0,e.inner_html.index('(')] }
-    (doc/".backtrace").each{|e| e.inner_html = ''}
-    (doc/"pre code").each{|e| e.inner_html = ''}
-    (doc/".failure").each{|e| e.inner_html = ''}
+    logger.info(res)
     
     header = File.readlines("#{current_user.path}/active/spec/learn_story.html").map{|l| l.rstrip}.to_s
-    render :text => header + (doc/".results").to_s
+    render :text => header + res
   end
 
   # Proxied terminal back to backend.
