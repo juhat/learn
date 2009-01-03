@@ -4,3 +4,4 @@ tmp/*/*
 db/*.sqlite3
 courses
 courses_saved
+*.tar.gz

@@ -27,6 +27,7 @@ html{
 #navigation{
   padding: 0.6em 3em;
   background: #ffee00;
+  border: 1px solid #EFE000;
 }
 #navigation .path{
   float:left;

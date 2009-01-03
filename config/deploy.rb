@@ -40,7 +40,10 @@ namespace :deploy do
     run "rm -f #{release_path}/db/development.sqlite3"
     run "ln -s #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
     run "ln -s #{shared_path}/db/development.sqlite3 #{release_path}/db/development.sqlite3"
+    
+    run "rm -rf #{release_path}/courses"
     run "ln -s #{shared_path}/courses #{release_path}/courses"
+    run "rm -rf #{release_path}/courses_saved"
     run "ln -s #{shared_path}/courses_saved #{release_path}/courses_saved"
   end
   
@@ -258,7 +261,7 @@ NameVirtualHost *
       # sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 664 {} \\; \""
       sudo "chmod 771 /home/user#{number}"
       sudo "adduser juhat user#{number}"
-      run "echo \"INSERT INTO 'server_resources' ('type', 'key', 'status') VALUES('user', 'user#{number}', 'free');\" >> src/users.sql"
+      run "echo \"INSERT INTO 'resource_users' ('key') VALUES('user#{number}');\" >> src/users.sql"
     end
   end
   
@@ -285,7 +288,7 @@ NameVirtualHost *
       sudo "sh -c \"sed -e 's/\\/home\\/test\\/public_html\\/public/\\/home\\/test\\/rails_#{key}\\/public/' src/vhost_config.bak > src/vhost_config.bak2 \" "
       sudo "mv src/vhost_config.bak2 /etc/apache2/sites-available/rails_#{key}"
       sudo "rm -f src/vhost_config.bak"
-      run "echo \"INSERT INTO 'server_resources' ('type', 'key', 'status') VALUES('url', 'rails_#{key}', 'free');\" >> src/url.sql"
+      run "echo \"INSERT INTO 'resource_urls' ('key') VALUES('rails_#{key}');\" >> src/url.sql"
       sudo "a2ensite rails_#{key}"
     end
       sudo "rm -f src/vhost_config"

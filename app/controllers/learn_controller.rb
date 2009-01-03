@@ -31,6 +31,7 @@ class LearnController < ApplicationController
     
     header = File.readlines("#{current_user.path}/active/spec/learn_story.html").map{|l| l.rstrip}.to_s
     render :text => header + res
+    # TODO: text parsing, template to make html
   end
 
   # Proxied terminal back to backend.

@@ -21,7 +21,7 @@ class LearnCourseController < ApplicationController
     logger.info('Working on autotest proxied by frontend.')
     out, err = StringIO.new('',"w+"), StringIO.new('',"w+")
     ::Spec::Runner::CommandLine.run(::Spec::Runner::OptionParser.parse(["#{RAILS_ROOT}/spec/learn_gallery_spec.rb",'-f specdoc','-t 10','-c'], err, out))
-    out.string.gsub!(/^.*\/.*$\s/, '').gsub!(/\(.*\)/, '').gsub!(/\d\)$\s(^.+$\s)+\s/, '')
+    out.string.gsub!(/^.*\/.*$\s/, '').gsub!(/\d\)$\s(^.+$\s)+\s/, '') #gsub!(/\(.*\)/, '')
     
     logger.info(out.string)
     render :text => out.string

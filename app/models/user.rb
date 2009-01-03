@@ -1,6 +1,9 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  has_one :resource_user
+  has_one :resource_url
+  
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
@@ -53,7 +56,7 @@ class User < ActiveRecord::Base
   def start_course
     `tar czvf #{path}/saved/#{Time.now.strftime("%y%m%d%H%M%S")}.tar.gz #{path}/active`
     `rm -rf #{RAILS_ROOT}/courses_saved/#{id}/active`
-    `cp -R #{RAILS_ROOT}/testproject_skel #{path}/active`
+    `cp -R #{RAILS_ROOT}/courses/testproject_skel #{path}/active`
     `cp #{RAILS_ROOT}/spec/learn_gallery_spec.rb #{path}/active/spec/learn_gallery_spec.rb`
     `cp #{RAILS_ROOT}/spec/spec.opts #{path}/active/spec/spec.opts`
     `cp #{RAILS_ROOT}/spec/spec_helper.rb #{path}/active/spec/spec_helper.rb`
