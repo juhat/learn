@@ -1,20 +1,9 @@
-ActionMailerTls
-===============
+Action Mailer TLS Plugin for Rails
 
-Use GMail SMTP server to send emails in Rails ActionMailer
+ActionMailer by default cannot securely connect to Google’s secure SMTP servers, so you have to use the following recipe to enable secure SMTP connections for your Rails application:
 
-Example
-=======
+http://robertbousquet.com/articles/using-gmail-smtp-with-actionmailer
 
-Place code snippet in config/environment.rb
 
-ActionMailer::Base.server_settings = {
-  :address => "smtp.gmail.com",
-  :port => 587,
-  :domain => "mycompany.com",
-  :authentication => :plain,
-  :user_name => "username",
-  :password => "password"
-}
-
-Copyright (c) 2008 Eladio Caritos, released under the MIT license
+Requirements: Ruby 1.8.6
+Note: The Net::SMTP interface changes in Ruby 1.8.7 and breaks this plugin.

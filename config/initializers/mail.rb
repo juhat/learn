@@ -1,9 +1,4 @@
-# config/initializers/mail.rb
-ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.smtp_settings = {
-  :address => "smtp.gmail.com",
-  :port => 587,
-  :authentication => :plain,
-  :user_name => "learn@atti.la",
-  :password => "webtools"
-}
+require "smtp_tls"
+mailer_config = File.open("#{RAILS_ROOT}/config/mailer.yml")
+mailer_options = YAML.load(mailer_config)
+ActionMailer::Base.smtp_settings = mailer_options
