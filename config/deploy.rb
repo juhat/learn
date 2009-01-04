@@ -82,7 +82,6 @@ namespace :learn do
 
     top.deploy.setup
     config_learn_vhost
-    run "rails #{deploy_to}/current/"
     apache_reload
 
     # generate_users
@@ -141,7 +140,7 @@ namespace :learn do
     
     sudo "gem install rails --no-ri --no-rdoc"
     sudo "gem install rails --no-ri --no-rdoc --version 2.1.0"
-    sudo "gem install hpricot rspec rspec-rails --no-ri --no-rdoc"
+    sudo "gem install hpricot rspec rspec-rails rubyist-aasm --no-ri --no-rdoc"
     
     top.upload 'vendor/stack/mc.ini', '.mc/ini'
   end
