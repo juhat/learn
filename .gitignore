@@ -1,6 +1,8 @@
 .DS_Store
 log/*.log
+log/*
 tmp/*/*
+tmp/*
 db/*.sqlite3
 courses
 courses_saved
