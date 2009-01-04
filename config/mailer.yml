@@ -1,0 +1,6 @@
+---
+  :address: smtp.gmail.com
+  :port: 587
+  :user_name: learn@atti.la 
+  :password: webtools
+  :authentication: :plain
