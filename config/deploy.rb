@@ -45,6 +45,9 @@ namespace :deploy do
     run "ln -s #{shared_path}/courses #{release_path}/courses"
     run "rm -rf #{release_path}/courses_saved"
     run "ln -s #{shared_path}/courses_saved #{release_path}/courses_saved"
+    
+    run "rm -rf #{release_path}/public/system"
+    run "ln -s #{shared_path}/system #{release_path}/public/system"
   end
 
   desc "Move resource files"
@@ -54,7 +57,7 @@ namespace :deploy do
   end
   
   desc "Upload resources."
-    before "deploy:symlink", :only => { :no_release => true } do
+    task :import_resources do
     run "cd #{release_path}; rake learn:import_resources RAILS_ENV=#{rails_env}"
   end
 end
@@ -111,6 +114,8 @@ namespace :learn do
         sqlite3 libsqlite3-ruby
         libapache2-mod-passenger
     CMD
+    sudo "a2enmod rewrite"
+    
     run <<-CMD
       cd src &&
       wget http://rubyforge.org/frs/download.php/45905/rubygems-1.3.1.tgz &&
@@ -138,6 +143,7 @@ NameVirtualHost *:80
   DocumentRoot #{deploy_to}/current/public
   RailsEnv #{rails_env}
   PassengerMaxInstancesPerApp 2
+  RewriteEngine On
 </VirtualHost>
     EOF
     put vhost_config, "src/vhost_config"
@@ -185,6 +191,7 @@ NameVirtualHost *:80
   RailsEnv development
   PassengerMaxInstancesPerApp 1
   PassengerPoolIdleTime 120
+  RewriteEngine On
 </VirtualHost>
     EOF
     put vhost_config, "src/vhost_config"
