@@ -55,7 +55,7 @@ namespace :deploy do
   
   desc "Upload resources."
   after "deploy:finalize_update", :except => { :no_release => false } do
-    run "cd #{deploy_to}/current; rake learn:import_resources RAILS_ENV=#{rails_env}"
+    run "cd #{deploy_to}/current && rake learn:import_resources RAILS_ENV=#{rails_env}"
   end
 end
 
