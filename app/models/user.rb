@@ -46,6 +46,13 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
+
+  def path
+    "#{RAILS_ROOT}/courses_saved/#{id}"
+  end
+  def active_path
+    "courses_saved/#{id}/active"
+  end
   def setup_environment
     `mkdir -p #{path}/active/`
     `mkdir -p #{path}/saved/`
@@ -55,13 +62,13 @@ class User < ActiveRecord::Base
   end
   def start_course
     `tar czvf #{path}/saved/#{Time.now.strftime("%y%m%d%H%M%S")}.tar.gz #{path}/active`
-    `rm -rf #{RAILS_ROOT}/courses_saved/#{id}/active`
-    `cp -R #{RAILS_ROOT}/courses/testproject_skel #{path}/active`
-    `cp #{RAILS_ROOT}/spec/learn_gallery_spec.rb #{path}/active/spec/learn_gallery_spec.rb`
-    `cp #{RAILS_ROOT}/spec/spec.opts #{path}/active/spec/spec.opts`
-    `cp #{RAILS_ROOT}/spec/spec_helper.rb #{path}/active/spec/spec_helper.rb`
-    `cp #{RAILS_ROOT}/spec/learn_story.html #{path}/active/spec/learn_story.html`
-    `cp #{RAILS_ROOT}/app/controllers/learn_course_controller.rb #{path}/active/app/controllers/learn_course_controller.rb`
+    `rm -rf #{active_path}`
+    `cp -R #{RAILS_ROOT}/courses/testproject_skel #{active_path}`
+    `cp #{RAILS_ROOT}/spec/learn_gallery_spec.rb #{active_path}/spec/learn_gallery_spec.rb`
+    `cp #{RAILS_ROOT}/spec/spec.opts #{active_path}/spec/spec.opts`
+    `cp #{RAILS_ROOT}/spec/spec_helper.rb #{active_path}/spec/spec_helper.rb`
+    `cp #{RAILS_ROOT}/spec/learn_story.html #{active_path}/spec/learn_story.html`
+    `cp #{RAILS_ROOT}/app/controllers/learn_course_controller.rb #{active_path}/app/controllers/learn_course_controller.rb`
     relink_course
     restart_course
   end
@@ -72,18 +79,27 @@ class User < ActiveRecord::Base
   def restart_course
     `touch #{path}/active/tmp/restart.txt`
   end
+
+
+  # false in case of problem
   def course_host
-    'user.atti.la'
+    if RAILS_ENV == 'production'
+      # ??
+    else
+      return 'user.atti.la'
+    end
   end
-  def path
-    "#{RAILS_ROOT}/courses_saved/#{id}"
-  end
-  def simple_path
-    "courses_saved/#{id}/active"
+  
+  # true if success
+  def release_course_host
+    if RAILS_ENV == 'production'
+      # ??
+    else
+      return true
+    end
   end
   
   protected
-
     def make_activation_code
       self.deleted_at = nil
       self.activation_code = self.class.make_token

@@ -46,55 +46,39 @@ namespace :deploy do
     run "rm -rf #{release_path}/courses_saved"
     run "ln -s #{shared_path}/courses_saved #{release_path}/courses_saved"
   end
+
+  desc "Move resource files"
+  after "deploy:setup" do
+    run "cp src/users.txt #{shared_path}/db"
+    run "cp src/urls.txt #{shared_path}/db"
+  end
   
+  desc "Upload resources."
+  after "deploy:finalize_update", :except => { :no_release => false } do
+    run "cd #{deploy_to}/current; rake learn:import_resources RAILS_ENV=#{rails_env}"
+  end
 end
 
 
 
 namespace :learn do
   
-  task :bootstrap do
-    # update_sudo
-    # update_umask    
-  end
-  
   desc "Setup Environment"
-  task :setup_env do
-    # upgrade the system
-    # update_apt_sources
-    update_apt_get
+  task :setup do
+    # update_apt_get
     # upgrade_apt_get
     
     # install the software stack
     mkdirs
     install_stack
-    # install_dev_tools
-    # install_git
-    # install_subversion
-    # install_sqlite3
-    # install_rails_stack
-    # install_apache
-    # install_passenger
-    # config_stack
-    # install_ftp
-    
+
     # Populate with student users
-
-    top.deploy.setup
     config_learn_vhost
-    apache_reload
 
-    # generate_users
-  end
-  
-  desc "Config environment"
-  task :config_env do
-    # Setup admin application environment
-    top.deploy.setup
-    
-    # Configure web addresses
-    config_learn_vhost
+    generate_users
     generate_vhosts
+
+    top.deploy.setup    
     apache_reload
   end
   
@@ -119,8 +103,8 @@ namespace :learn do
     #build-essential  subversion libopenssl-ruby1.8 
     # rubygems rubygems1.8
     #apache2-suexec
-    run <<-CMD
-      sudo apt-get install -y
+    sudo <<-CMD
+      apt-get install -y
         mc build-essential
         git-core
         ruby ruby1.8 irb irb1.8 ruby1.8-dev libreadline-ruby libreadline-ruby1.8 libopenssl-ruby libopenssl-ruby1.8
@@ -173,30 +157,30 @@ NameVirtualHost *:80
     # sudo "sh -c \"find /home/#{user}/. -type f -exec chmod 664 {} \\; \"" 
     sudo "chmod 771 /home/#{user}"
     
-    sudo "useradd -m test"
-    sudo "sh -c \"find /home/test/. -type d -exec chmod 771 {} \\; \""
+    sudo "useradd test" # -m for creating home
+    # sudo "sh -c \"find /home/test/. -type d -exec chmod 771 {} \\; \""
     # sudo "sh -c \"find /home/test/. -type f -exec chmod 664 {} \\; \"" 
-    sudo "chmod 771 /home/test"
+    # sudo "chmod 771 /home/test"
     sudo "adduser juhat test"
     
     (1..10).each do |number|
-      sudo "useradd -m user#{number}"
-      sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 771 {} \\; \""
+      sudo "useradd user#{number}"
+      # sudo "sh -c \"find /home/user#{number}/. -type d -exec chmod 771 {} \\; \""
       # sudo "sh -c \"find /home/user#{number}/. -type f -exec chmod 664 {} \\; \""
-      sudo "chmod 771 /home/user#{number}"
+      # sudo "chmod 771 /home/user#{number}"
       sudo "adduser juhat user#{number}"
-      run "echo \"INSERT INTO 'resource_users' ('key') VALUES('user#{number}');\" >> src/users.sql"
+      run "echo \"user#{number}\" >> src/users.txt"
     end
   end
   
   desc "Generate vhosts"
   task :generate_vhosts do
-    run "#{sudo :as => "test"} rails /home/test/basic_rails"
-    sudo "sh -c \"find /home/test/. -type d -exec chmod 771 {} \\; \""
+    # run "#{sudo :as => "test"} rails /home/test/basic_rails"
+    # sudo "sh -c \"find /home/test/. -type d -exec chmod 771 {} \\; \""
     
     vhost_config =<<-EOF
 <VirtualHost *>
-  ServerName rails.test1.krc.hu
+  ServerName rails.e-learn.hu
   DocumentRoot /home/test/public_html/public
   RailsEnv development
   PassengerMaxInstancesPerApp 1
@@ -207,12 +191,12 @@ NameVirtualHost *:80
     
     (1..10).each do |number|
       key = Digest::MD5.hexdigest("rails_#{number}")
-      run "ln -s /home/test/basic_rails /home/test/rails_#{key}"
-      sudo "sh -c \"sed -e 's/rails.test1.krc.hu/rails_#{key}.test1.krc.hu/' src/vhost_config > src/vhost_config.bak \" "
+      # run "ln -s /home/test/basic_rails /home/test/rails_#{key}"
+      sudo "sh -c \"sed -e 's/rails.e-learn.hu/rails_#{key}.e-learn.hu/' src/vhost_config > src/vhost_config.bak \" "
       sudo "sh -c \"sed -e 's/\\/home\\/test\\/public_html\\/public/\\/home\\/test\\/rails_#{key}\\/public/' src/vhost_config.bak > src/vhost_config.bak2 \" "
       sudo "mv src/vhost_config.bak2 /etc/apache2/sites-available/rails_#{key}"
       sudo "rm -f src/vhost_config.bak"
-      run "echo \"INSERT INTO 'resource_urls' ('key') VALUES('rails_#{key}');\" >> src/url.sql"
+      run "echo \"rails_#{key}\" >> src/urls.txt"
       sudo "a2ensite rails_#{key}"
     end
       sudo "rm -f src/vhost_config"
