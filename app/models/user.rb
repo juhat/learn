@@ -61,6 +61,8 @@ class User < ActiveRecord::Base
     `rm -rf #{path}`
   end
   def start_course
+    
+    
     `tar czvf #{path}/saved/#{Time.now.strftime("%y%m%d%H%M%S")}.tar.gz #{path}/active`
     `rm -rf #{active_path}`
     `cp -R #{RAILS_ROOT}/courses/testproject_skel #{active_path}`
@@ -83,8 +85,16 @@ class User < ActiveRecord::Base
 
   # false in case of problem
   def course_host
-    if RAILS_ENV == 'production'
-      # ??
+    if RAILS_ENV == 'development'
+      unless resource_url
+        r = ResourceUrl.find(:first, :conditions => [ "user_id = ?", nil], :order => "updated_at DESC")
+        if r
+          resource_url = r
+          return resource_url
+        else
+          return false
+        end
+      end
     else
       return 'user.atti.la'
     end
