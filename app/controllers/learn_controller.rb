@@ -22,9 +22,9 @@ class LearnController < ApplicationController
   # TODO: Restarting of backend is not the best deal, it is a workaround.
   # It just needid because the backend code is cached even in development mode.
   def autotest
-    current_user.restart_course
+    current_user.restart_course_server
     path = '/learn_course/autotest'
-    res = Net::HTTP.get(current_user.course_host, path)
+    res = Net::HTTP.get(current_user.resource_url, path)
 
     logger.info("Proxied autotest to backend to #{current_user.course_host + path}.")
     logger.info(res)
@@ -91,6 +91,7 @@ class LearnController < ApplicationController
     
     case params[:cmd]
       when 'get'
+        logger.info "FILEPANEL: Reading #{params[:path]}"
         dr = Dirlist.new(baseDir + params[:path])
         render :json => dr.list
       when 'rename'

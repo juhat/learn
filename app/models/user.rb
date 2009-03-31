@@ -1,3 +1,24 @@
+# == Schema Information
+# Schema version: 20090103144612
+#
+# Table name: users
+#
+#  id                        :integer(11)     not null, primary key
+#  login                     :string(40)
+#  name                      :string(100)     default("")
+#  email                     :string(100)
+#  crypted_password          :string(40)
+#  salt                      :string(40)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  remember_token            :string(40)
+#  remember_token_expires_at :datetime
+#  activation_code           :string(40)
+#  activated_at              :datetime
+#  state                     :string(255)     default("passive")
+#  deleted_at                :datetime
+#
+
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
@@ -61,25 +82,31 @@ class User < ActiveRecord::Base
     `rm -rf #{path}`
   end
   def start_course
-    
-    
     `tar czvf #{path}/saved/#{Time.now.strftime("%y%m%d%H%M%S")}.tar.gz #{path}/active`
     `rm -rf #{active_path}`
     `cp -R #{RAILS_ROOT}/courses/testproject_skel #{active_path}`
-    `cp #{RAILS_ROOT}/spec/learn_gallery_spec.rb #{active_path}/spec/learn_gallery_spec.rb`
+    `cp #{RAILS_ROOT}/courses/learn_gallery_spec.rb #{active_path}/spec/learn_gallery_spec.rb`
+    `cp #{RAILS_ROOT}/courses/learn_story.html #{active_path}/spec/learn_story.html`
+
     `cp #{RAILS_ROOT}/spec/spec.opts #{active_path}/spec/spec.opts`
     `cp #{RAILS_ROOT}/spec/spec_helper.rb #{active_path}/spec/spec_helper.rb`
-    `cp #{RAILS_ROOT}/spec/learn_story.html #{active_path}/spec/learn_story.html`
     `cp #{RAILS_ROOT}/app/controllers/learn_course_controller.rb #{active_path}/app/controllers/learn_course_controller.rb`
     relink_course
-    restart_course
+    # handling user rights
+    restart_course_server
+    self.resource_url ||= ResourceUrl.first :conditions => ['user_id = NULL']
+    self.resource_user ||= ResourceUser.first :conditions => ['user_id = NULL']
   end
   def relink_course
+    # it works for development only / it paired with the user.atti.la virtualhost
     `rm -f #{RAILS_ROOT}/testproject`
-    `ln -s #{path}/active #{RAILS_ROOT}/testproject`
+    `ln -s #{active_path} #{RAILS_ROOT}/testproject`
   end
   def restart_course
-    `touch #{path}/active/tmp/restart.txt`
+    start_course
+  end
+  def restart_course_server
+    `touch #{active_path}/tmp/restart.txt`
   end
 
 
@@ -103,9 +130,7 @@ class User < ActiveRecord::Base
   # true if success
   def release_course_host
     if RAILS_ENV == 'production'
-      # ??
-    else
-      return true
+      # release the resource
     end
   end
   

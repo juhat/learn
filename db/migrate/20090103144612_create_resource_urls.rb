@@ -5,6 +5,11 @@ class CreateResourceUrls < ActiveRecord::Migration
       t.integer :user_id
       t.timestamps
     end
+    
+    if RAILS_ENV == 'development'
+      ResourceUrl.create( :key => 'user.atti.la' )
+    end
+    
   end
 
   def self.down
