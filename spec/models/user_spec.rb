@@ -22,6 +22,12 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe User, 'course related stuff' do
-  it "should give the path of the course"
-  it "should give the active_path of the course"
+  it "should give the paths of the course"
+  it "should setup and delete dirs around user lifecicle"
+  it "should start a new course"
+  it "should stop a course"
+  it "should restart course server"
+  it "should relink course dir for mod_rails"
+  it "should associate and release course url"
+  it "should associate and release course user"
 end

@@ -2,9 +2,7 @@
   <%= link_to('Főoldal', root_url)  %> >
 <% end %>
 
-
-
-<h1>Üdvözöllek</h1>
+<h1>Üdvözöllek!</h1>
 
 <% unless logged_in? %>  
 
@@ -14,10 +12,27 @@
 
 <% else %> 
 
-  A <i id="s_kv3">Ruby on Rails</i>(továbbiakban <i id="s_kv4">Rails</i>) egy weboldalak fejlesztéséhez használható keretrendszer. Külön erőssége a Rails-nak, hogy mindent tartalmaz amire interaktív weboldalak fejlesztése során szükségünk lehet. Az adatbázis programozástól kezdve, a tesztelésen át, a vagány JavaScript-es effektekig mindent egy programozási nyelven, Ruby-ban írhatunk meg! Így nincs szükség több programozási nyelv ismeretére! Természetesen HTML-t és CSS-t azért fogunk használni.<br id="s_kv5">
   
   <div class='highlight-box'>
-    <%= link_to 'Tanfolyam indítása! - Ruby gyorstalpaló', :controller=>'home', :action=>'course' %>
+    <%= button_to 'Tanfolyam indítása! - Ruby gyorstalpaló', :controller=>'home', :action=>'course' %>
   </div>
 
 <% end %>
+
+<h3>A Ruby on Rails</h3>
+<div class='intro'>
+	<div>
+		<a href='basecamphq.com'>Basecamp</a>
+		 <%= image_tag 'intro_basecamp.gif' %>
+	</div>
+	<div>
+		<a href='twitter.com'>Twitter</a>
+		<%= image_tag 'intro_twitter.jpg' %>
+	</div>
+	<div>
+		<a href='shopify.com'>Shopify</a>	
+		 <%= image_tag 'intro_shopify.gif' %>
+	</div>
+</div>
+
+A <i>Ruby on Rails</i>(továbbiakban <i id="s_kv4">Rails</i>) egy weboldalak fejlesztéséhez használható keretrendszer. Külön erőssége a Rails-nak, hogy mindent tartalmaz amire interaktív weboldalak fejlesztése során szükségünk lehet. Az adatbázis programozástól kezdve, a tesztelésen át, a vagány JavaScript-es effektekig mindent egy programozási nyelven, Ruby-ban írhatunk meg! Így nincs szükség több programozási nyelv ismeretére! Természetesen HTML-t és CSS-t azért fogunk használni.<br id="s_kv5">

@@ -26,7 +26,7 @@ html{
 }
 #navigation{
   padding: 0.6em 3em;
-  background: #ffee00;
+  background: #ffee00 url(images/header-bevel.gif) repeat-x;
   border: 1px solid #EFE000;
 }
 #navigation .path{
@@ -135,17 +135,5 @@ label{
   background: #ccc; 
 }
 .intro{
-  text-align: center;
-  height: 150px;
-  margin-right: 4em;
-}
-.intro img{
-  float:none;
-}
-.intro div{
-  float: right;
-}
-.intro a{
-  display:block;
-  text-align:center;
+  height: 140px;
 }

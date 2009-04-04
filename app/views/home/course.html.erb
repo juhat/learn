@@ -3,15 +3,287 @@
   <%= link_to('Tanfolyam', :controller => 'home', :action => 'course')  %>
 <% end %>
 
-<h1>Retek is NOT my friend.</h1>
-<p>retek is my friend.</p>
-<p>retek is my friend.</p>
-<p>retek is my friend.</p>
-<p>retek is my friend.</p>
-<p>retek is my friend.</p>
-<p>retek is my friend.</p>
-<p>retek is my friend.</p>
+<style>	.content{	padding-top:0;	}</style>
+
+<h2>
+  Rails alkalmazás könyvtár struktúrája
+</h2>
+<p>
+	A Rails alig tartalmaz konfigurációs beállításokat.<br>
+	Nagy szerepet kap a könyvtár struktúra.<br>
+	Convention over configuration.<br>
+</p>
+<h3>
+	Fontos könyvtárak:
+</h3>
+<%= image_tag 'course/1.jpg' %>
+
+<ul>
+  <li>
+    app - itt található a program amit írunk - MVC minta
+    <ul>
+      <li>
+        controller - itt találhatóak azok a kódok amik az oldal működését befolyásolják
+      </li>
+      <li>
+        helpers - a több helyen előforduló feladatokat egyszer megírva ide rakhatjuk
+      </li>
+      <li>
+        models - az adatokkal dolgozó programrészek helye
+      </li>
+      <li>
+        views - ide kerülnek a HTML sablonok, és a megjelenítés kódjai.
+      </li>
+    </ul>
+  </li>
+  <li>
+    config - ebben van pár beállítás fájl
+    <ul>
+      <li>
+        database.yml - ebben a fájlban kell beállítanunk az adatbázis paramétereit
+      </li>
+      <li>
+        environment.rb - rendszerszintű beállítások, pl Rails verzió<br>
+      </li>
+      <li>
+        routes.rb - ez alapján dönti el a Rails, hogy egy adott webcím mi is jelent<br>
+      </li>
+    </ul>
+  </li>
+  <li>
+    db - adatbázissal kapcsolatos dolgok vannak benne
+  </li>
+  <li>
+    doc - ide kerülhetnek a program dokumentációi
+  </li>
+  <li>
+    log - naplófájlok helye
+  </li>
+  <li>
+    public - A <i>public</i> könyvtár a weboldalunk arca a külvilág felé.<br>
+    <ul>
+      <li>
+        images - a képek helye
+      </li>
+      <li>
+        javascripts - a JavaScript kódok helye
+      </li>
+      <li>
+        stilesheets - a CSS stíluslapok helye
+      </li>
+    </ul>
+  </li>
+  <li>
+    test - itt találhatóak a tesztek, amikkel a legapróbb részletekig letesztelhetjük az alkalmazásunkat
+  </li>
+  <li>
+    tmp - mindenféle ideiglenes fájl
+  </li>
+  <li>
+    vendor - ide kerülnek a kiegészítők, például a pluginek<br>
+  </li>
+</ul>
+
+
+<h2>
+  MVC
+</h2>
+
+<p>
+  Az MVC a Model-View-Controller rövidítése.<br>
+  Ez egy programozási módszertan, amit interaktív alkalmazások fejlesztéséhez találtak ki a 70-es években.<br>
+</p>
+<ul>
+  <li>
+    Azokat a kódokat, amik a felhasználó felé megjelenítik az eredményt, view-nek nevezzük és az <i>app\views</i> könyvtárba kerülnek<i>.</i><br>
+  </li>
+  <li>
+    Azokat a kódok amik reagálnak a felhasználó parancsaira controller-nek nevezzük és az <i>app\controllers</i> könyvtárba pakoljuk.<br>
+  </li>
+  <li>
+    Végül az adatokkal dolgozó kódokat model-nek nevezzük és az <i>app\models </i>könyvtárban a helyük.
+  </li>
+</ul>
+
+<h2>
+  Rails osztály struktúra
+</h2>
+<p>
+  A Rails több Ruby-ban írt osztályból áll.
+</p>
+<ul>
+  <li>
+    ActionPack - A kérésekre adott válaszokért felelős. Az összes controller és view fájl ide tartozik. Tehát az ActionPack adja az MVC betűszó V és C betűjét.<br>
+  </li>
+  <li>
+    ActiveRecord - Az adatainkat kezelhetjük vele. A model fájlok tartoznak ide. Tehát ez az MVC-ből az M betű.<br>
+  </li>
+  <li>
+    ActionMailer - Levelek küldését fogadását egyszerűsíti le.<br>
+  </li>
+  <li>
+    ActiveSupport - Mindenféle más hasznos kiegészítés van benne.
+  </li>
+</ul>
+
+<h3>
+  Együttműködés
+</h3>
+
+<div float:right;>
+  Mi történik tehát, ha egy felhasználó megnézi az oldalunkat?
+  <%= image_tag 'course/3.jpg' %>
+</div>
+
+<ol>
+  <li>
+    Végrehajtódik a megfelelő controller kód.<br>
+  </li>
+  <li>
+    A controller kód futása közben adatokat kezelhet.<br>
+    Írhat és olvashat az adatbázisból a model kód segítségével.
+  </li>
+  <li>
+    Kiértékelődik a megfelelő view kód.<br>
+    Ez nem más mint egy HTML sablon.<br>
+    Ide behelyettesítődhetnek a controller-től kapott adatok.
+  </li>
+  <li>
+    A böngésző megkapja a kész oldalt.
+  </li>
+</ol>
+
+
+<h2>
+  Scaffold = állványzat<br>
+</h2>
+<p>
+	Gyors admin felület.<br>
+  Segít az elindulásban.<br>
+  Scaffold = model + controller<br>
+  Az adatbázis hátteret is kezeli.<br>
+  <br>
+  script/generate scaffold post title:string body:text<br>
+  Létrehozza a post model-t és posts controller-t.<br>
+  <br>
+  Adatbázis migráció is kell utána - hogy mi ez azt majd később tudjuk meg.<br>
+  rake db:migrate<br>
+</p>
+  
+<h2>
+  Összefoglalás
+</h2>
+<p>
+	A megismert metódusok a következőek:
+</p>
+<blockquote>
+  <b>#Kódgenerálás<br>
+  </b><br>
+  #Új rails alkalmazás a projektnévvel megegyező könyvtárban<br>
+  rails projektnév<br>
+  <br>
+  <br>
+  #Az alkalmazás könyvtárában állva használhatjuk a <i>script</i> könyvtár parancsait<br>
+  <br>
+  #Általános infók<br>
+  script/about<br>
+  <br>
+  #Kódfájlok generálása<br>
+  script/generate controller controllerneve<br>
+  script/generate model modelneve<br>
+  <br>
+  #Törlése<br>
+  script/destroy controller controllerneve<br>
+  script/destroy model modelneve<br>
+  <br>
+  #Scaffold<br>
+  script/generate scaffold post title:string<br>
+</blockquote>
+<blockquote>
+  <p>
+    <b>#Controller-ban használható dolgok(controller)</b>
+  </p>
+  <p>
+    <br>
+  </p>
+  #Segítségével a controller-ben befolyásolhatjuk,<br>
+  #hogy mit generáljon le a Rails a böngészőnek.<br>
+  render<br>
+  <br>
+  <br>
+  #Visszaküldi a böngészőnek, hogy "valami".<br>
+  render :text =&gt; "valami"&nbsp;&nbsp;<br>
+  <br>
+  #Kiértékeli a app\views\hello\koszones.html.erb-t és elküldi a böngészőnek.<br>
+  <div>
+    render :template =&gt; "hello/koszones"<br>
+    <br>
+    <br>
+    <p>
+      #Átirányítás:
+    </p>
+    <p>
+      redirect_to :controller =&gt; 'valami', :action =&gt; 'valami', :id =&gt; 'valami'
+    </p>
+  </div>
+</blockquote>
+<blockquote>
+  <b>#Sablonokban használható dolgok(view)</b><br>
+  <br>
+  #Layoutban használjuk, ennek a helyére kerül a kiértékelt sablon tartalma<br>
+  yield<br>
+  <br>
+  <br>
+  #Oldalakat linkel egymáshoz, ezt a HTML template-ekben használhatjuk.<br>
+  link_to<br>
+  <br>
+  #Linkelés webcímhez.<br>
+  link_to "link neve", "http://www.rubyonrails.org/"<br>
+  <br>
+  #Linkelés Rails-on belül.<br>
+  link_to "hello", { :controller =&gt; "hello", :action=&gt;"index" }<br>
+  <br>
+  #speciális lehetőségek<br>
+  <br>
+  #Linkelés webcímhez, megerősítő kérdéssel.<br>
+  link_to "link neve", "http://www.rubyonrails.org/", :confirm =&gt; "Biztos vagy benne?"<br>
+  <br>
+  #Új ablakban fog megjelenni.<br>
+  link_to "hello", { :controller =&gt; "hello" }, :popup =&gt; true<br>
+  <br>
+  #Az új ablakot paraméterezhetjük így:<br>
+  link_to "View Image", { :action =&gt; "view" }, :popup =&gt; ['new_window_name', 'height=300,width=600']<br>
+  <br>
+  <br id=vm..>
+  #Kép beszúrása:<br id=m:of>
+  image_tag 'kép elérési útja'<br id=c.8i>
+  image_tag 'kép elérési útja', 'kép neve'<br>
+  <br id=rj:b>
+  <br>
+  #Stíluslaphivatkozás beszúrása:<br>
+  stylesheet_link_tag 'css neve'<br>
+</blockquote>
+<h2>
+  Kapcsolódó oldalak
+</h2>
+  További információkat a Rails leírásában a <a href=http://api.rubyonrails.org/ title=http://api.rubyonrails.org/>http://api.rubyonrails.org/</a> oldalon találhatsz. Ha egy konkrét metódus használatára vagy kíváncsi, keress rá!<br>
+  <br>
+  render<br>
+  <a href=http://api.rubyonrails.org/classes/ActionController/Base.html#M000272 id=xk.7 title=http://api.rubyonrails.org/classes/ActionController/Base.html#M000272>http://api.rubyonrails.org/classes/ActionController/Base.html#M000272</a><br>
+  <br>
+  link_to<br>
+  <a href=http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#M000490 title=http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#M000490>http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#M000490</a><br>
+  <br>
+  image_tag<br id=gc0.>
+  <a href=http://api.rubyonrails.org/classes/ActionView/Helpers/AssetTagHelper.html#M000601 id=hu5. title=http://api.rubyonrails.org/classes/ActionView/Helpers/AssetTagHelper.html#M000601>http://api.rubyonrails.org/classes/ActionView/Helpers/AssetTagHelper.html#M000601</a><br>
+  <br>
+  styleshet_link_tag<br>
+  <a href=http://api.rubyonrails.org/classes/ActionView/Helpers/AssetTagHelper.html#M000599 title=http://api.rubyonrails.org/classes/ActionView/Helpers/AssetTagHelper.html#M000599>http://api.rubyonrails.org/classes/ActionView/Helpers/AssetTagHelper.html#M000599</a><br>
+  <br>
+  redirect_to<br id=m.y:>
+  <a href=http://api.rubyonrails.org/classes/ActionController/Base.html#M000276 title=http://api.rubyonrails.org/classes/ActionController/Base.html#M000276>http://api.rubyonrails.org/classes/ActionController/Base.html#M000276</a><br>
+</div>
 
 <div class='highlight-box'>
-  <%= link_to('Jöhet a gyakorlati feladat!', {:controller => 'learn'}, :popup => true )  %>
+  <%= button_to('Jöhet a gyakorlati feladat!', :controller => 'learn')  %>
 </div>
