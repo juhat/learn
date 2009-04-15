@@ -1,0 +1,10 @@
+--- 
+- :source: http://gems.github.com
+  :name: rubyist-aasm
+- :name: hpricot
+- :version: ">= 1.2.0"
+  :name: rspec
+- :version: ">= 1.2.0"
+  :name: rspec-rails
+- :version: 2.3.2
+  :name: rails

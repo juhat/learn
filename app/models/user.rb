@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 20090103144612
+# Schema version: 20090415162021
 #
 # Table name: users
 #
-#  id                        :integer(11)     not null, primary key
+#  id                        :integer(4)      not null, primary key
 #  login                     :string(40)
 #  name                      :string(100)     default("")
 #  email                     :string(100)
@@ -17,12 +17,12 @@
 #  activated_at              :datetime
 #  state                     :string(255)     default("passive")
 #  deleted_at                :datetime
+#  os_user                   :string(255)
 #
 
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_one :resource_user
   has_one :resource_url
   
   include Authentication
@@ -42,17 +42,14 @@ class User < ActiveRecord::Base
   after_create :setup_environment
   before_destroy :destroy_environment
 
-  # HACK HACK HACK -- how to do attr_accessible from here?
+  #
+  # Login system
+  #
+
   # prevents a user from submitting a crafted form that bypasses activation
-  # anything else you want your user to change should be added here.
   attr_accessible :login, :email, :name, :password, :password_confirmation
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-  #
-  # uff.  this is really an authorization, not authentication routine.  
-  # We really need a Dispatch Chain here or something.
-  # This will also let us return a human error message.
-  #
   def self.authenticate(email, password)
     return nil if email.blank? || password.blank?
     u = find_in_state :first, :active, :conditions => {:email => email} # need to get the salt
@@ -67,7 +64,10 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
-
+  #
+  # Course related codes 
+  # 
+  
   def path
     "#{RAILS_ROOT}/courses_saved/#{id}"
   end
@@ -94,8 +94,7 @@ class User < ActiveRecord::Base
     relink_course
     # handling user rights
     restart_course_server
-    self.resource_url ||= ResourceUrl.first :conditions => ['user_id = NULL']
-    self.resource_user ||= ResourceUser.first :conditions => ['user_id = NULL']
+    # self.resource_url ||= ResourceUrl.first :conditions => ['user_id = NULL']
   end
   def relink_course
     # it works for development only / it paired with the user.atti.la virtualhost
@@ -112,16 +111,18 @@ class User < ActiveRecord::Base
 
   # false in case of problem
   def course_host
-    if RAILS_ENV == 'development'
-      unless resource_url
-        r = ResourceUrl.find(:first, :conditions => [ "user_id = ?", nil], :order => "updated_at DESC")
-        if r
-          resource_url = r
-          return resource_url
-        else
-          return false
-        end
-      end
+    return self.resource_url.key
+    
+    unless RAILS_ENV == 'development'
+      # unless resource_url
+      #   r = ResourceUrl.find(:first, :conditions => [ "user_id = ?", nil], :order => "updated_at DESC")
+      #   if r
+      #     resource_url = r
+      #     return resource_url
+      #   else
+      #     return false
+      #   end
+      # end
     else
       return 'user.atti.la'
     end

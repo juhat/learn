@@ -2,14 +2,8 @@
 
 one:
   name: MyString
-  author: MyString
-  description: MyText
-  price: 1
-  text: MyText
+  text: 
 
 two:
   name: MyString
-  author: MyString
-  description: MyText
-  price: 1
-  text: MyText
+  text: 

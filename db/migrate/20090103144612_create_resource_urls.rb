@@ -7,7 +7,7 @@ class CreateResourceUrls < ActiveRecord::Migration
     end
     
     if RAILS_ENV == 'development'
-      ResourceUrl.create( :key => 'user.atti.la' )
+      ResourceUrl.create( :key => 'user.atti.la', :user_id => 1 )
     end
     
   end

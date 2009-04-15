@@ -6,11 +6,5 @@ namespace :learn do
       ResourceUrl.create :key=> line.strip
       print ' ' + line.strip
     end
-    puts "\nProcessed USERs: "
-    File.new("#{RAILS_ROOT}/db/users.txt", 'r').each() do |line|
-      ResourceUser.create :key=> line.strip
-      print  ' ' + line.strip
-    end
-    puts
   end
 end

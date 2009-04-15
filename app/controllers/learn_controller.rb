@@ -24,10 +24,12 @@ class LearnController < ApplicationController
   def autotest
     current_user.restart_course_server
     path = '/learn_course/autotest'
-    res = Net::HTTP.get(current_user.resource_url, path)
 
     logger.info("Proxied autotest to backend to #{current_user.course_host + path}.")
-    logger.info(res)
+    
+    res = Net::HTTP.get(current_user.course_host, path)
+
+    # logger.info(res)
     
     header = File.readlines("#{current_user.path}/active/spec/learn_story.html").map{|l| l.rstrip}.to_s
     render :text => header + res
@@ -36,20 +38,20 @@ class LearnController < ApplicationController
 
   # Proxied terminal back to backend.
   def terminal
-    path = "#{current_user.course_host}/learn_course/terminal"
+    path = "http://#{current_user.course_host}/learn_course/terminal"
     begin
-      res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
+      output = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
     rescue StandardError => e
-      res = e.message
+      output = e.message
     end
     logger.info("Proxied terminal command to backend to #{path}.")
-    logger.info(res)
-    render :text => res
+    logger.info(output)
+    render :text => output
   end
 
   # Proxied app console back to backend
   def console
-    path = "#{current_user.course_host}/learn_course/console"
+    path = "http://#{current_user.course_host}/learn_course/console"
     begin
       res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
     rescue StandardError => e
@@ -62,7 +64,7 @@ class LearnController < ApplicationController
   
   # Proxied db console back to backend
   def db
-    path = "#{current_user.course_host}/learn_course/db"
+    path = "http://#{current_user.course_host}/learn_course/db"
     begin
       res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
     rescue StandardError => e

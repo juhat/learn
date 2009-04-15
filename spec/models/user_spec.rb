@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 20090103144612
+# Schema version: 20090415162021
 #
 # Table name: users
 #
-#  id                        :integer(11)     not null, primary key
+#  id                        :integer(4)      not null, primary key
 #  login                     :string(40)
 #  name                      :string(100)     default("")
 #  email                     :string(100)
@@ -17,6 +17,7 @@
 #  activated_at              :datetime
 #  state                     :string(255)     default("passive")
 #  deleted_at                :datetime
+#  os_user                   :string(255)
 #
 
 require File.dirname(__FILE__) + '/../spec_helper'

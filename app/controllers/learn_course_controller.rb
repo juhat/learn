@@ -3,6 +3,7 @@
 # This separation help us to separate code and programs by rights.
 
 require 'spec'
+require 'hpricot'
 
 class AuditLogger < Logger
   def format_message(severity, timestamp, progname, msg)
@@ -20,11 +21,17 @@ class LearnCourseController < ApplicationController
 
     logger.info('Working on autotest proxied by frontend.')
     out, err = StringIO.new('',"w+"), StringIO.new('',"w+")
-    ::Spec::Runner::CommandLine.run(::Spec::Runner::OptionParser.parse(["#{RAILS_ROOT}/spec/learn_gallery_spec.rb",'-f specdoc','-t 10','-c'], err, out))
-    out.string.gsub!(/^.*\/.*$\s/, '').gsub!(/\d\)$\s(^.+$\s)+\s/, '') #gsub!(/\(.*\)/, '')
+    ::Spec::Runner::CommandLine.run(::Spec::Runner::OptionParser.parse(["#{RAILS_ROOT}/spec/learn_gallery_spec.rb",'-f html','-t 10','-c'], err, out))
+    # out.string.gsub!(/^.*\/.*$\s/, '').gsub!(/\d\)$\s(^.+$\s)+\s/, '') #gsub!(/\(.*\)/, '')
+  
+    # logger.info(out.string)
     
-    logger.info(out.string)
-    render :text => out.string
+    doc = Hpricot(out.string)
+      (doc/'script').remove
+      (doc/'dd div.failure').remove      
+    
+    # logger.info( (doc/".results").to_s )
+    render :text => (doc/".results").to_s
   end  
   
   def terminal
