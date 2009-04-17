@@ -9,13 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090415192933) do
+ActiveRecord::Schema.define(:version => 20090415200215) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "courses_users", :id => false, :force => true do |t|
+    t.integer "course_id"
+    t.integer "user_id"
   end
 
   create_table "lessons", :force => true do |t|
@@ -29,7 +34,14 @@ ActiveRecord::Schema.define(:version => 20090415192933) do
 
   create_table "resource_urls", :force => true do |t|
     t.string   "key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "running_lessons", :force => true do |t|
+    t.integer  "lesson_id"
     t.integer  "user_id"
+    t.integer  "resource_url_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

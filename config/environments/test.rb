@@ -22,3 +22,5 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 CUSTOM_SITE_HOST = 'dev.atti.la'
+
+USER_DIR = '/home'

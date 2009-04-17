@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090415162021
+# Schema version: 20090415192933
 #
 # Table name: users
 #
@@ -21,9 +21,12 @@
 #
 
 require 'digest/sha1'
+require 'etc' 
+require 'fileutils'
 
 class User < ActiveRecord::Base
-  has_one :resource_url
+  has_and_belongs_to_many :courses
+  has_one :running_lesson
   
   include Authentication
   include Authentication::ByPassword
@@ -38,16 +41,18 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :message => 'Az email cím foglalt.'
   validates_format_of       :email, :with => Authentication.email_regex, :message => 'Érvényes email cím lehet.'
   validates_format_of       :email, :with => /\A\w+@digitus\.itk\.ppke\.hu\Z/, :message => "Pillanatnyilag csak egyetemi cím lehet."
+  validates_presence_of     :os_user
   
+  before_create :add_os_user
   after_create :setup_environment
-  before_destroy :destroy_environment
+  after_destroy :destroy_environment
 
   #
   # Login system
   #
 
   # prevents a user from submitting a crafted form that bypasses activation
-  attr_accessible :login, :email, :name, :password, :password_confirmation
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :os_user
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
@@ -64,80 +69,53 @@ class User < ActiveRecord::Base
     write_attribute :email, (value ? value.downcase : nil)
   end
 
+
   #
   # Course related codes 
   # 
-  
-  def path
-    "#{RAILS_ROOT}/courses_saved/#{id}"
-  end
-  def active_path
-    "courses_saved/#{id}/active"
-  end
   def setup_environment
-    `mkdir -p #{path}/active/`
-    `mkdir -p #{path}/saved/`
+    # TODO: create OS user
+    # `adduser ...`
+    ensure_path
   end
   def destroy_environment
-    `rm -rf #{path}`
+    # TODO: delete OS user
+    # TODO: delete all files too
+    # `rm -rf #{path}`
   end
-  def start_course
-    `tar czvf #{path}/saved/#{Time.now.strftime("%y%m%d%H%M%S")}.tar.gz #{path}/active`
-    `rm -rf #{active_path}`
-    `cp -R #{RAILS_ROOT}/courses/testproject_skel #{active_path}`
-    `cp #{RAILS_ROOT}/courses/learn_gallery_spec.rb #{active_path}/spec/learn_gallery_spec.rb`
-    `cp #{RAILS_ROOT}/courses/learn_story.html #{active_path}/spec/learn_story.html`
-
-    `cp #{RAILS_ROOT}/spec/spec.opts #{active_path}/spec/spec.opts`
-    `cp #{RAILS_ROOT}/spec/spec_helper.rb #{active_path}/spec/spec_helper.rb`
-    `cp #{RAILS_ROOT}/app/controllers/learn_course_controller.rb #{active_path}/app/controllers/learn_course_controller.rb`
-    relink_course
-    # handling user rights
-    restart_course_server
-    # self.resource_url ||= ResourceUrl.first :conditions => ['user_id = NULL']
+  def path
+    "#{USER_DIR}/#{os_user}"
   end
-  def relink_course
-    # it works for development only / it paired with the user.atti.la virtualhost
-    `rm -f #{RAILS_ROOT}/testproject`
-    `ln -s #{active_path} #{RAILS_ROOT}/testproject`
-  end
-  def restart_course
-    start_course
-  end
-  def restart_course_server
-    `touch #{active_path}/tmp/restart.txt`
-  end
-
-
-  # false in case of problem
-  def course_host
-    return self.resource_url.key
+  def ensure_path
+    path = File.join( USER_DIR, os_user )
+    logger.info("ENSURE_PATH #{path} for USER #{email} ")
     
-    unless RAILS_ENV == 'development'
-      # unless resource_url
-      #   r = ResourceUrl.find(:first, :conditions => [ "user_id = ?", nil], :order => "updated_at DESC")
-      #   if r
-      #     resource_url = r
-      #     return resource_url
-      #   else
-      #     return false
-      #   end
-      # end
-    else
-      return 'user.atti.la'
+    FileUtils.mkdir_p( path ) unless File.exists?( path )
+    
+    logger.info("ENSURE_PATH_OWNER #{path}, for USER #{email}")
+    # TODO: dont use Etc here!
+    unless Etc.getpwuid( File.stat( path ).uid ).name == os_user and Etc.getgrgid( File.stat( path ).gid ).name == os_user
+      begin
+        FileUtils.chown os_user, os_user, path
+      rescue ArgumentError => e
+        logger.error("ENSURE_PATH_OWNER ArgumentError: #{e.to_s}")
+      end
     end
-  end
-  
-  # true if success
-  def release_course_host
-    if RAILS_ENV == 'production'
-      # release the resource
-    end
+    
+    logger.info("ENSURE_PATH_RIGHTS #{path}, for USER #{email}")
+    # TODO: read rights first
+    FileUtils.chmod( 0711, path )
+    
+    logger.info("ENSURED_PATH #{path} for USER #{email}")
   end
   
   protected
     def make_activation_code
       self.deleted_at = nil
       self.activation_code = self.class.make_token
+    end
+    def add_os_user
+      # TODO: add os user name
+      self.os_user ||= Time.now.to_s
     end
 end

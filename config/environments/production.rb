@@ -22,3 +22,5 @@ config.action_view.cache_template_loading            = true
 # config.action_mailer.raise_delivery_errors = false
 
 CUSTOM_SITE_HOST = 'dev.atti.la'
+
+USER_DIR = '/home'

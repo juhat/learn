@@ -17,3 +17,5 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 
 CUSTOM_SITE_HOST = 'dev.atti.la'
+
+USER_DIR = '/tmp/learn'
