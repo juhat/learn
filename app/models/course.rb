@@ -23,13 +23,7 @@ class Course < ActiveRecord::Base
     user.ensure_path
     
     FileUtils.mkdir_p( path( user ) ) unless File.exists?( path( user ) )
-    begin
-      FileUtils.chmod_R( 0711, path( user ) )
-      FileUtils.chown( user.os_user, user.os_user, path( user ) )
-    rescue ArgumentError => e
-      logger.info("COURSE ENSURE_PATH #{path( user )} for USER #{user.email} PROBLEM #{e.to_s}")
-    end
-    
-    logger.info("COURSE ENSURE_PATH END #{path( user )} for USER #{user.email}") 
+    `sudo chmod 711 #{path( user )}`
+    `sudo chown #{user.os_user}:#{user.os_group} #{path( user )}`
   end
 end

@@ -1,12 +1,12 @@
 class CreateResourceUrls < ActiveRecord::Migration
   def self.up
     create_table :resource_urls do |t|
-      t.string  :key
+      t.string  :url
       t.timestamps
     end
     
     if RAILS_ENV == 'development'
-      ResourceUrl.create( :key => 'user.atti.la' )
+      ResourceUrl.create( :url => 'user.atti.la' )
     end
     
   end

@@ -61,6 +61,8 @@ ActiveRecord::Schema.define(:version => 20090415200215) do
     t.string   "state",                                    :default => "passive"
     t.datetime "deleted_at"
     t.string   "os_user"
+    t.string   "os_group"
+    t.string   "os_secret"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

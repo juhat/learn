@@ -24,3 +24,5 @@ config.action_mailer.delivery_method = :test
 CUSTOM_SITE_HOST = 'dev.atti.la'
 
 USER_DIR = '/home'
+
+VHOST_DIR = "/srv/vhost/"

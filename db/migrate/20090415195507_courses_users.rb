@@ -11,5 +11,6 @@ class CoursesUsers < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table :courses_users
   end
 end

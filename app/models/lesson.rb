@@ -50,15 +50,11 @@ class Lesson < ActiveRecord::Base
     course.ensure_path( user )
     
     FileUtils.mkdir_p( path( user ) ) unless File.exists?( path( user ) )
-    begin
-      FileUtils.chmod_R( 0711, path( user ) )
-      FileUtils.chown( user.os_user, user.os_user, path( user ) )
-    rescue ArgumentError => e
-      logger.info("LESSON ENSURE_PATH #{path( user )} for USER #{user.email} PROBLEM #{e.to_s}")
-    end
-    
-    logger.info("LESSON ENSURE_PATH END #{path( user )} for USER #{user.email}") 
+    `sudo chmod 711 #{path( user )}`
+    `sudo chown #{user.os_user}:#{user.os_group} #{path( user )}`
   end
+
+
     
   def start_lesson
     `tar czvf #{path}/saved/#{Time.now.strftime("%y%m%d%H%M%S")}.tar.gz #{path}/active`

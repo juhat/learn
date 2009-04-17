@@ -23,6 +23,7 @@
 require 'digest/sha1'
 require 'etc' 
 require 'fileutils'
+require 'digest/md5'
 
 class User < ActiveRecord::Base
   has_and_belongs_to_many :courses
@@ -41,9 +42,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :message => 'Az email cím foglalt.'
   validates_format_of       :email, :with => Authentication.email_regex, :message => 'Érvényes email cím lehet.'
   validates_format_of       :email, :with => /\A\w+@digitus\.itk\.ppke\.hu\Z/, :message => "Pillanatnyilag csak egyetemi cím lehet."
-  validates_presence_of     :os_user
+  validates_presence_of     :os_user, :os_group, :os_secret
   
-  before_create :add_os_user
+  before_create :add_os_user_group_secret
   after_create :setup_environment
   after_destroy :destroy_environment
 
@@ -52,7 +53,7 @@ class User < ActiveRecord::Base
   #
 
   # prevents a user from submitting a crafted form that bypasses activation
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :os_user
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :os_user, :os_group, :os_secret
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
@@ -83,30 +84,20 @@ class User < ActiveRecord::Base
     # TODO: delete all files too
     # `rm -rf #{path}`
   end
+  def home_path
+    File.join( USER_DIR, os_user )
+  end
   def path
-    "#{USER_DIR}/#{os_user}"
+    File.join( home_path, os_secret)
   end
   def ensure_path
-    path = File.join( USER_DIR, os_user )
     logger.info("ENSURE_PATH #{path} for USER #{email} ")
     
     FileUtils.mkdir_p( path ) unless File.exists?( path )
-    
-    logger.info("ENSURE_PATH_OWNER #{path}, for USER #{email}")
-    # TODO: dont use Etc here!
-    unless Etc.getpwuid( File.stat( path ).uid ).name == os_user and Etc.getgrgid( File.stat( path ).gid ).name == os_user
-      begin
-        FileUtils.chown os_user, os_user, path
-      rescue ArgumentError => e
-        logger.error("ENSURE_PATH_OWNER ArgumentError: #{e.to_s}")
-      end
-    end
-    
-    logger.info("ENSURE_PATH_RIGHTS #{path}, for USER #{email}")
-    # TODO: read rights first
-    FileUtils.chmod( 0711, path )
-    
-    logger.info("ENSURED_PATH #{path} for USER #{email}")
+    `sudo chmod 711 #{home_path}`
+    `sudo chmod 711 #{path}`
+    `sudo chown #{os_user}:#{os_group} #{home_path}`
+    `sudo chown #{os_user}:#{os_group} #{path}`
   end
   
   protected
@@ -114,8 +105,9 @@ class User < ActiveRecord::Base
       self.deleted_at = nil
       self.activation_code = self.class.make_token
     end
-    def add_os_user
-      # TODO: add os user name
-      self.os_user ||= Time.now.to_s
+    def add_os_user_group_secret
+      self.os_user ||= "user#{_id}"
+      self.os_group ||= "user#{_id}"
+      self.os_secret ||= Digest::MD5.hexdigest("#{os_user} #{Time.now.to_s} #{rand(1024)}")
     end
 end

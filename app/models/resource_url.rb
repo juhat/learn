@@ -11,5 +11,5 @@
 #
 
 class ResourceUrl < ActiveRecord::Base
-  has_one :running_lesson
+  belongs_to :running_lesson
 end

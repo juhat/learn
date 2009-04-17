@@ -15,11 +15,13 @@ class CreateUsers < ActiveRecord::Migration
       t.column :state,                     :string, :null => :no, :default => 'passive'
       t.column :deleted_at,                :datetime
       t.column :os_user,                  :string
+      t.column :os_group,                  :string
+      t.column :os_secret,                  :string
     end
     add_index :users, :login, :unique => true
     
     if RAILS_ENV == 'development'
-      u = User.new :name => 'Attila Juhász', :os_user => 'juhat', :email => 'juhat@digitus.itk.ppke.hu', :password => 'webtools', :password_confirmation => 'webtools'
+      u = User.new :name => 'Attila Juhász', :os_user => 'juhat', :os_group => 'staff', :email => 'juhat@digitus.itk.ppke.hu', :password => 'webtools', :password_confirmation => 'webtools'
       u.register!
       u.update_attribute( :state, 'active' )
     end

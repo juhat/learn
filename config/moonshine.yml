@@ -1,9 +1,9 @@
 :ruby: ree
-:application: your_app_name
+:application: learn
 :user: rails
 #:time_zone: UTC
-:deploy_to: /srv/your_app_name
-:domain: yourapp.com
+:deploy_to: /srv/learn
+:domain: learn.atti.la
 #:domain_aliases:
 #  - assets1.yourapp.com
 #  - assets2.yourapp.com
@@ -24,6 +24,7 @@
 - log
 - pids
 - config
+- courses
 # After specifying a gem with config.gem, run 'rake moonshine:gems'
 # to update config/gems.yml. If the gem depends on native packages, 
 # tell Moonshine here:
