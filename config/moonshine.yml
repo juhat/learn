@@ -7,7 +7,7 @@
 #:domain_aliases:
 #  - assets1.yourapp.com
 #  - assets2.yourapp.com
-:repository: git@github.com:username/your_app_name.git
+:repository: git@github.com:juhat/learn.git
 # Use :app_symlinks to setup directories under public/ that you want to persist
 # across deployments. They'll be symlinked to the shared directory.
 #:app_symlinks:
@@ -24,7 +24,7 @@
 - log
 - pids
 - config
-- courses
+- lesson_templates
 # After specifying a gem with config.gem, run 'rake moonshine:gems'
 # to update config/gems.yml. If the gem depends on native packages, 
 # tell Moonshine here:
