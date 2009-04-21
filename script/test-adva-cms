@@ -1,3 +1,0 @@
-#!/usr/bin/env ruby
-paths = ARGV.clone
-load 'vendor/adva/script/test'
