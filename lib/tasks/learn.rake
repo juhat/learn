@@ -1,10 +1,9 @@
-namespace :learn do
-  desc "Put resources into the db."
-  task(:import_resources => :environment) do
-    puts 'Processed URLs: '
-    File.new("#{RAILS_ROOT}/db/urls.txt", 'r').each() do |line|
-      ResourceUrl.create :key=> line.strip
-      print ' ' + line.strip
+# Task for the first deploy
+namespace :moonshine do
+  namespace :app do
+    desc "Overwrite this task in your app if you have any bootstrap tasks that need to be run"
+    task :bootstrap => :environment do
+      puts "### HELLO WORLD"
     end
   end
 end

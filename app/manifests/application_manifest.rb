@@ -28,6 +28,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
     # :apt_gems in <tt>moonshine.yml</tt> you do not need to include it here.
     # package 'some_native_package', :ensure => :installed
     
+    template(File.join( rails_root(), 'templates', 'passenger.vhost.erb'))
     # some_rake_task = "/usr/bin/rake -f #{configuration[:deploy_to]}/current/Rakefile custom:task RAILS_ENV=#{ENV['RAILS_ENV']}"
     # cron 'custom:task', :command => some_rake_task, :user => configuration[:user], :minute => 0, :hour => 0
     
