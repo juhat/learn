@@ -25,4 +25,5 @@ CUSTOM_SITE_HOST = 'dev.atti.la'
 
 USER_DIR = '/home'
 
-VHOST_DIR = "/srv/vhost/"
+VHOSTS_PATH = "/srv/vhosts/"
+VHOSTS_URL = 'vh.atti.la'

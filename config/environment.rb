@@ -23,6 +23,7 @@ Rails::Initializer.run do |config|
   config.gem 'hpricot'
   config.gem "rspec", :lib => false, :version => ">= 1.2.0" 
   config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
+  config.gem "erubis"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

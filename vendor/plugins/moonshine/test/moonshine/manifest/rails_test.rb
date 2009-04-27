@@ -21,6 +21,37 @@ class Moonshine::Manifest::RailsTest < Test::Unit::TestCase
     @manifest = Moonshine::Manifest::Rails.new
   end
 
+  def test_default_stack
+    @manifest.expects(:database_environment).at_least_once.returns({:adapter => 'mysql' })
+    @manifest.default_stack
+    assert @manifest.recipes.map(&:first).include?(:apache_server), 'apache_server'
+    [:passenger_gem, :passenger_configure_gem_path, :passenger_apache_module, :passenger_site].each do |passenger_stack|
+      assert @manifest.recipes.map(&:first).include?(passenger_stack), passenger_stack.to_s
+    end
+    [:mysql_server, :mysql_gem, :mysql_database, :mysql_user, :mysql_fixup_debian_start].each do |mysql_stack|
+      assert @manifest.recipes.map(&:first).include?(mysql_stack), mysql_stack.to_s
+    end
+    [:rails_rake_environment, :rails_gems, :rails_directories, :rails_bootstrap, :rails_migrations, :rails_logrotate].each do |rails_stack|
+      assert @manifest.recipes.map(&:first).include?(rails_stack), rails_stack.to_s
+    end
+    [:ntp, :time_zone, :postfix, :cron_packages, :motd].each do |os_stack|
+      assert @manifest.recipes.map(&:first).include?(os_stack), os_stack.to_s
+    end
+  end
+  
+  def test_default_stack_with_postgresql
+    @manifest.expects(:database_environment).at_least_once.returns({:adapter => 'postgresql' })
+    @manifest.default_stack
+    [:postgresql_server, :postgresql_gem, :postgresql_user, :postgresql_database].each do |pgsql_stack|
+      assert @manifest.recipes.map(&:first).include?(pgsql_stack), pgsql_stack.to_s
+    end
+  end
+
+  def test_default_stack_with_sqlite
+    @manifest.expects(:database_environment).at_least_once.returns({:adapter => 'sqlite' })
+    @manifest.default_stack
+    assert @manifest.recipes.map(&:first).include?(:sqlite3), 'sqlite3'
+  end
 
   def test_is_executable
     assert @manifest.executable?
@@ -149,9 +180,9 @@ class Moonshine::Manifest::RailsTest < Test::Unit::TestCase
     })
     @manifest.apache_server
     
-    assert_not_nil @manifest.puppet_resources[Puppet::Type::Exec].find { |n, r| r.params[:command].value == 'htpasswd -b /srv/foo/current/config/htpasswd jimbo motorcycle' }
-    assert_not_nil @manifest.puppet_resources[Puppet::Type::Exec].find { |n, r| r.params[:command].value == 'htpasswd -b /srv/foo/current/config/htpasswd joebob jimbo' }
-    assert_not_nil @manifest.puppet_resources[Puppet::Type::File]["#{@manifest.configuration[:deploy_to]}/current/config/htpasswd"]
+    assert_not_nil @manifest.puppet_resources[Puppet::Type::Exec].find { |n, r| r.params[:command].value == 'htpasswd -b /srv/foo/shared/config/htpasswd jimbo motorcycle' }
+    assert_not_nil @manifest.puppet_resources[Puppet::Type::Exec].find { |n, r| r.params[:command].value == 'htpasswd -b /srv/foo/shared/config/htpasswd joebob jimbo' }
+    assert_not_nil @manifest.puppet_resources[Puppet::Type::File]["#{@manifest.configuration[:deploy_to]}/shared/config/htpasswd"]
   end
 
   def test_vhost_basic_auth_configuration
@@ -165,7 +196,7 @@ class Moonshine::Manifest::RailsTest < Test::Unit::TestCase
     @manifest.passenger_site
 
     assert_match /<Location \/ >/, @manifest.puppet_resources[Puppet::Type::File]["/etc/apache2/sites-available/#{@manifest.configuration[:application]}"].params[:content].value
-    assert_match /authuserfile #{@manifest.configuration[:deploy_to]}\/current\/config\/htpasswd/, @manifest.puppet_resources[Puppet::Type::File]["/etc/apache2/sites-available/#{@manifest.configuration[:application]}"].params[:content].value
+    assert_match /authuserfile #{@manifest.configuration[:deploy_to]}\/shared\/config\/htpasswd/, @manifest.puppet_resources[Puppet::Type::File]["/etc/apache2/sites-available/#{@manifest.configuration[:application]}"].params[:content].value
     assert_match /require valid-user/, @manifest.puppet_resources[Puppet::Type::File]["/etc/apache2/sites-available/#{@manifest.configuration[:application]}"].params[:content].value
   end
  

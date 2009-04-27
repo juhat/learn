@@ -33,7 +33,8 @@ ActiveRecord::Schema.define(:version => 20090415200215) do
   end
 
   create_table "resource_urls", :force => true do |t|
-    t.string   "key"
+    t.string   "url"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

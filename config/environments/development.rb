@@ -20,4 +20,5 @@ CUSTOM_SITE_HOST = 'dev.atti.la'
 
 USER_DIR = '/tmp/learn'
 
-VHOST_DIR = '/tmp/learn/vhost'
+VHOSTS_PATH = "/srv/vhosts/"
+VHOSTS_URL = 'vh.atti.la'
