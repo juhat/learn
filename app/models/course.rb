@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090415192933
+# Schema version: 20090415200215
 #
 # Table name: courses
 #
@@ -11,8 +11,13 @@
 #
 
 class Course < ActiveRecord::Base
-  has_many :lessons
-  has_and_belongs_to_many :users
+  has_many :running_courses
+  has_many :users, :through => :running_courses
+  
+  
+  
+  
+  
   
   def path( user )
     File.join( user.path, id.to_s )

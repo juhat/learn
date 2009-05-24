@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090415192933
+# Schema version: 20090415200215
 #
 # Table name: users
 #
@@ -18,6 +18,8 @@
 #  state                     :string(255)     default("passive")
 #  deleted_at                :datetime
 #  os_user                   :string(255)
+#  os_group                  :string(255)
+#  os_secret                 :string(255)
 #
 
 require 'digest/sha1'
@@ -26,8 +28,12 @@ require 'fileutils'
 require 'digest/md5'
 
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :courses
-  has_one :running_lesson
+  has_many :running_courses
+  has_many :courses, :through => :running_courses
+
+  has_many :running_lessons
+  has_many :lessons, :through => :running_lessons
+  
   
   include Authentication
   include Authentication::ByPassword

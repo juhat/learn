@@ -20,11 +20,6 @@ class CreateUsers < ActiveRecord::Migration
     end
     add_index :users, :login, :unique => true
     
-    if RAILS_ENV == 'development'
-      u = User.new :name => 'Attila Juhász', :os_user => 'juhat', :os_group => 'staff', :email => 'juhat@digitus.itk.ppke.hu', :password => 'webtools', :password_confirmation => 'webtools'
-      u.register!
-      u.update_attribute( :state, 'active' )
-    end
   end
 
   def self.down

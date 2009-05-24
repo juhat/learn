@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090415192933
+# Schema version: 20090415200215
 #
 # Table name: users
 #
@@ -18,6 +18,8 @@
 #  state                     :string(255)     default("passive")
 #  deleted_at                :datetime
 #  os_user                   :string(255)
+#  os_group                  :string(255)
+#  os_secret                 :string(255)
 #
 
 require File.dirname(__FILE__) + '/../spec_helper'

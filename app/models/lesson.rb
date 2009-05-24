@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090415192933
+# Schema version: 20090415200215
 #
 # Table name: lessons
 #
@@ -14,10 +14,10 @@
 
 class Lesson < ActiveRecord::Base
   belongs_to :course
+  validates_presence_of :course
+  
   has_many :running_lessons
   has_many :users, :through => :running_lessons
-  
-  validates_presence_of :course
   
   
   def start( user )

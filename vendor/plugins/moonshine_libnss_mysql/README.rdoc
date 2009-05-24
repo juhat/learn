@@ -1,0 +1,14 @@
+= Moonshine_LibnssMysql
+
+=== A plugin for Moonshine[http://github.com/railsmachine/moonshine]
+
+A plugin for installing and managing libnss_mysql.
+
+=== Instructions
+
+* <tt>script/plugin install git://github.com/ACCOUNT/moonshine_libnss_mysql.git</tt>
+* Configure settings if needed
+    configure(:libnss_mysql => {:foo => true})
+* Include the plugin and recipe(s) in your Moonshine manifest
+    plugin :libnss_mysql
+    recipe :libnss_mysql

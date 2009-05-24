@@ -3,13 +3,9 @@ class CreateResourceUrls < ActiveRecord::Migration
     create_table :resource_urls do |t|
       t.string  :url
       t.string :type
+      t.integer :running_lesson_id
       t.timestamps
     end
-    
-    if RAILS_ENV == 'development'
-      ResourceUrl.create( :url => 'user.atti.la', :type => 'rails')
-    end
-    
   end
 
   def self.down

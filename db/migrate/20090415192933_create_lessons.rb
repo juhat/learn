@@ -8,10 +8,6 @@ class CreateLessons < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    if RAILS_ENV == 'development'
-      Lesson.create :name => 'Rails alapok', :description => 'Lorem ipsum...', :type => 'rails', :course_id => 1
-    end
   end
 
   def self.down

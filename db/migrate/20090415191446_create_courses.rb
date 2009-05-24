@@ -5,11 +5,7 @@ class CreateCourses < ActiveRecord::Migration
       t.text :description
 
       t.timestamps
-    end
-    
-    if RAILS_ENV == 'development'
-      Course.create :name => 'Rails 2 tanfolyam', :description => 'Lorem ipsum...'
-    end
+    end    
   end
 
   def self.down

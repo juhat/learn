@@ -1,11 +1,11 @@
 # == Schema Information
-# Schema version: 20090415192933
+# Schema version: 20090415200215
 #
 # Table name: resource_urls
 #
 #  id         :integer(4)      not null, primary key
-#  key        :string(255)
-#  user_id    :integer(4)
+#  url        :string(255)
+#  type       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
