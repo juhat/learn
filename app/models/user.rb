@@ -101,9 +101,9 @@ class User < ActiveRecord::Base
   def ensure_path
     logger.info("ENSURE_PATH #{path} for USER #{email} ")
     
-    FileUtils.mkdir_p( path ) unless File.exists?( path )
-    `sudo chmod 711 #{home_path}`
-    `sudo chmod 711 #{path}`
+    # FileUtils.mkdir_p( path ) unless File.exists?( path )
+    # `sudo chmod 711 #{home_path}`
+    # `sudo chmod 711 #{path}`
     # `sudo chown #{os_user}:#{os_group} #{home_path}`
     # `sudo chown #{os_user}:#{os_group} #{path}`
   end
