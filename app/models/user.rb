@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090415200215
+# Schema version: 20090804142735
 #
 # Table name: users
 #
@@ -18,6 +18,7 @@
 #  state                     :string(255)     default("passive")
 #  deleted_at                :datetime
 #  os_user                   :string(255)
+#  os_gid                    :integer(4)
 #  os_group                  :string(255)
 #  os_secret                 :string(255)
 #
@@ -34,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :running_lessons
   has_many :lessons, :through => :running_lessons
   
+  has_and_belongs_to_many :groups
   
   include Authentication
   include Authentication::ByPassword
@@ -48,7 +50,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :message => 'Az email cím foglalt.'
   validates_format_of       :email, :with => Authentication.email_regex, :message => 'Érvényes email cím lehet.'
   validates_format_of       :email, :with => /\A\w+@digitus\.itk\.ppke\.hu\Z/, :message => "Pillanatnyilag csak egyetemi cím lehet."
-  validates_presence_of     :os_user, :os_group, :os_secret
+  validates_presence_of     :os_user, :os_secret
   
   before_create :add_os_user_group_secret
   after_create :setup_environment
@@ -59,7 +61,7 @@ class User < ActiveRecord::Base
   #
 
   # prevents a user from submitting a crafted form that bypasses activation
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :os_user, :os_group, :os_secret
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :os_user, :os_gid, :os_secret
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(email, password)
@@ -102,8 +104,8 @@ class User < ActiveRecord::Base
     FileUtils.mkdir_p( path ) unless File.exists?( path )
     `sudo chmod 711 #{home_path}`
     `sudo chmod 711 #{path}`
-    `sudo chown #{os_user}:#{os_group} #{home_path}`
-    `sudo chown #{os_user}:#{os_group} #{path}`
+    # `sudo chown #{os_user}:#{os_group} #{home_path}`
+    # `sudo chown #{os_user}:#{os_group} #{path}`
   end
   
   protected
@@ -113,7 +115,7 @@ class User < ActiveRecord::Base
     end
     def add_os_user_group_secret
       self.os_user ||= "user#{_id}"
-      self.os_group ||= "user#{_id}"
+      # self.os_group ||= "user#{_id}"
       self.os_secret ||= Digest::MD5.hexdigest("#{os_user} #{Time.now.to_s} #{rand(1024)}")
     end
 end

@@ -15,7 +15,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :state,                     :string, :null => :no, :default => 'passive'
       t.column :deleted_at,                :datetime
       t.column :os_user,                  :string
-      t.column :os_group,                  :string
+      t.column :os_gid,                   :integer
       t.column :os_secret,                  :string
     end
     add_index :users, :login, :unique => true

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090415200215
+# Schema version: 20090804142735
 #
 # Table name: lessons
 #

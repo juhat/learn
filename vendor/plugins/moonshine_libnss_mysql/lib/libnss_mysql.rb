@@ -26,18 +26,12 @@ module LibnssMysql
     :content => template(File.join(File.dirname(__FILE__), '..', 'templates', 'nss-mysql.conf'), binding),
     :require => package('libnss-mysql')
 
-    file '/etc/ssh/sshd_config.new',
-      :mode => '644',
-      :content => template(File.join(File.dirname(__FILE__), '..', 'templates', 'sshd_config'), binding),
-      :require => package('ssh'),
-      :notify => exec('update_sshd_config')
-
-    exec 'cp /etc/ssh/sshd_config.new /etc/ssh/sshd_config',
-      :alias => 'update_sshd_config'
-      :onlyif => '/usr/sbin/sshd -t -f /etc/ssh/sshd_config.new',
-      :refreshonly => true, # do nothing until notified
-      :require => file('/etc/ssh/sshd_config.new'),
-      :notify => service('ssh')
+    # exec 'cp /etc/ssh/sshd_config.new /etc/ssh/sshd_config',
+    #   :alias => 'update_sshd_config'
+    #   :onlyif => '/usr/sbin/sshd -t -f /etc/ssh/sshd_config.new',
+    #   :refreshonly => true, # do nothing until notified
+    #   :require => file('/etc/ssh/sshd_config.new'),
+    #   :notify => service('ssh')
     
   end
   

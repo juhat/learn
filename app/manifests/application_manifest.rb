@@ -17,6 +17,10 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   #   :custom => { :random => random  }
   # })
 
+  configure( :libnss_mysql => { :allow_users => ['rails'] } )
+  plugin :libnss_mysql
+  recipe :libnss_mysql
+
   # The default_stack recipe install Rails, Apache, Passenger, the database from 
   # database.yml, Postfix, Cron, logrotate and NTP. See lib/moonshine/manifest/rails.rb
   # for details. To customize, remove this recipe and specify the components you want.

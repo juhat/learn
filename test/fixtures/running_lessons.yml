@@ -1,15 +1,15 @@
 # == Schema Information
-# Schema version: 20090415200215
+# Schema version: 20090804142735
 #
 # Table name: running_lessons
 #
-#  id              :integer(4)      not null, primary key
-#  lesson_id       :integer(4)
-#  user_id         :integer(4)
-#  resource_url_id :integer(4)
-#  state           :string(255)     default("new")
-#  created_at      :datetime
-#  updated_at      :datetime
+#  id                :integer(4)      not null, primary key
+#  lesson_id         :integer(4)
+#  user_id           :integer(4)
+#  running_course_id :integer(4)
+#  state             :string(255)     default("new")
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
