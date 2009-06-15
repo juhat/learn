@@ -17,6 +17,12 @@ class CreateUsers < ActiveRecord::Migration
       t.column :os_user,                  :string
       t.column :os_gid,                   :integer
       t.column :os_secret,                  :string
+
+      # t.column :homedir, :string
+      # t.column :shell, :string
+
+      # t.column :uid, :integer
+      # t.column :gid, :integer
     end
     add_index :users, :login, :unique => true
     

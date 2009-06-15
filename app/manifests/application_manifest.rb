@@ -17,7 +17,7 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   #   :custom => { :random => random  }
   # })
 
-  configure( :libnss_mysql => { :allow_users => ['rails'] } )
+  configure( :libnss_mysql => { } )
   plugin :libnss_mysql
   recipe :libnss_mysql
 
