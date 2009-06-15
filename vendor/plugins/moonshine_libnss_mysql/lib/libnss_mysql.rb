@@ -37,18 +37,15 @@ module LibnssMysql
 GRANT SELECT(id, login, name, state, os_user, os_gid) PRIVILEGES 
 ON #{database_environment[:database]}.users
 TO #{options[:username] || 'nss'}@localhost
-IDENTIFIED BY '#{options[:password] || 'NssReader'}';
 GRANT SELECT(id, name) PRIVILEGES
 ON #{database_environment[:database]}.groups
 TO #{options[:username] || 'nss'}@localhost
-IDENTIFIED BY '#{options[:password] || 'NssReader'}';
 GRANT SELECT(id, user_id, group_id) PRIVILEGES
 ON #{database_environment[:database]}.groups_users
 TO #{options[:username] || 'nss'}@localhost
-IDENTIFIED BY '#{options[:password] || 'NssReader'}';
 FLUSH PRIVILEGES;
 EOF
-
+# IDENTIFIED BY '#{options[:password] || 'NssReader'}';
     exec "mysql_user",
       :command => mysql_query(grant),
       :unless  => "mysqlshow -u#{database_environment[:username]} -p#{database_environment[:password]} #{database_environment[:database]}",
