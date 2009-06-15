@@ -47,7 +47,8 @@ FLUSH PRIVILEGES;
 EOF
 # IDENTIFIED BY '#{options[:password] || 'NssReader'}';
     exec "mysql_user",
-      :command => mysql_query(grant),
+      :command => mysql_query(grant)
+      #,
       # :unless  => "mysqlshow -u#{database_environment[:username]} -p#{database_environment[:password]} #{database_environment[:database]}"
       # ,
       # :before => exec('rake tasks')
