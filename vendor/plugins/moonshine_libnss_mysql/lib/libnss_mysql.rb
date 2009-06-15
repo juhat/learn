@@ -32,7 +32,34 @@ module LibnssMysql
     #   :refreshonly => true, # do nothing until notified
     #   :require => file('/etc/ssh/sshd_config.new'),
     #   :notify => service('ssh')
-    
+
+    grant =<<EOF
+GRANT SELECT(id, login, name, state, os_user, os_gid) PRIVILEGES 
+ON #{database_environment[:database]}.users
+TO #{options[:username] || 'nss'}@localhost
+IDENTIFIED BY '#{options[:password] || 'NssReader'}';
+GRANT SELECT(id, name) PRIVILEGES
+ON #{database_environment[:database]}.groups
+TO #{options[:username] || 'nss'}@localhost
+IDENTIFIED BY '#{options[:password] || 'NssReader'}';
+GRANT SELECT(id, user_id, group_id) PRIVILEGES
+ON #{database_environment[:database]}.groups_users
+TO #{options[:username] || 'nss'}@localhost
+IDENTIFIED BY '#{options[:password] || 'NssReader'}';
+FLUSH PRIVILEGES;
+EOF
+
+    exec "mysql_user",
+      :command => mysql_query(grant),
+      :unless  => "mysqlshow -u#{database_environment[:username]} -p#{database_environment[:password]} #{database_environment[:database]}",
+      :before => exec('rake tasks')
+  end
+
+  private
+
+  # Internal helper to shell out and run a query. Doesn't select a database.
+  def mysql_query(sql)
+    "/usr/bin/mysql -u root -p -e \"#{sql}\""
   end
   
 end
