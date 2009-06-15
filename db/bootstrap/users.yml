@@ -1,0 +1,19 @@
+--- 
+users_0001: 
+  os_secret: 0987ff4f27845d606d3d42c8df0ce476
+  os_gid: "2001"
+  salt: dbf0fae382314425936ae16cccdd1badecdf4484
+  name: "Attila Juh\xC3\xA1sz"
+  activated_at: 
+  updated_at: 2009-06-04 14:44:47
+  crypted_password: 81af60cc7e477161c6be47bab8a339da73d5263c
+  deleted_at: 
+  activation_code: 46a953336d717bac4fd8e764608e942cc23525eb
+  remember_token_expires_at: 
+  id: "1"
+  remember_token: 
+  login: 
+  os_user: juhat
+  state: active
+  created_at: 2009-06-04 14:44:47
+  email: juhat@digitus.itk.ppke.hu
