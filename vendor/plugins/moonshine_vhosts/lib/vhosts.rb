@@ -19,7 +19,7 @@ module Vhosts
     file '/etc/apache2/sites-available/rails-courses',
       :mode => '644',
       :content => template(File.join(File.dirname(__FILE__), '..', 'templates', 'passenger.vhost.erb'), binding),
-      :notify => service('apache')
+      :notify => service('apache2')
     
     file options[:docroot], 
       :ensure => :directory,
