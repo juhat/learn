@@ -52,7 +52,6 @@ class User < ActiveRecord::Base
   # validates_format_of       :email, :with => /\A\w+@digitus\.itk\.ppke\.hu\Z/, :message => "Pillanatnyilag csak egyetemi cím lehet."
   # validates_presence_of     :os_user, :os_secret, :base_group
   
-  before_create :add_os_user_group_secret
   after_create :setup_environment
   after_destroy :destroy_environment
 
@@ -85,6 +84,12 @@ class User < ActiveRecord::Base
   def setup_environment
     # TODO: create OS user
     # `adduser ...`
+    self.os_user ||= "user_#{self.id}"
+    group = Group.create( :name => "group_#{self.id}" )
+    self.base_group = group
+    self.os_secret ||= Digest::MD5.hexdigest("#{os_user} #{Time.now.to_s} #{rand(1024)}")
+    save!
+    
     if Rails.env == 'production'
       `sudo mkdir -p #{ path }`
       `sudo chmod -R 711 #{ path }`
@@ -115,11 +120,5 @@ class User < ActiveRecord::Base
     def make_activation_code
       self.deleted_at = nil
       self.activation_code = self.class.make_token
-    end
-    def add_os_user_group_secret
-      self.os_user ||= "user_#{id}"
-      group = Group.create( :name => self.os_user )
-      self.os_gid = group.id + 5000
-      self.os_secret ||= Digest::MD5.hexdigest("#{os_user} #{Time.now.to_s} #{rand(1024)}")
     end
 end
