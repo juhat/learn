@@ -26,15 +26,7 @@ module LibnssMysql
     :content => template(File.join(File.dirname(__FILE__), '..', 'templates', 'nss-mysql.conf'), binding),
     :require => package('libnss-mysql')
 
-    # exec 'cp /etc/ssh/sshd_config.new /etc/ssh/sshd_config',
-    #   :alias => 'update_sshd_config'
-    #   :onlyif => '/usr/sbin/sshd -t -f /etc/ssh/sshd_config.new',
-    #   :refreshonly => true, # do nothing until notified
-    #   :require => file('/etc/ssh/sshd_config.new'),
-    #   :notify => service('ssh')
-
     grant =<<EOF
-CREATE USER #{options[:username] || 'nss'};
 GRANT SELECT(id, login, name, state, os_user, os_gid) 
 ON #{database_environment[:database]}.users 
 TO #{options[:username] || 'nss'}@localhost;
@@ -46,20 +38,13 @@ ON #{database_environment[:database]}.groups_users
 TO #{options[:username] || 'nss'}@localhost;
 FLUSH PRIVILEGES;
 EOF
-# IDENTIFIED BY '#{options[:password] || 'NssReader'}';
-    exec "mysql_user",
-      :command => mysql_query(grant)
+
+    exec "mysql_nss_user",
+      :command => "/usr/bin/mysql -u root -p -e \"#{sql}\""
       #,
       # :unless  => "mysqlshow -u#{database_environment[:username]} -p#{database_environment[:password]} #{database_environment[:database]}"
       # ,
       # :before => exec('rake tasks')
   end
 
-  private
-
-  # Internal helper to shell out and run a query. Doesn't select a database.
-  def mysql_query(sql)
-    "sudo /usr/bin/mysql -u root -p -e \"#{sql}\""
-  end
-  
 end
