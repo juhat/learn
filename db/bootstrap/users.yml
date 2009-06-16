@@ -1,7 +1,7 @@
 --- 
 users_0001: 
   os_secret: 0987ff4f27845d606d3d42c8df0ce476
-  os_gid: "1000"
+  os_gid: "5000"
   salt: dbf0fae382314425936ae16cccdd1badecdf4484
   name: "Attila Juh\xC3\xA1sz"
   activated_at: 

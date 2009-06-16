@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   has_many :lessons, :through => :running_lessons
   
   has_and_belongs_to_many :groups
-  has_one :os_group, :class_name => "Group", :foreign_key => :os_gid
+  belongs_to :base_group, :class_name => "Group", :foreign_key => :os_gid
   
   include Authentication
   include Authentication::ByPassword
@@ -49,8 +49,8 @@ class User < ActiveRecord::Base
   validates_length_of       :email, :within => 6..100, :message => 'Az email cím hossza nem megfelelő.'
   validates_uniqueness_of   :email, :message => 'Az email cím foglalt.'
   validates_format_of       :email, :with => Authentication.email_regex, :message => 'Érvényes email cím lehet.'
-  validates_format_of       :email, :with => /\A\w+@digitus\.itk\.ppke\.hu\Z/, :message => "Pillanatnyilag csak egyetemi cím lehet."
-  validates_presence_of     :os_user, :os_secret
+  # validates_format_of       :email, :with => /\A\w+@digitus\.itk\.ppke\.hu\Z/, :message => "Pillanatnyilag csak egyetemi cím lehet."
+  validates_presence_of     :os_user, :os_secret, :base_group
   
   before_create :add_os_user_group_secret
   after_create :setup_environment
@@ -85,13 +85,16 @@ class User < ActiveRecord::Base
   def setup_environment
     # TODO: create OS user
     # `adduser ...`
-    `sudo mkdir -p #{ path }`
-    
+    if Rails.env == 'production'
+      `sudo mkdir -p #{ path }`
+      `sudo chmod -R 711 #{ path }`
+      `sudo chown -R #{ self.os_user }:#{ self.base_group.name } #{ path }`
+    end
   end
   def destroy_environment
-    # TODO: delete OS user
-    # TODO: delete all files too
-    # `rm -rf #{path}`
+    if Rails.env == 'production'
+      `sudo rm -rf #{ home_path }`
+    end
   end
   def home_path
     File.join( USER_DIR, os_user )
@@ -102,8 +105,7 @@ class User < ActiveRecord::Base
   def ensure_path
     logger.info("ENSURE_PATH #{path} for USER #{email} ")
     
-    # FileUtils.mkdir_p( path ) unless File.exists?( path )
-    # `sudo chmod 711 #{home_path}`
+    # 
     # `sudo chmod 711 #{path}`
     # `sudo chown #{os_user}:#{os_group} #{home_path}`
     # `sudo chown #{os_user}:#{os_group} #{path}`
