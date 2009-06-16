@@ -4,7 +4,7 @@ class Nss < ActiveRecord::Migration
       t.column :name, :string
     end
 
-    execute "ALTER TABLE groups AUTO_INCREMENT = 1000;"
+    execute "ALTER TABLE groups AUTO_INCREMENT = 5000;"
     
     create_table "groups_users", :id => nil do |t|
       t.integer 'user_id'
