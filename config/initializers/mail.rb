@@ -9,6 +9,6 @@ ActionMailer::Base.smtp_settings = {
     :port => "587",
     :domain => "atti.la",
     :authentication => :plain,
-    :user_name => "learn",
+    :user_name => "learn@atti.la",
     :password => "webtools" 
   }
