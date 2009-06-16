@@ -26,6 +26,7 @@ class CreateUsers < ActiveRecord::Migration
     end
     add_index :users, :login, :unique => true
     
+    execute "ALTER TABLE users AUTO_INCREMENT = 1000;"
   end
 
   def self.down

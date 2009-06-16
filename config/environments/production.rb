@@ -26,4 +26,4 @@ CUSTOM_SITE_HOST = 'dev.atti.la'
 USER_DIR = '/home'
 
 VHOSTS_PATH = "/srv/vhosts/"
-VHOSTS_URL = 'vh.atti.la'
+VHOSTS_URL = 'e-learn.hu'

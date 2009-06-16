@@ -3,6 +3,8 @@ class Nss < ActiveRecord::Migration
     create_table "groups", :force => true do |t|
       t.column :name, :string
     end
+
+    execute "ALTER TABLE groups AUTO_INCREMENT = 1000;"
     
     create_table "groups_users", :id => nil do |t|
       t.integer 'user_id'

@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :lessons, :through => :running_lessons
   
   has_and_belongs_to_many :groups
+  has_one :os_group, :class_name => "Group", :foreign_key => :os_gid
   
   include Authentication
   include Authentication::ByPassword
@@ -84,7 +85,8 @@ class User < ActiveRecord::Base
   def setup_environment
     # TODO: create OS user
     # `adduser ...`
-    ensure_path
+    `sudo mkdir -p #{ path }`
+    
   end
   def destroy_environment
     # TODO: delete OS user
