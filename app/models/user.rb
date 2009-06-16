@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :message => 'Az email cím foglalt.'
   validates_format_of       :email, :with => Authentication.email_regex, :message => 'Érvényes email cím lehet.'
   # validates_format_of       :email, :with => /\A\w+@digitus\.itk\.ppke\.hu\Z/, :message => "Pillanatnyilag csak egyetemi cím lehet."
-  validates_presence_of     :os_user, :os_secret, :base_group
+  # validates_presence_of     :os_user, :os_secret, :base_group
   
   before_create :add_os_user_group_secret
   after_create :setup_environment
@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
       self.activation_code = self.class.make_token
     end
     def add_os_user_group_secret
-      self.os_user ||= "user#{_id}"
+      self.os_user ||= "user_#{id}"
       group = Group.create( :name => self.os_user )
       self.os_gid = group.id + 5000
       self.os_secret ||= Digest::MD5.hexdigest("#{os_user} #{Time.now.to_s} #{rand(1024)}")

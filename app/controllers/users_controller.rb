@@ -17,10 +17,12 @@ class UsersController < ApplicationController
     @user.register! if @user && @user.valid?
     success = @user && @user.valid?
     if success && @user.errors.empty?
+      logger.info('success')
       redirect_back_or_default('/')
       flash[:notice] = "A regisztráció sikerült! Az aktivációs levél úton van!"
     else
-      flash[:error]  = "Sajnos valami nincs rendben. A regisztráció nem sikerült."
+      logger.info('bad news')
+      flash[:notice]  = "Sajnos valami nincs rendben. A regisztráció nem sikerült."
       render :action => 'new'
     end
   end
