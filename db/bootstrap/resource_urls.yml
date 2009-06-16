@@ -1,8 +1,701 @@
 --- 
-resource_urls_0001: 
-  updated_at: 2009-06-04 14:44:47
+resource_urls_0097: 
+  updated_at: 2009-06-16 17:19:33
   type: 
-  url: user.atti.la
-  id: "1"
+  url: bae969fb1aeaf26691236e17517d4114
+  id: "99"
   running_lesson_id: 
-  created_at: 2009-06-04 14:44:47
+  created_at: 2009-06-16 17:19:33
+resource_urls_0076: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: d8472bbceb471e8d4140caa77341b315
+  id: "78"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0013: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 5eb5dfc32d40e4c51d55937c4148bb68
+  id: "15"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0034: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 778468dfdb77bf28506d1c287452699a
+  id: "36"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0055: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 42acc253a2777eaf17343d1c8c086b98
+  id: "57"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0098: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 5efb572c666d90899d5a10a25d5100bb
+  id: "100"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0077: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 2b8b8cde1549408872acf24a93a2d87b
+  id: "79"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0014: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 931ef7276160d0d2f211e8de4aa54f92
+  id: "16"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0035: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 56c622019a03fd90227133a0acd3d5b6
+  id: "37"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0056: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 70bb023be4ace9cd5b155e2d9a699ad7
+  id: "58"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0099: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 56b9733d0f98a010fab22c6f12c72976
+  id: "101"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0078: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 9c263d4ccb9a7c836ff8d77ab7f850cd
+  id: "80"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0015: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 71994f1b494893edaa1148fcaf4472f0
+  id: "17"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0036: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 9729deea574667fafe1af86c470112bd
+  id: "38"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0057: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 2787fcadba698fadb4f2a32b62dfeae1
+  id: "59"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0080: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 32182d8953ae1bb94f7d4b342c6145ab
+  id: "82"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0079: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 256852183b9cb7c8fb2c04727566c143
+  id: "81"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0016: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 593101650fde41c7b3e142f8cda06977
+  id: "18"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0037: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 853cace5675f8a2e3fd70bd27187ea34
+  id: "39"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0058: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: f1794cf93728bad8e6fa4945af7cfc3c
+  id: "60"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0081: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: a1eefcefa048a7ce26ef4945b857dd0f
+  id: "83"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0017: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 3e7ed3a647966502986ebecb92123fa6
+  id: "19"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0038: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 2b8c9e3bc5ea0e62cd612a15a6c7fff7
+  id: "40"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0060: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: f12bb74ea38a98f4feba9a5a41e6d995
+  id: "62"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0059: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 97e2cb45275fc87fd8c2e1da491ee492
+  id: "61"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0082: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 99e1c6164abeb91c1fd2d966de69b51c
+  id: "84"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0018: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: a0de51c0eb9c04bfef94144684b1e4ce
+  id: "20"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0040: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: e7c0f35389bf84cbb5e4aca70879573e
+  id: "42"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0039: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 4ca43bc34270cd02c5af7c833ce65399
+  id: "41"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0061: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 17c5177d93f93ad2f5074dd40f0a6dbb
+  id: "63"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0083: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: de1014b6def5d2d0042ee197d61e3614
+  id: "85"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0062: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 256bf6dac6ff0b91c53103c7f8f01873
+  id: "64"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0020: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 53690a81370422fe3a052c240bd6531a
+  id: "22"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0019: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 2114e0f96999228cccfde99c217fbd26
+  id: "21"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0041: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 232e6ede3f43d731dd549c756f99c25b
+  id: "43"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0084: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 1b257d50cc586cb07c2905c06de43f00
+  id: "86"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0021: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: daa40866db4094fa9dba91ef8ccbd806
+  id: "23"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0042: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: ab6079f257f85b3ab35460b0c7456d78
+  id: "44"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0063: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 10133ea46905150bc434cc5dd29d9ee0
+  id: "65"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0100: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 71bf59e987a5583c20217792caebce65
+  id: "102"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0085: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 869995b0025a1702f7c9d27372e513f6
+  id: "87"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0001: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: f884271c1b3050264e94ed4ed102f742
+  id: "3"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0022: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: c878ece5d7821baa03e173c53e2d4c1b
+  id: "24"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0043: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 6becdf8403a7b892eea3b9142113ba62
+  id: "45"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0064: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 2dbb832d42ce08a157ead37626f6211b
+  id: "66"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0086: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: aaa354c298915f19cc5f769aae2635e5
+  id: "88"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0002: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 698acf020a74e4f5abb688545fe72d35
+  id: "4"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0023: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 8c836bd16c97749d8ee4be31e61e399a
+  id: "25"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0044: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: a4f7b78c1496238880ef086e30174db1
+  id: "46"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0065: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: dbb7c2d11fefe136269a2feba02c0b5f
+  id: "67"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0087: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 25822aace014397ebd216206d4615901
+  id: "89"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0003: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 6facdbe3568f966bd4f35dbbf8243909
+  id: "5"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0024: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: adc15156ad15af250b84c32a44090193
+  id: "26"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0045: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 62971942fe153ca0365ad06736812a67
+  id: "47"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0066: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: e9abdee16aceee75a0547838f3fe8c0d
+  id: "68"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0088: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 0c21a22e86eca212defe050bae1c41a9
+  id: "90"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0067: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 2e1834ecd42343fe4a06840ee7e9c3e8
+  id: "69"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0004: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: ae2a0ece6323f2a9403012b6734a5794
+  id: "6"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0025: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 685a7bc02ef7e93ff702f0b23da866ce
+  id: "27"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0046: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 007cbf6aa0e9c0d010358efd837fcd9c
+  id: "48"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0090: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: b8d9db58ce091446f907fe87e97db359
+  id: "92"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0089: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 933bd9be8bb5deea379073d4ab9db1fd
+  id: "91"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0068: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 2b83695329d0872066e760e9c152c597
+  id: "70"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0005: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 78cc5611862af3632acfe50b2aceb38d
+  id: "7"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0026: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 901986b5f7d9121c9d13fe7657937741
+  id: "28"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0047: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: c16f8bd581ac6f0d7abe94ef28c3bdca
+  id: "49"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0091: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: b7e3422bdd57928ffabec01e2f61f665
+  id: "93"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0070: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 89fe2dc022875f17690e916bf7331de8
+  id: "72"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0069: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 40cfb4d25d9e188d3f385efa9d3f7761
+  id: "71"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0006: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: bff8e70cb752d57d632321570c82d232
+  id: "8"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0027: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: e0557d8c83d3f39e43075e7d1eac2231
+  id: "29"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0048: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 3c484b0e685b442e667fa88230fe5c25
+  id: "50"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0092: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 6f0678ee13763039e1d5dace9137d105
+  id: "94"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0071: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: b84ca654013299cff7749e6e63941108
+  id: "73"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0007: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: a1fc20ce915ad559959818c63bca3887
+  id: "9"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0028: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 166af83f90e9a8ee757abe040d678a4f
+  id: "30"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0050: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 992ed213d3f09fabc30aec0fb21528f4
+  id: "52"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0049: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: bd0d98971fccf62ca8a6139a9fd7fae5
+  id: "51"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0093: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 7628a7944ae8f367fb835fdecf66610d
+  id: "95"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0072: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 79273935fdbaff3153ba300db617c078
+  id: "74"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0029: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: fdc78b3e56331bea37239aae26cbe493
+  id: "31"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0051: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: f10084d71cb2bfbeb98b0299c3ef80d2
+  id: "53"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0008: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: e6a8739f5004ac0ba4d5aacefba1f188
+  id: "10"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0030: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 3b8f0b38bea8550473439b33179e5093
+  id: "32"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0094: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: a19baf12642313473fc26e191ab1bb00
+  id: "96"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0073: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 311b5db7e4ab96e78653e6ef5f28df59
+  id: "75"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0010: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 5f2826b1f5ac193f0b57cd96d7655548
+  id: "12"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0009: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 610992ec661cefcd629458ce66a4532e
+  id: "11"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0031: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: a4fad844cdeb412d5402cd4cf0dded5b
+  id: "33"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0052: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 7e98faced8d3fc0f593327d8e97c5892
+  id: "54"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0095: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 7b4d477ff52186450977b87191af3a16
+  id: "97"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0074: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 27c4ae164d7571896b7bfb3c9461dfde
+  id: "76"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0011: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: b55dde6c210e8264212b7d5893ac2496
+  id: "13"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0032: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 0f5ebe8c4722e884084c12d432bf06f4
+  id: "34"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0053: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 9924a716f5d023dc7cf16e9f80fe3d93
+  id: "55"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0096: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 67432e7c66152f2e0c1ef93bf998cd25
+  id: "98"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0075: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: befcab0bbdc24ed742c981289e82fb23
+  id: "77"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0012: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 8cba6bd59d81e6f087428efc1b32708d
+  id: "14"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0033: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 3a3db673ee01ca5f3a6fe506cd2a46da
+  id: "35"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33
+resource_urls_0054: 
+  updated_at: 2009-06-16 17:19:33
+  type: 
+  url: 808a97602d7ab9e3cb562d7c79094cf3
+  id: "56"
+  running_lesson_id: 
+  created_at: 2009-06-16 17:19:33

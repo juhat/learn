@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090804142735
+# Schema version: 20090604140343
 #
 # Table name: resource_urls
 #

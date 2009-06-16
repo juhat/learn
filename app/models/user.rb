@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090804142735
+# Schema version: 20090604140343
 #
 # Table name: users
 #
@@ -19,7 +19,6 @@
 #  deleted_at                :datetime
 #  os_user                   :string(255)
 #  os_gid                    :integer(4)
-#  os_group                  :string(255)
 #  os_secret                 :string(255)
 #
 
@@ -115,7 +114,8 @@ class User < ActiveRecord::Base
     end
     def add_os_user_group_secret
       self.os_user ||= "user#{_id}"
-      # self.os_group ||= "user#{_id}"
+      group = Group.create( :name => self.os_user )
+      self.os_gid = group.id + 5000
       self.os_secret ||= Digest::MD5.hexdigest("#{os_user} #{Time.now.to_s} #{rand(1024)}")
     end
 end

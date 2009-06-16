@@ -7,7 +7,6 @@ namespace :moonshine do
   namespace :app do
     desc "Bootstrap vhost generator task"
     task :bootstrap => :environment do
-      #
     end
   end
 end

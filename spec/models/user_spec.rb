@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090804142735
+# Schema version: 20090604140343
 #
 # Table name: users
 #
@@ -19,7 +19,6 @@
 #  deleted_at                :datetime
 #  os_user                   :string(255)
 #  os_gid                    :integer(4)
-#  os_group                  :string(255)
 #  os_secret                 :string(255)
 #
 
