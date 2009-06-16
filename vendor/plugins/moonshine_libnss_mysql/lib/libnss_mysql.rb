@@ -34,15 +34,16 @@ module LibnssMysql
     #   :notify => service('ssh')
 
     grant =<<EOF
+CREATE USER #{options[:username] || 'nss'};
 GRANT SELECT(id, login, name, state, os_user, os_gid) 
 ON #{database_environment[:database]}.users 
-TO #{options[:username] || 'nss'}@localhost
+TO #{options[:username] || 'nss'}@localhost;
 GRANT SELECT(id, name)
 ON #{database_environment[:database]}.groups
-TO #{options[:username] || 'nss'}@localhost
+TO #{options[:username] || 'nss'}@localhost;
 GRANT SELECT(id, user_id, group_id)
 ON #{database_environment[:database]}.groups_users
-TO #{options[:username] || 'nss'}@localhost
+TO #{options[:username] || 'nss'}@localhost;
 FLUSH PRIVILEGES;
 EOF
 # IDENTIFIED BY '#{options[:password] || 'NssReader'}';
