@@ -40,7 +40,7 @@ FLUSH PRIVILEGES;
 EOF
 
     exec "mysql_nss_user",
-      :command => "/usr/bin/mysql -u root -p -e \"#{grant}\""
+      :command => "sudo /usr/bin/mysql -u root -e \"#{grant}\""
       #,
       # :unless  => "mysqlshow -u#{database_environment[:username]} -p#{database_environment[:password]} #{database_environment[:database]}"
       # ,
