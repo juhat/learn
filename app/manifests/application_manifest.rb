@@ -21,6 +21,10 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   plugin :libnss_mysql
   recipe :libnss_mysql
 
+  configure( :vhosts => { :quantity => 100, :base => '.e-learn.hu', :docroot => '/srv/vhosts/' } )
+  plugin :vhosts
+  recipe :vhosts
+
   # The default_stack recipe install Rails, Apache, Passenger, the database from 
   # database.yml, Postfix, Cron, logrotate and NTP. See lib/moonshine/manifest/rails.rb
   # for details. To customize, remove this recipe and specify the components you want.

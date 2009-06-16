@@ -26,6 +26,7 @@ module LibnssMysql
     :content => template(File.join(File.dirname(__FILE__), '..', 'templates', 'nss-mysql.conf'), binding),
     :require => package('libnss-mysql')
 
+    # It works for localhost only
     grant =<<EOF
 GRANT SELECT(id, login, name, state, os_user, os_gid) 
 ON #{database_environment[:database]}.users 
@@ -41,10 +42,6 @@ EOF
 
     exec "mysql_nss_user",
       :command => "sudo /usr/bin/mysql -u root -e \"#{grant}\""
-      #,
-      # :unless  => "mysqlshow -u#{database_environment[:username]} -p#{database_environment[:password]} #{database_environment[:database]}"
-      # ,
-      # :before => exec('rake tasks')
   end
 
 end
