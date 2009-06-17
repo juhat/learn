@@ -83,10 +83,10 @@ class User < ActiveRecord::Base
   # 
   def setup_environment
     update_attributes(
-      :os_user => "user_#{ id }",
+      :os_user => "user#{ id }",
       :os_secret => Digest::MD5.hexdigest("#{ os_user } #{ Time.now.to_s } #{ rand(1024) }")
     )
-    self.create_base_group( :name => "group_#{ id }" ) unless base_group
+    self.create_base_group( :name => "group#{ id }" ) unless base_group
     save!
     
     if RAILS_ENV == 'production'
@@ -127,6 +127,6 @@ class User < ActiveRecord::Base
     end
     def run_code( code )
       logger.info( 'RUN > ' + code )
-      `#{ code }`
+      logger.info( `#{ code }` )
     end
 end
