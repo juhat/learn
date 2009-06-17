@@ -90,9 +90,9 @@ class User < ActiveRecord::Base
     save!
     
     if RAILS_ENV == 'production'
-      `sudo mkdir -p #{ path }`
-      `sudo chmod -R 711 #{ path }`
-      `sudo chown -R #{ os_user }:#{ base_group.name } #{ path }`
+      run_code "sudo mkdir -p #{ path }"
+      run_code "sudo chmod -R 711 #{ path }"
+      run_code "sudo chown -R #{ os_user }:#{ base_group.name } #{ path }"
     end
   end
 
@@ -123,5 +123,9 @@ class User < ActiveRecord::Base
     def make_activation_code
       self.deleted_at = nil
       self.activation_code = self.class.make_token
+    end
+    def run_code( code )
+      logger.info( 'RUN > ' + code )
+      `code`
     end
 end
