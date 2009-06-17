@@ -91,8 +91,9 @@ class User < ActiveRecord::Base
     
     if RAILS_ENV == 'production'
       run_code "sudo mkdir -p #{ path }"
-      run_code "sudo chmod -R 711 #{ path }"
-      run_code "sudo chown -R #{ os_user }:#{ base_group.name } #{ path }"
+      run_code "sudo chmod 755 #{ home_path }"
+      run_code "sudo chmod 711 #{ path }"
+      run_code "sudo chown #{ os_user }:#{ base_group.name } #{ path }"
     end
   end
 
@@ -126,6 +127,6 @@ class User < ActiveRecord::Base
     end
     def run_code( code )
       logger.info( 'RUN > ' + code )
-      `code`
+      `#{ code }`
     end
 end
