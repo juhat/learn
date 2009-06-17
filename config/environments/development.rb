@@ -22,3 +22,13 @@ USER_DIR = '/tmp/learn'
 
 VHOSTS_PATH = "/srv/vhosts/"
 VHOSTS_URL = 'vh.atti.la'
+
+ActionMailer::Base.smtp_settings = {
+    :tls => true,
+    :address => "smtp.gmail.com",
+    :port => "587",
+    :domain => "atti.la",
+    :authentication => :plain,
+    :user_name => "learn@atti.la",
+    :password => "webtools" 
+  }
