@@ -82,31 +82,34 @@ class User < ActiveRecord::Base
   # Course related codes 
   # 
   def setup_environment
-    # TODO: create OS user
-    # `adduser ...`
-    self.os_user ||= "user_#{self.id}"
-    group = Group.create( :name => "group_#{self.id}" )
-    self.base_group = group
-    self.os_secret ||= Digest::MD5.hexdigest("#{os_user} #{Time.now.to_s} #{rand(1024)}")
+    update_attributes(
+      :os_user => "user_#{ id }",
+      :os_secret => Digest::MD5.hexdigest("#{ os_user } #{ Time.now.to_s } #{ rand(1024) }")
+    )
+    self.create_base_group( :name => "group_#{ id }" ) unless base_group
     save!
     
     if RAILS_ENV == 'production'
       `sudo mkdir -p #{ path }`
       `sudo chmod -R 711 #{ path }`
-      `sudo chown -R #{ self.os_user }:#{ self.base_group.name } #{ path }`
+      `sudo chown -R #{ os_user }:#{ base_group.name } #{ path }`
     end
   end
+
   def destroy_environment
     if Rails.env == 'production'
       `sudo rm -rf #{ home_path }`
     end
   end
+
   def home_path
     File.join( USER_DIR, os_user )
   end
+
   def path
     File.join( home_path, os_secret)
   end
+
   def ensure_path
     logger.info("ENSURE_PATH #{path} for USER #{email} ")
     

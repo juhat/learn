@@ -10,5 +10,7 @@
 class Group < ActiveRecord::Base
   has_and_belongs_to_many :users
   
+  has_one :base_user, :class_name => "User", :foreign_key => :os_gid
+  
   validates_presence_of :name
 end
