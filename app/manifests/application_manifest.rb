@@ -17,14 +17,6 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   #   :custom => { :random => random  }
   # })
 
-  configure( :libnss_mysql => { :username => 'nss', :password => 'NssReaderSecret' } )
-  plugin :libnss_mysql
-  recipe :libnss_mysql
-
-  configure( :vhosts => { :quantity => 100, :base => '.e-learn.hu', :docroot => '/srv/vhosts/' } )
-  plugin :vhosts
-  recipe :vhosts
-
   # The default_stack recipe install Rails, Apache, Passenger, the database from 
   # database.yml, Postfix, Cron, logrotate and NTP. See lib/moonshine/manifest/rails.rb
   # for details. To customize, remove this recipe and specify the components you want.
@@ -59,4 +51,12 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   end
   # The following line includes the 'application_packages' recipe defined above
   recipe :application_packages
+  
+  configure( :libnss_mysql => { :username => 'nss', :password => 'NssReaderSecret' } )
+  plugin :libnss_mysql
+  recipe :libnss_mysql
+
+  configure( :vhosts => { :quantity => 100, :base => '.e-learn.hu', :docroot => '/srv/vhosts/' } )
+  plugin :vhosts
+  recipe :vhosts
 end

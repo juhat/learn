@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
     self.os_secret ||= Digest::MD5.hexdigest("#{os_user} #{Time.now.to_s} #{rand(1024)}")
     save!
     
-    if Rails.env == 'production'
+    if RAILS_ENV == 'production'
       `sudo mkdir -p #{ path }`
       `sudo chmod -R 711 #{ path }`
       `sudo chown -R #{ self.os_user }:#{ self.base_group.name } #{ path }`
