@@ -127,6 +127,7 @@ class User < ActiveRecord::Base
     end
     def run_code( code )
       logger.info( 'RUN > ' + code )
-      logger.info( `#{ code }` )
+      rsp = `#{ code }`
+      logger.info( rsp )
     end
 end
