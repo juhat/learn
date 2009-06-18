@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090604140343
+# Schema version: 20090617162631
 #
 # Table name: resource_urls
 #
@@ -9,8 +9,10 @@
 #  running_lesson_id :integer(4)
 #  created_at        :datetime
 #  updated_at        :datetime
+#  user_id           :integer(4)
 #
 
 class ResourceUrl < ActiveRecord::Base
   belongs_to :running_lesson
+  belongs_to :user
 end

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090604140343
+# Schema version: 20090617162631
 #
 # Table name: users
 #
@@ -36,6 +36,8 @@ class User < ActiveRecord::Base
   
   has_and_belongs_to_many :groups
   belongs_to :base_group, :class_name => "Group", :foreign_key => :os_gid
+  
+  has_one :resource_url, :autosave => true
   
   include Authentication
   include Authentication::ByPassword
@@ -110,14 +112,29 @@ class User < ActiveRecord::Base
   def path
     File.join( home_path, os_secret)
   end
-
-  def ensure_path
-    logger.info("ENSURE_PATH #{path} for USER #{email} ")
+  
+  def lesson_path
+    File.join( path, 'rails')
+  end
+  
+  def start_learn
+    if RAILS_ENV == 'production'
+      run_code "sudo rails #{ lesson_path }"
+      run_code "sudo mkdir #{ lesson_path }"
+      run_code "sudo cp #{RAILS_ROOT}/courses/learn_gallery_spec.rb #{ lesson_path }/spec/learn_gallery_spec.rb"
+      run_code "sudo cp #{RAILS_ROOT}/spec/spec.opts #{lesson_path}/spec/spec.opts"
+      run_code "sudo cp #{RAILS_ROOT}/spec/spec_helper.rb #{lesson_path}/spec/spec_helper.rb"
+      run_code "sudo chown -R #{ os_user }:#{ base_group.name } #{ lesson_path }"
+    end
     
-    # 
-    # `sudo chmod 711 #{path}`
-    # `sudo chown #{os_user}:#{os_group} #{home_path}`
-    # `sudo chown #{os_user}:#{os_group} #{path}`
+    
+    self.resource_url = nil if self.resource_url
+    self.resource_url = ResourceUrl.first :conditions => { :user_id => nil }, :order => 'updated_at ASC'
+    
+    if RAILS_ENV == 'production'
+      run_code "sudo rm /srv/vhosts/#{resource_url.url}"
+      run_code "sudo ln -s /srv/vhosts/#{resource_url.url} #{lesson_path}/public"
+    end
   end
   
   protected

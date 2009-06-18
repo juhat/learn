@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20090604140343
+# Schema version: 20090617162631
 #
 # Table name: courses
 #
@@ -21,14 +21,5 @@ class Course < ActiveRecord::Base
   
   def path( user )
     File.join( user.path, id.to_s )
-  end
-  def ensure_path( user )
-    logger.info("COURSE ENSURE_PATH #{path( user )} for USER #{user.email}")
-
-    user.ensure_path
-    
-    FileUtils.mkdir_p( path( user ) ) unless File.exists?( path( user ) )
-    `sudo chmod 711 #{path( user )}`
-    `sudo chown #{user.os_user}:#{user.os_group} #{path( user )}`
   end
 end
