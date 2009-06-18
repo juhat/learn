@@ -3,7 +3,7 @@
   
   <VirtualHost *:80>
     ServerName <%=  sec + options[:base]  %>
-    DocumentRoot <%= File.join( options[:docroot], sec ) %>
+    DocumentRoot <%= File.join( options[:docroot], sec, 'public' ) %>
 
     <Directory <%= File.join( options[:docroot], sec, "public" ) %>>
       Options FollowSymLinks
