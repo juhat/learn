@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
     if RAILS_ENV == 'production'
       run_code "sudo rails #{ lesson_path }"
       run_code "sudo mkdir #{ lesson_path }"
-      run_code "sudo cp #{RAILS_ROOT}/courses/learn_gallery_spec.rb #{ lesson_path }/spec/learn_gallery_spec.rb"
+      run_code "sudo cp #{RAILS_ROOT}/spec/learn_gallery_spec.rb #{ lesson_path }/spec/learn_gallery_spec.rb"
       run_code "sudo cp #{RAILS_ROOT}/spec/spec.opts #{lesson_path}/spec/spec.opts"
       run_code "sudo cp #{RAILS_ROOT}/spec/spec_helper.rb #{lesson_path}/spec/spec_helper.rb"
       run_code "sudo chown -R #{ os_user }:#{ base_group.name } #{ lesson_path }"
@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
     
     if RAILS_ENV == 'production'
       run_code "sudo rm /srv/vhosts/#{resource_url.url}"
-      run_code "sudo ln -s /srv/vhosts/#{resource_url.url} #{lesson_path}/public"
+      run_code "sudo ln -s #{lesson_path}/public /srv/vhosts/#{resource_url.url}"
     end
   end
   
