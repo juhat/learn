@@ -5,7 +5,7 @@
     ServerName <%=  sec + options[:base]  %>
     DocumentRoot <%= File.join( options[:docroot], sec ) %>
 
-    <Directory <%= File.join( options[:docroot], sec, "current/public" ) %>>
+    <Directory <%= File.join( options[:docroot], sec, "public" ) %>>
       Options FollowSymLinks
       AllowOverride None
       Order allow,deny
