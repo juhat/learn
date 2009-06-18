@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
     
     if RAILS_ENV == 'production'
       run_code "sudo rm /srv/vhosts/#{resource_url.url}"
-      run_code "sudo ln -s #{lesson_path}/public /srv/vhosts/#{resource_url.url}"
+      run_code "sudo ln -s #{lesson_path}/ /srv/vhosts/#{resource_url.url}"
     end
   end
   

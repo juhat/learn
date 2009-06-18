@@ -52,6 +52,8 @@ class ApplicationManifest < Moonshine::Manifest::Rails
   # The following line includes the 'application_packages' recipe defined above
   recipe :application_packages
   
+  recipe :sqlite3
+  
   configure( :libnss_mysql => { :username => 'nss', :password => 'NssReaderSecret' } )
   plugin :libnss_mysql
   recipe :libnss_mysql
