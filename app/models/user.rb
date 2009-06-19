@@ -127,13 +127,15 @@ class User < ActiveRecord::Base
       run_code "sudo chown -R #{ os_user }:#{ base_group.name } #{ lesson_path }"
     end
     
-    
-    self.resource_url = nil if self.resource_url
+    if self.resource_url
+      run_code "sudo rm /srv/vhosts/#{self.resource_url.url}" if RAILS_ENV == 'production'
+      self.resource_url = nil 
+    end
     self.resource_url = ResourceUrl.first :conditions => { :user_id => nil }, :order => 'updated_at ASC'
     
     if RAILS_ENV == 'production'
-      run_code "sudo rm /srv/vhosts/#{resource_url.url}"
-      run_code "sudo ln -s #{lesson_path}/ /srv/vhosts/#{resource_url.url}"
+      run_code "sudo rm /srv/vhosts/#{self.resource_url.url}"
+      run_code "sudo ln -s #{lesson_path} /srv/vhosts/#{self.resource_url.url}"
     end
   end
   

@@ -9,7 +9,7 @@ class LearnController < ApplicationController
   
   def index
     @user = current_user
-    current_user.start_course
+    current_user.start_learn
     render :layout=>'learn'
   end
 
@@ -22,57 +22,64 @@ class LearnController < ApplicationController
   # TODO: Restarting of backend is not the best deal, it is a workaround.
   # It just needid because the backend code is cached even in development mode.
   def autotest
-    current_user.restart_course_server
-    path = '/learn_course/autotest'
-
-    logger.info("Proxied autotest to backend to #{current_user.course_host + path}.")
-    
-    res = Net::HTTP.get(current_user.course_host, path)
-
-    # logger.info(res)
-    
-    header = File.readlines("#{current_user.path}/active/spec/learn_story.html").map{|l| l.rstrip}.to_s
-    render :text => header + res
-    # TODO: text parsing, template to make html
+    # current_user.restart_course_server
+    # path = '/learn_course/autotest'
+    # 
+    # logger.info("Proxied autotest to backend to #{current_user.course_host + path}.")
+    # 
+    # res = Net::HTTP.get(current_user.course_host, path)
+    # 
+    # # logger.info(res)
+    # 
+    # header = File.readlines("#{current_user.path}/active/spec/learn_story.html").map{|l| l.rstrip}.to_s
+    # render :text => header + res
+    # # TODO: text parsing, template to make html
+    render :text => "TODO"
   end
 
   # Proxied terminal back to backend.
   def terminal
-    path = "http://#{current_user.course_host}/learn_course/terminal"
+    params[:command].gsub!(/;/, '').gsub!(/&/, '')
+    
     begin
-      output = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
+      output = `sudo su -c "cd #{current_user.lesson_path}; #{params[:command]}" #{current_user.os_user}`
     rescue StandardError => e
       output = e.message
     end
-    logger.info("Proxied terminal command to backend to #{path}.")
+    
+    logger.info("Terminal command: #{params[:command]}")
     logger.info(output)
     render :text => output
   end
 
   # Proxied app console back to backend
   def console
-    path = "http://#{current_user.course_host}/learn_course/console"
-    begin
-      res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
-    rescue StandardError => e
-      res = e.message
-    end
-    logger.info("Proxied app console command to backend to #{path}.")
-    logger.info(res)
-    render :text => res
+    render :text => "TODO"
+
+    # path = "http://#{current_user.course_host}/learn_course/console"
+    # begin
+    #   res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
+    # rescue StandardError => e
+    #   res = e.message
+    # end
+    # logger.info("Proxied app console command to backend to #{path}.")
+    # logger.info(res)
+    # render :text => res
   end
   
   # Proxied db console back to backend
   def db
-    path = "http://#{current_user.course_host}/learn_course/db"
-    begin
-      res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
-    rescue StandardError => e
-      res = e.message
-    end
-    logger.info("Proxied db console command to backend to #{path}.")
-    logger.info(res)
-    render :text => res
+    render :text => "TODO"
+
+    # path = "http://#{current_user.course_host}/learn_course/db"
+    # begin
+    #   res = Net::HTTP.post_form(URI.parse(path),{'command' => params[:command]}).body
+    # rescue StandardError => e
+    #   res = e.message
+    # end
+    # logger.info("Proxied db console command to backend to #{path}.")
+    # logger.info(res)
+    # render :text => res
   end
   
   def file
