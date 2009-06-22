@@ -28,6 +28,9 @@ module Vhosts
     file options[:docroot], 
       :ensure => :directory,
       :mode => '771'
+    
+    exec "rails_template",
+      :command => "sudo rails -s /srv/rails"
   end
   
 end
