@@ -90,13 +90,6 @@ class User < ActiveRecord::Base
     )
     self.create_base_group( :name => "group#{ id }" ) unless base_group
     save!
-    
-    if RAILS_ENV == 'production'
-      run_code "sudo mkdir -p #{ path }"
-      run_code "sudo chmod 755 #{ home_path }"
-      run_code "sudo chmod 711 #{ path }"
-      run_code "sudo chown #{ os_user }:#{ base_group.name } #{ path }"
-    end
   end
 
   def destroy_environment
@@ -119,6 +112,11 @@ class User < ActiveRecord::Base
   
   def start_learn
     if RAILS_ENV == 'production'
+      run_code "sudo mkdir -p #{ path }"
+      run_code "sudo chmod 755 #{ home_path }"
+      run_code "sudo chmod 711 #{ path }"
+      run_code "sudo chown #{ os_user }:#{ base_group.name } #{ path }"
+      
       run_code "sudo rails #{ lesson_path }"
       # run_code "sudo mkdir #{ lesson_path }"
       # run_code "sudo cp #{RAILS_ROOT}/spec/learn_gallery_spec.rb #{ lesson_path }/spec/learn_gallery_spec.rb"
