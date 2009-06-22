@@ -117,7 +117,7 @@ class User < ActiveRecord::Base
       # run_code "sudo chmod 711 #{ path }"
       run_code "sudo chown #{ os_user }:#{ base_group.name } #{ path }"
       
-      run_code "sudo rails #{ lesson_path }"
+      run_code "sudo cp -R /srv/rails #{ lesson_path }"
       # run_code "sudo mkdir #{ lesson_path }"
       # run_code "sudo cp #{RAILS_ROOT}/spec/learn_gallery_spec.rb #{ lesson_path }/spec/learn_gallery_spec.rb"
       # run_code "sudo cp #{RAILS_ROOT}/spec/spec.opts #{lesson_path}/spec/spec.opts"
