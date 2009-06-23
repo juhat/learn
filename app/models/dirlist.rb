@@ -20,17 +20,17 @@ class Dirlist
     Dir.glob(@actual_dir).each do |f|
       unless f.include?('learn')
         if File.directory?(f)
-          if File.writable?(f)
+          # if File.writable?(f)
             @dirs.push({:text=>File.basename(f), :iconcls=>'folder', :leaf=> false})
-          else
-            @dirs.push({:text=>File.basename(f), :iconcls=>'folder', :disabled=>true, :leaf=> false})
-          end
+          # else
+            # @dirs.push({:text=>File.basename(f), :iconcls=>'folder', :disabled=>true, :leaf=> false})
+          # end
         else
-          if File.writable?(f)
+          # if File.writable?(f)
             @files.push({:text=>File.basename(f), :iconcls=>'file-txt', :id=>(f), :leaf=> true, :qtip=>'tooltip'})
-          else
-            @files.push({:text=>File.basename(f), :iconcls=>'file-txt', :id=>(f), :leaf=> true, :disabled=>true,:qtip=>'tooltip'})
-          end
+          # else
+            # @files.push({:text=>File.basename(f), :iconcls=>'file-txt', :id=>(f), :leaf=> true, :disabled=>true,:qtip=>'tooltip'})
+          # end
         end
       end
     end

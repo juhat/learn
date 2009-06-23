@@ -84,12 +84,14 @@ class LearnController < ApplicationController
   end
   
   def file
-    baseDir = ""
+    baseDir = current_user.lesson_path
+    path = File.join( baseDir, params[:path] )
     case params[:cmd]
       when 'load'
-        render :file => baseDir + params[:path]
+        render :file => path
       when 'save'
-        file = File.new(baseDir + params[:path], 'w')
+        logger.info( "FILEPANEL WRITE to #{path}" )
+        file = File.new( path, 'w')
         file.write(params[:note])
         file.close
         render :text=>'{"success":true,"error":""}'
@@ -102,7 +104,7 @@ class LearnController < ApplicationController
     case params[:cmd]
       when 'get'
         logger.info "FILEPANEL: Reading #{params[:path]}"
-        dr = Dirlist.new(baseDir + params[:path])
+        dr = Dirlist.new( File.join( baseDir, params[:path] ) )
         render :json => dr.list
       when 'rename'
         begin
