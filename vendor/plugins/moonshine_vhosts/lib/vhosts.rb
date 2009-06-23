@@ -30,7 +30,7 @@ module Vhosts
       :mode => '771'
     
     exec "rails_template",
-      :command => "sudo rails -s /srv/rails"
+      :command => "sudo rails -sf /srv/rails"
   end
   
 end

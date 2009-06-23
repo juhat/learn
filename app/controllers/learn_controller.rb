@@ -39,7 +39,8 @@ class LearnController < ApplicationController
 
   # Proxied terminal back to backend.
   def terminal
-    params[:command].gsub!(/;/, '').gsub!(/&/, '')
+    # params[:command].gsub!(/;/, '')
+    # params[:command].gsub!(/&/, '')
     
     begin
       output = `sudo su -c "cd #{current_user.lesson_path}; #{params[:command]}" #{current_user.os_user}`
