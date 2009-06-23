@@ -97,7 +97,7 @@ class LearnController < ApplicationController
   end
   
   def filepanel
-    baseDir = ""
+    baseDir = current_user.lesson_path
     
     case params[:cmd]
       when 'get'
