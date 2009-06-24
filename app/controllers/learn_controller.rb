@@ -96,11 +96,11 @@ class LearnController < ApplicationController
         file.write(params[:note])
         file.close
         
-        rcode = run_code "sudo -c \"cp #{ tmpfile } #{ path }\" #{current_user.os_user}"
+        rcode = run_code "sudo su -c \"cp #{ tmpfile } #{ path }\" #{current_user.os_user}"
         
         run_code "rm -f #{ tmpfile }"
         
-        if rcode
+        unless rcode
           render :text=>'{"success":true,"error":""}'
         else
           render :text=>'{"success":false,"error":""}'
