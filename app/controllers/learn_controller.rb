@@ -89,7 +89,7 @@ class LearnController < ApplicationController
     tmpfile = "/tmp/#{ Time.now.to_i }.txt"
     case params[:cmd]
       when 'load'
-        render :file => path
+        render :text => `sudo su -c "cat #{ path }" #{ current_user.os_user }`
       when 'save'
         logger.info( "FILEPANEL WRITE to #{ path }" )
         file = File.new( tmpfile, 'w')
