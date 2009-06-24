@@ -100,6 +100,7 @@ class LearnController < ApplicationController
         
         run_code "rm -f #{ tmpfile }"
         
+        logger.info(rcode)
         unless rcode
           render :text=>'{"success":true,"error":""}'
         else
