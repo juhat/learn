@@ -116,7 +116,8 @@ class User < ActiveRecord::Base
       # run_code "sudo chmod 755 #{ home_path }"
       # run_code "sudo chmod 711 #{ path }"
       run_code "sudo chown #{ os_user }:#{ base_group.name } #{ path }"
-      
+
+      run_code "sudo rm -rf #{ lesson_path }"
       run_code "sudo cp -R /srv/rails #{ lesson_path }"
       # run_code "sudo mkdir #{ lesson_path }"
       # run_code "sudo cp #{RAILS_ROOT}/spec/learn_gallery_spec.rb #{ lesson_path }/spec/learn_gallery_spec.rb"
@@ -146,6 +147,10 @@ class User < ActiveRecord::Base
     def run_code( code )
       logger.info( 'RUN > ' + code )
       rsp = `#{ code }`
-      logger.info( rsp )
+      unless $?.to_i
+        logger.info( "RETURN 0 > #{rsp}" )
+      else
+        logger.error( "RETURN #{$?.to_i} > #{rsp}" )
+      end      
     end
 end
