@@ -101,7 +101,7 @@ class LearnController < ApplicationController
         run_code "rm -f #{ tmpfile }"
         
         logger.info(rcode)
-        unless rcode
+        if rcode == 0
           render :text=>'{"success":true,"error":""}'
         else
           render :text=>'{"success":false,"error":""}'
@@ -112,7 +112,7 @@ class LearnController < ApplicationController
   def run_code( code )
     logger.info( 'RUN > ' + code )
     rsp = `#{ code }`
-    unless $?.to_i
+    if $?.to_i == 0
       logger.info( "RETURN 0 > #{rsp}" )
     else
       logger.error( "RETURN #{$?.to_i} > #{rsp}" )
