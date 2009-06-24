@@ -86,17 +86,39 @@ class LearnController < ApplicationController
   def file
     baseDir = current_user.lesson_path
     path = File.join( baseDir, params[:path] )
+    tmpfile = "/tmp/#{ Time.now.to_i }.txt"
     case params[:cmd]
       when 'load'
         render :file => path
       when 'save'
-        logger.info( "FILEPANEL WRITE to #{path}" )
-        file = File.new( path, 'w')
+        logger.info( "FILEPANEL WRITE to #{ path }" )
+        file = File.new( tmpfile, 'w')
         file.write(params[:note])
         file.close
-        render :text=>'{"success":true,"error":""}'
+        
+        rcode = run_code "sudo -c \"cp #{ tmpfile } #{ path }\" #{current_user.os_user}"
+        
+        run_code "rm -f #{ tmpfile }"
+        
+        if rcode
+          render :text=>'{"success":true,"error":""}'
+        else
+          render :text=>'{"success":false,"error":""}'
+        end
     end 
   end
+  
+  def run_code( code )
+    logger.info( 'RUN > ' + code )
+    rsp = `#{ code }`
+    unless $?.to_i
+      logger.info( "RETURN 0 > #{rsp}" )
+    else
+      logger.error( "RETURN #{$?.to_i} > #{rsp}" )
+    end
+    return $?.to_i
+  end
+  private :run_code
   
   def filepanel
     baseDir = current_user.lesson_path
